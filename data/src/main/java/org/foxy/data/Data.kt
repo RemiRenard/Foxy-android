@@ -21,7 +21,6 @@ object Data {
 
     var database: BriteDatabase? = null
     var networkService: NetworkService? = null
-    var webSocket: WebSocket? = null
 
     /**
      * Create the database and the network service.
@@ -30,24 +29,6 @@ object Data {
     fun init(application: Application) {
         createDatabase(application)
         createNetworkService()
-    }
-
-    /**
-     * Create the web socket
-     */
-    fun createWebSocket() {
-        val client = OkHttpClient.Builder().build()
-        val requestBuilder = Request.Builder().url(Constants.WS_URL_DEV)
-        requestBuilder.addHeader(Constants.AUTHORIZATION, Cache.token!!)
-        webSocket = client.newWebSocket(requestBuilder.build(), EchoWebSocketListener)
-        client.dispatcher().executorService().shutdown()
-    }
-
-    /**
-     * Close the web socket connection
-     */
-    fun closeWebSocket() {
-        webSocket?.close(1000, "Logout")
     }
 
     /**

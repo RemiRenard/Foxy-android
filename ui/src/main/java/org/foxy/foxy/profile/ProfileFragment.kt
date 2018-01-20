@@ -69,15 +69,6 @@ class ProfileFragment : Fragment(), IProfileView {
     @BindView(R.id.profile_chart_best_friends)
     lateinit var mPieChart: PieChart
 
-    @BindView(R.id.card_stats_profile_nb_drink_given_text_view)
-    lateinit var mNbDrinkGiven: TextView
-
-    @BindView(R.id.card_stats_profile_nb_drink_finished_text_view)
-    lateinit var mNbDrinkFinished: TextView
-
-    @BindView(R.id.card_stats_profile_nb_game_played_text_view)
-    lateinit var mNbGamePlayed: TextView
-
     @BindView(R.id.profile_view_under_bar_chart)
     lateinit var mViewBarChart: View
 
@@ -165,11 +156,6 @@ class ProfileFragment : Fragment(), IProfileView {
         }
         mProfileName.text = context.getString(R.string.placeholder_name, mCurrentUser?.firstName, mCurrentUser?.lastName)
         mProfileUsername.text = mCurrentUser?.username
-
-        //TODO call server instead of hardcoded text
-        mNbDrinkGiven.text = 32.toString()
-        mNbDrinkFinished.text = 16.toString()
-        mNbGamePlayed.text = 12.toString()
     }
 
     /**

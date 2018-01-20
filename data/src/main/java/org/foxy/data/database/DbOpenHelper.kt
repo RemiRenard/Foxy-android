@@ -4,7 +4,6 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import org.foxy.data.database.table.TableFriend
-import org.foxy.data.database.table.TableGame
 import org.foxy.data.database.table.TableNotification
 import org.foxy.data.database.table.TableUser
 
@@ -27,7 +26,6 @@ class DbOpenHelper
         db.execSQL(TableFriend.createTableFriend())
         db.execSQL(TableNotification.createTableNotification())
         db.execSQL(TableUser.createTableUser())
-        db.execSQL(TableGame.createTableGame())
     }
 
     /**

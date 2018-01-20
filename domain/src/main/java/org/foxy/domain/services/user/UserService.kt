@@ -96,7 +96,6 @@ class UserService : IUserService {
     override fun refreshToken(context: Context) {
         Cache.token = context.getSharedPreferences(Constants.APP_TOKEN_PREF, Context.MODE_PRIVATE)
                 .getString(Constants.TOKEN, "")
-        Data.createWebSocket()
     }
 
     /**

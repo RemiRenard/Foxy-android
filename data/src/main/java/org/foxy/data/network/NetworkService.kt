@@ -3,7 +3,6 @@ package org.foxy.data.network
 import io.reactivex.Observable
 import okhttp3.RequestBody
 import org.foxy.data.Constants
-import org.foxy.data.model.Game
 import org.foxy.data.model.Notification
 import org.foxy.data.model.User
 import org.foxy.data.network.api_response.ConnectResponse
@@ -77,8 +76,4 @@ interface NetworkService {
     @POST("notification/mark-as-read")
     fun markNotificationAsRead(@Header(Constants.AUTHORIZATION) token: String,
                                @Body params: NotificationIdRequest): Observable<SimpleSuccessResponse>
-
-    // GAME SECTION
-    @GET("games")
-    fun getGames(@Header(Constants.AUTHORIZATION) token: String): Observable<List<Game>>
 }

@@ -10,7 +10,6 @@ import kotlinx.android.synthetic.main.item_notification.view.*
 import org.foxy.data.model.Notification
 import org.foxy.foxy.R
 import org.foxy.foxy.event_bus.NotificationClickedEvent
-import org.foxy.foxy.notification.details.DetailsNotificationActivity
 import org.foxy.foxy.profile.friends.requests.FriendsRequestsActivity
 import org.greenrobot.eventbus.EventBus
 
@@ -33,17 +32,13 @@ class NotificationAdapter(val mContext: Context) : RecyclerView.Adapter<Notifica
             mNotifications[position].isRead = true
             notifyDataSetChanged()
             // Manage the type of notification
-            if (mNotifications[position].type.equals("message")) {
-                mContext.startActivity(DetailsNotificationActivity.getStartingIntent(mContext,
-                        mNotifications[position]).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
-            }
             if (mNotifications[position].type.equals("friendRequest")) {
                 mContext.startActivity(FriendsRequestsActivity.getStartingIntent(mContext)
                         .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
             }
         }
         if (mNotifications[position].isRead) {
-            holder.itemView?.item_notification_layout?.alpha = 0.8F
+            holder.itemView?.item_notification_layout?.alpha = 0.7F
         }
     }
 

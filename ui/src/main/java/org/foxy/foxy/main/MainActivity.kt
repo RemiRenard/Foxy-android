@@ -7,9 +7,11 @@ import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.Bundle
+import android.support.design.widget.FloatingActionButton
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.content.ContextCompat
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -26,27 +28,40 @@ import org.foxy.foxy.event_bus.WriteStoragePermResultEvent
 import org.foxy.foxy.main.dagger.MainModule
 import org.foxy.foxy.notification.NotificationFragment
 import org.foxy.foxy.profile.ProfileFragment
-import org.foxy.foxy.search.SearchFragment
 import org.greenrobot.eventbus.EventBus
 import javax.inject.Inject
+import android.widget.FrameLayout
+import android.view.MotionEvent
+import org.foxy.data.Constants.MAX_CLICK_DURATION
+import org.foxy.foxy.notification.add.AddNotificationActivity
+import java.util.*
+
 
 /**
  * Main activity
  */
-class MainActivity : BaseActivity(), IMainView {
+class MainActivity : BaseActivity(), IMainView, View.OnTouchListener {
 
     private var mFragmentManager: FragmentManager? = null
     private var mIsNewNotification: Boolean = false
     private var mCurrentViewId: Int = 0
+    private var mLayoutParams: FrameLayout.LayoutParams = FrameLayout.LayoutParams(150,150)
+    private var mXDelta: Int = 0
+    private var mYDelta: Int = 0
+    private var startClickTime: Long = 0
+    private var clickDuration: Long = 0
 
-    @BindView(R.id.linear_layout_bottom_bar)
+    @BindView(R.id.bottom_bar)
     lateinit var mBottomBarLayout: LinearLayout
-
-    @BindView(R.id.navigation_search)
-    lateinit var mNavigationSearch: ImageView
 
     @BindView(R.id.navigation_notification)
     lateinit var mNavigationNotification: ImageView
+
+    @BindView(R.id.notif_send_button)
+    lateinit var mSendButton: FloatingActionButton
+
+    @BindView(R.id.container)
+    lateinit var mContainer: FrameLayout
 
     @Inject
     lateinit var mPresenter: IMainPresenter
@@ -65,31 +80,70 @@ class MainActivity : BaseActivity(), IMainView {
         if (mIsNewNotification) {
             mPresenter.refreshToken()
         }
-        manageColorBottomBar(if (mIsNewNotification) mNavigationNotification else mNavigationSearch)
-        manageFragmentNewNotif()
+        manageColorBottomBar(mNavigationNotification)
+        manageFragment()
+        mSendButton.layoutParams = mLayoutParams
+        mSendButton.setOnTouchListener(this)
+    }
+
+    @OnClick(R.id.notif_send_button)
+    fun addNotification() {
+        startActivity(AddNotificationActivity.getStartingIntent(this))
+    }
+
+    /**
+     * Moving handler for notification button
+     */
+    override fun onTouch(view: View, event: MotionEvent): Boolean {
+        val x = event.rawX.toInt()
+        val y = event.rawY.toInt()
+        when (event.action and MotionEvent.ACTION_MASK) {
+            MotionEvent.ACTION_DOWN -> { //On click down
+                startClickTime = System.currentTimeMillis()
+                val lParams = view.layoutParams as FrameLayout.LayoutParams
+                mXDelta = x - lParams.leftMargin
+                mYDelta = y - lParams.topMargin
+            }
+            MotionEvent.ACTION_UP -> { //On click up
+                clickDuration = System.currentTimeMillis() - startClickTime
+                Log.i("clickDuration", clickDuration.toString())
+                if(clickDuration < MAX_CLICK_DURATION)
+                    view.performClick()
+            }
+            MotionEvent.ACTION_POINTER_DOWN -> {
+            }
+            MotionEvent.ACTION_POINTER_UP -> {
+            }
+            MotionEvent.ACTION_MOVE -> { //On moving
+                val layoutParams = view
+                        .layoutParams as FrameLayout.LayoutParams
+                layoutParams.leftMargin = x - mXDelta
+                layoutParams.topMargin = y - mYDelta
+                layoutParams.rightMargin = -250
+                layoutParams.bottomMargin = -250
+                view.layoutParams = layoutParams
+            }
+        }
+        mContainer.invalidate()
+        return true
     }
 
     /**
      * Display the good fragment if there are new notifications
      */
-    private fun manageFragmentNewNotif() {
-        val fragment: Fragment = if (mIsNewNotification) {
-            NotificationFragment()
-        } else {
-            SearchFragment()
-        }
+    private fun manageFragment() {
+        val fragment: Fragment = NotificationFragment()
         val bundle = Bundle()
         bundle.putBoolean(Constants.BUNDLE_IS_NEW_NOTIFICATION, mIsNewNotification)
         fragment.arguments = bundle
         mFragmentManager?.beginTransaction()?.replace(R.id.content, fragment)?.commit()
     }
 
-    @OnClick(R.id.navigation_search, R.id.navigation_notification, R.id.navigation_rank, R.id.navigation_profile)
+    @OnClick(R.id.navigation_notification, R.id.navigation_rank, R.id.navigation_profile)
     fun manageBottomBar(view: View) {
         manageColorBottomBar(view)
         var fragment: Fragment? = null
         when (view.id) {
-            R.id.navigation_search -> fragment = SearchFragment()
             R.id.navigation_rank -> Toast.makeText(this, R.string.Not_available, Toast.LENGTH_SHORT).show() // fragment = RankingFragment()
             R.id.navigation_notification -> fragment = NotificationFragment()
             R.id.navigation_profile -> fragment = ProfileFragment()

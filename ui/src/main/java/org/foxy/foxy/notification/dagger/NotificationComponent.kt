@@ -3,7 +3,6 @@ package org.foxy.foxy.notification.dagger
 import dagger.Subcomponent
 import org.foxy.foxy.notification.NotificationFragment
 import org.foxy.foxy.notification.add.AddNotificationActivity
-import org.foxy.foxy.notification.details.DetailsNotificationActivity
 import org.foxy.foxy.notification.select_friends.SelectFriendsActivity
 
 /**
@@ -19,6 +18,4 @@ interface NotificationComponent {
     fun inject(target: AddNotificationActivity)
 
     fun inject(target: SelectFriendsActivity)
-
-    fun inject(target: DetailsNotificationActivity)
 }

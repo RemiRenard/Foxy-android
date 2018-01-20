@@ -90,11 +90,6 @@ class NotificationFragment : Fragment(), INotificationView {
         mProgressBar.visibility = View.GONE
     }
 
-    @OnClick(R.id.toolbar_add)
-    fun addNotification() {
-        startActivity(AddNotificationActivity.getStartingIntent(context))
-    }
-
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onNotificationClickedEvent(event: NotificationClickedEvent) {
         mPresenter.markNotificationAsRead(event.notificationId)

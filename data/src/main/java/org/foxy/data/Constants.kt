@@ -20,20 +20,18 @@ object Constants {
     const val EXTRA_IS_NEW_NOTIFICATION = "EXTRA_IS_NEW_NOTIFICATION"
     const val BUNDLE_IS_NEW_NOTIFICATION = "BUNDLE_IS_NEW_NOTIFICATION"
     const val EXTRA_NOTIFICATION = "EXTRA_NOTIFICATION"
-    const val EXTRA_GAME = "EXTRA_GAME"
     const val CHANNEL_ID = "CHANNEL_ID"
     const val NOTIFICATION_CHANNEL_NAME = "NOTIFICATION_CHANNEL_NAME"
     const val REQUEST_PERMISSION_WRITE_STORAGE = 1
     const val REQUEST_PERMISSION_GROUP_CAMERA = 5
-    const val TYPE_LEFT = 240
-    const val TYPE_RIGHT = 241
+    const val MAX_CLICK_DURATION = 150
 
     // DEV
     const val SERVER_URL_DEV = "http://192.168.1.135:3000/api/"
     const val WS_URL_DEV = "ws://foxy-server.herokuapp.com:8889"
 
     //PROD
-    const val SERVER_URL_PROD = "http://foxy-server.herokuapp.com/api/"
+    const val SERVER_URL_PROD = "http://foxy-api.herokuapp.com/api/"
     const val WS_URL_PROD = "ws://foxy-server.herokuapp.com:8889"
 
     //NETWORK ERROR CODE

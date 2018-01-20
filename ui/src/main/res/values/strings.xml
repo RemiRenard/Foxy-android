@@ -7,7 +7,7 @@
     <string name="Ok">OK</string>
     <string name="Profile">Profile</string>
     <string name="Search">Discover</string>
-    <string name="slogan">Be wild, be rich!</string>
+    <string name="slogan">You\'re not ready!</string>
     <string name="Money">Money</string>
     <string name="Ranking">Ranking</string>
     <string name="My_challenges">My challenges</string>
@@ -43,7 +43,6 @@
     <string name="Cancel">Cancel</string>
     <string name="settings">Settings</string>
     <string name="Not_available">Not available</string>
-    <string name="Games">Games</string>
     <string name="session_expired_message">Your session has expired, please logout.</string>
     <string name="Username">Username</string>
     <string name="First_name">First name</string>
@@ -60,7 +59,6 @@
     <string name="Please_enter_a_valid_email">Please enter a valid email</string>
     <string name="Your_email">Your email :</string>
     <string name="Your_birthday">Your birthday :</string>
-    <string name="Game_played">Game played</string>
     <string name="Stats">Stats</string>
     <string name="Finished_drink">Finished drink</string>
     <string name="Given_drink">Given drink</string>
@@ -81,18 +79,6 @@
     <string name="Terms_and_conditions">Terms and conditions</string>
     <string name="Privacy_policy">Privacy policy</string>
     <string name="share_app_message">Join us on Foxy !</string>
-    <string name="Game">Game</string>
-    <string name="Rules">Rules</string>
-    <string name="Game_rules">Game rules.Game rules.Game rules.Game rules.Game rules.Game rules.Game rules.Game rules.Game rules.</string>
-    <string name="Players">Players</string>
-    <string name="Game_players">From 0 to 999 players !</string>
-    <string name="Requirements">Requirements</string>
-    <string name="Game_requirements">Game requirements.\nGame requirements.\nGame requirements.\nGame requirements.\nGame requirements.</string>
-    <string name="placeholder_game_players">From %1$d to %2$d players.</string>
-    <string name="Play">Play</string>
-    <string name="Home">Home</string>
-    <string name="Create_a_game">Create a game</string>
-    <string name="Join_a_game">Join a game</string>
     <string name="What_do_you_want_to_do">What do you want to do ?</string>
     <string name="Findit">Findit</string>
     <string name="look_for_a_friend">Type your friend\'s name</string>

@@ -30,14 +30,6 @@
                 android:textAllCaps="true"
                 android:textColor="@android:color/white"
                 android:textSize="18sp" />
-
-            <ImageView
-                android:id="@+id/toolbar_add"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:padding="16dp"
-                android:src="@drawable/ic_add_white" />
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
 

@@ -1,6 +1,5 @@
 package org.foxy.data.cache
 
-import org.foxy.data.model.Game
 import org.foxy.data.model.Notification
 import org.foxy.data.model.User
 import java.io.File
@@ -16,5 +15,4 @@ object Cache {
     var audioFile: File? = null
     var friends: List<User> = ArrayList()
     var currentUser: User? = null
-    var games: List<Game> = ArrayList()
 }
