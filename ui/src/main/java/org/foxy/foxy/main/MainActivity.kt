@@ -12,7 +12,9 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.content.ContextCompat
 import android.util.Log
+import android.view.MotionEvent
 import android.view.View
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Toast
@@ -20,6 +22,7 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.OnClick
 import org.foxy.data.Constants
+import org.foxy.data.Constants.MAX_CLICK_DURATION
 import org.foxy.foxy.BaseActivity
 import org.foxy.foxy.FoxyApp
 import org.foxy.foxy.R
@@ -27,14 +30,10 @@ import org.foxy.foxy.event_bus.CameraPermsResultEvent
 import org.foxy.foxy.event_bus.WriteStoragePermResultEvent
 import org.foxy.foxy.main.dagger.MainModule
 import org.foxy.foxy.notification.NotificationFragment
+import org.foxy.foxy.notification.add.AddNotificationActivity
 import org.foxy.foxy.profile.ProfileFragment
 import org.greenrobot.eventbus.EventBus
 import javax.inject.Inject
-import android.widget.FrameLayout
-import android.view.MotionEvent
-import org.foxy.data.Constants.MAX_CLICK_DURATION
-import org.foxy.foxy.notification.add.AddNotificationActivity
-import java.util.*
 
 
 /**
@@ -45,7 +44,6 @@ class MainActivity : BaseActivity(), IMainView, View.OnTouchListener {
     private var mFragmentManager: FragmentManager? = null
     private var mIsNewNotification: Boolean = false
     private var mCurrentViewId: Int = 0
-    private var mLayoutParams: FrameLayout.LayoutParams = FrameLayout.LayoutParams(150,150)
     private var mXDelta: Int = 0
     private var mYDelta: Int = 0
     private var startClickTime: Long = 0
@@ -82,7 +80,6 @@ class MainActivity : BaseActivity(), IMainView, View.OnTouchListener {
         }
         manageColorBottomBar(mNavigationNotification)
         manageFragment()
-        mSendButton.layoutParams = mLayoutParams
         mSendButton.setOnTouchListener(this)
     }
 
@@ -107,12 +104,8 @@ class MainActivity : BaseActivity(), IMainView, View.OnTouchListener {
             MotionEvent.ACTION_UP -> { //On click up
                 clickDuration = System.currentTimeMillis() - startClickTime
                 Log.i("clickDuration", clickDuration.toString())
-                if(clickDuration < MAX_CLICK_DURATION)
+                if (clickDuration < MAX_CLICK_DURATION)
                     view.performClick()
-            }
-            MotionEvent.ACTION_POINTER_DOWN -> {
-            }
-            MotionEvent.ACTION_POINTER_UP -> {
             }
             MotionEvent.ACTION_MOVE -> { //On moving
                 val layoutParams = view

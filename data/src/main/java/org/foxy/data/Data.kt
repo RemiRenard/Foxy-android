@@ -4,12 +4,7 @@ import android.app.Application
 import com.squareup.sqlbrite2.BriteDatabase
 import com.squareup.sqlbrite2.SqlBrite
 import io.reactivex.schedulers.Schedulers
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import okhttp3.WebSocket
-import org.foxy.data.cache.Cache
 import org.foxy.data.database.DbOpenHelper
-import org.foxy.data.network.EchoWebSocketListener
 import org.foxy.data.network.NetworkService
 import org.foxy.data.network.RetrofitHelper
 import timber.log.Timber
