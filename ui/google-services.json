@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "780116430355",
+    "firebase_url": "https://foxy-176903.firebaseio.com",
+    "project_id": "foxy-176903",
+    "storage_bucket": "foxy-176903.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:780116430355:android:9c8a53369a372544",
+        "android_client_info": {
+          "package_name": "org.foxy.foxy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "780116430355-fu25arog2fb6ppblt8ujrp8ti4hs2bfl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCceqYLQ-JhZ01LIAEt39DE6qYw-707zJ4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
