@@ -41,30 +41,17 @@ import javax.inject.Inject
 /**
  * Main activity
  */
-class MainActivity : BaseActivity(), IMainView, View.OnTouchListener {
+class MainActivity : BaseActivity(), IMainView {
 
     private var mFragmentManager: FragmentManager? = null
     private var mIsNewNotification: Boolean = false
     private var mCurrentViewId: Int = 0
-    private var mLastTouchX: Int = 0
-    private var mLastTouchY: Int = 0
-    private var startClickTime: Long = 0
-    private var clickDuration: Long = 0
 
     @BindView(R.id.bottom_bar)
     lateinit var mBottomBarLayout: LinearLayout
 
     @BindView(R.id.navigation_notification)
     lateinit var mNavigationNotification: ImageView
-
-    @BindView(R.id.notif_send_button)
-    lateinit var mSendButton: FloatingActionButton
-
-    @BindView(R.id.container)
-    lateinit var mContainer: FrameLayout
-
-    @BindView(R.id.content)
-    lateinit var mContent: FrameLayout
 
     @Inject
     lateinit var mPresenter: IMainPresenter
@@ -85,79 +72,11 @@ class MainActivity : BaseActivity(), IMainView, View.OnTouchListener {
         }
         manageColorBottomBar(mNavigationNotification)
         manageFragment()
-        mSendButton.setOnTouchListener(this)
     }
 
     @OnClick(R.id.notif_send_button)
     fun addNotification() {
         startActivity(AddNotificationActivity.getStartingIntent(this))
-    }
-
-    /**
-     * Moving handler for notification button
-     */
-    override fun onTouch(view: View, event: MotionEvent): Boolean {
-        val x = event.rawX.toInt()
-        val y = event.rawY.toInt()
-        when (event.action and MotionEvent.ACTION_MASK) {
-            MotionEvent.ACTION_DOWN -> { //On click down
-                startClickTime = System.currentTimeMillis()
-                // Remember where we started
-                mLastTouchX = x
-                mLastTouchY = y
-            }
-            MotionEvent.ACTION_UP -> { //On click up
-                clickDuration = System.currentTimeMillis() - startClickTime
-                Log.i("clickDuration", clickDuration.toString())
-                if (clickDuration < MAX_CLICK_DURATION)
-                    view.performClick()
-            }
-            MotionEvent.ACTION_MOVE -> { //On moving
-                // Calculate the distance moved
-                val dx = x - mLastTouchX
-                val dy = y - mLastTouchY
-
-                // Make sure we will still be the in parent's container
-                val parent = Rect(0, 0, mContainer.width, mContainer.height)
-
-                var newLeft = (view.x + dx).toInt()
-                var newRight = newLeft + view.width
-                var newTop = (view.y + dy).toInt()
-                var newBottom = newTop + view.height
-
-                if (!parent.contains(newLeft, newTop, newRight, newBottom)) {
-                    if (newRight >= parent.width()) {
-                        newRight = parent.width()
-                        newLeft = newRight - view.width
-                    }
-                    if (newLeft<=0) {
-                        newLeft = 0
-                        newRight = newLeft + view.width
-                    }
-                    if (newBottom >= parent.height()) {
-                        newBottom = parent.height()
-                        newTop = newBottom - view.height
-                    }
-                    if (newTop<=0) {
-                        newTop = 0
-                        newBottom = newTop + view.height
-                    }
-                }
-
-                view.left = newLeft
-                view.right = newRight
-                view.top = newTop
-                view.bottom = newBottom
-
-                // Remember this touch position for the next move event
-                mLastTouchX = x
-                mLastTouchY = y
-
-            }
-        }
-        // Invalidate to request a redraw
-        mContainer.invalidate()
-        return true
     }
 
     /**
@@ -171,14 +90,15 @@ class MainActivity : BaseActivity(), IMainView, View.OnTouchListener {
         mFragmentManager?.beginTransaction()?.replace(R.id.content, fragment)?.commit()
     }
 
-    @OnClick(R.id.navigation_notification, R.id.navigation_rank, R.id.navigation_profile)
+    @OnClick( R.id.navigation_profile, R.id.navigation_notification, R.id.navigation_rank, R.id.navigation_achievement)
     fun manageBottomBar(view: View) {
         manageColorBottomBar(view)
         var fragment: Fragment? = null
         when (view.id) {
-            R.id.navigation_rank -> Toast.makeText(this, R.string.Not_available, Toast.LENGTH_SHORT).show() // fragment = RankingFragment()
             R.id.navigation_notification -> fragment = NotificationFragment()
             R.id.navigation_profile -> fragment = ProfileFragment()
+            R.id.navigation_rank -> Toast.makeText(this, R.string.Not_available, Toast.LENGTH_SHORT).show() // fragment = RankingFragment()
+            R.id.navigation_achievement -> Toast.makeText(this, R.string.Not_available, Toast.LENGTH_SHORT).show() // fragment = AchievementFragment()
         }
         val bundle = Bundle()
         fragment?.arguments = bundle
