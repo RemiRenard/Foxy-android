@@ -6,9 +6,11 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.PorterDuff
+import android.graphics.Rect
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentActivity
 import android.support.v4.app.FragmentManager
 import android.support.v4.content.ContextCompat
 import android.util.Log
@@ -44,8 +46,8 @@ class MainActivity : BaseActivity(), IMainView, View.OnTouchListener {
     private var mFragmentManager: FragmentManager? = null
     private var mIsNewNotification: Boolean = false
     private var mCurrentViewId: Int = 0
-    private var mXDelta: Int = 0
-    private var mYDelta: Int = 0
+    private var mLastTouchX: Int = 0
+    private var mLastTouchY: Int = 0
     private var startClickTime: Long = 0
     private var clickDuration: Long = 0
 
@@ -60,6 +62,9 @@ class MainActivity : BaseActivity(), IMainView, View.OnTouchListener {
 
     @BindView(R.id.container)
     lateinit var mContainer: FrameLayout
+
+    @BindView(R.id.content)
+    lateinit var mContent: FrameLayout
 
     @Inject
     lateinit var mPresenter: IMainPresenter
@@ -97,9 +102,9 @@ class MainActivity : BaseActivity(), IMainView, View.OnTouchListener {
         when (event.action and MotionEvent.ACTION_MASK) {
             MotionEvent.ACTION_DOWN -> { //On click down
                 startClickTime = System.currentTimeMillis()
-                val lParams = view.layoutParams as FrameLayout.LayoutParams
-                mXDelta = x - lParams.leftMargin
-                mYDelta = y - lParams.topMargin
+                // Remember where we started
+                mLastTouchX = x
+                mLastTouchY = y
             }
             MotionEvent.ACTION_UP -> { //On click up
                 clickDuration = System.currentTimeMillis() - startClickTime
@@ -108,15 +113,49 @@ class MainActivity : BaseActivity(), IMainView, View.OnTouchListener {
                     view.performClick()
             }
             MotionEvent.ACTION_MOVE -> { //On moving
-                val layoutParams = view
-                        .layoutParams as FrameLayout.LayoutParams
-                layoutParams.leftMargin = x - mXDelta
-                layoutParams.topMargin = y - mYDelta
-                layoutParams.rightMargin = -250
-                layoutParams.bottomMargin = -250
-                view.layoutParams = layoutParams
+                // Calculate the distance moved
+                val dx = x - mLastTouchX
+                val dy = y - mLastTouchY
+
+                // Make sure we will still be the in parent's container
+                val parent = Rect(0, 0, mContainer.width, mContainer.height)
+
+                var newLeft = (view.x + dx).toInt()
+                var newRight = newLeft + view.width
+                var newTop = (view.y + dy).toInt()
+                var newBottom = newTop + view.height
+
+                if (!parent.contains(newLeft, newTop, newRight, newBottom)) {
+                    if (newRight >= parent.width()) {
+                        newRight = parent.width()
+                        newLeft = newRight - view.width
+                    }
+                    if (newLeft<=0) {
+                        newLeft = 0
+                        newRight = newLeft + view.width
+                    }
+                    if (newBottom >= parent.height()) {
+                        newBottom = parent.height()
+                        newTop = newBottom - view.height
+                    }
+                    if (newTop<=0) {
+                        newTop = 0
+                        newBottom = newTop + view.height
+                    }
+                }
+
+                view.left = newLeft
+                view.right = newRight
+                view.top = newTop
+                view.bottom = newBottom
+
+                // Remember this touch position for the next move event
+                mLastTouchX = x
+                mLastTouchY = y
+
             }
         }
+        // Invalidate to request a redraw
         mContainer.invalidate()
         return true
     }
