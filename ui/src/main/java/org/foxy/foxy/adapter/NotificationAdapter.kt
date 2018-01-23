@@ -17,6 +17,8 @@ import org.foxy.foxy.R
 import org.foxy.foxy.event_bus.NotificationClickedEvent
 import org.foxy.foxy.profile.friends.requests.FriendsRequestsActivity
 import org.greenrobot.eventbus.EventBus
+import java.text.SimpleDateFormat
+import java.util.*
 
 /**
  * Adapter used to display notifications.
@@ -26,13 +28,18 @@ class NotificationAdapter(val mContext: Context) : RecyclerView.Adapter<Notifica
     private var mNotifications: MutableList<Notification> = ArrayList()
     private var mPlayer: MediaPlayer? = null
     private var mIsPlaying: Int = -1
+    private val mDatePattern: String = "HH:mm"
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder =
             ItemViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_notification, parent, false))
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        holder.itemView?.item_notification_title?.text = mNotifications[position].title
-        holder.itemView?.item_notification_content?.text = mNotifications[position].content
+
+        holder.itemView?.item_notification_message?.text = mNotifications[position].message
+        holder.itemView?.item_notification_user_time?.text = mContext.getString(
+                R.string.user_time,
+                mNotifications[position].userSource?.username,
+                SimpleDateFormat(mDatePattern, Locale.US).format(mNotifications[position].createdAt))
         holder.itemView?.item_notification_layout?.setOnClickListener {
             // Mark notification as read.
             EventBus.getDefault().post(NotificationClickedEvent(mNotifications[position].id!!))
@@ -44,9 +51,11 @@ class NotificationAdapter(val mContext: Context) : RecyclerView.Adapter<Notifica
                         .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
             }
         }
-        if (mNotifications[position].isRead) {
-            holder.itemView?.item_notification_layout?.alpha = 0.7F
-        }
+
+        if (mNotifications[position].isRead)
+            holder.itemView?.item_notification_layout?.setBackgroundResource(R.color.colorWhite)
+        else
+            holder.itemView?.item_notification_layout?.setBackgroundResource(R.color.colorWhite)
 
         if (TextUtils.equals(mNotifications[position].song, "default_song_location")
                 || TextUtils.equals(mNotifications[position].song, ""))
@@ -56,8 +65,8 @@ class NotificationAdapter(val mContext: Context) : RecyclerView.Adapter<Notifica
 
         holder.itemView?.item_notification_audio_button?.setOnClickListener {
             when (mIsPlaying) {
-                -1 -> {
-                    mIsPlaying = position
+                -1 -> { //If nothing is currently played
+                    mIsPlaying = holder.adapterPosition //mIsPlayed is set to it's item position
                     mPlayer = MediaPlayer()
                     mPlayer?.setDataSource(mContext, Uri.parse(mNotifications[position].song))
                     mPlayer?.setOnCompletionListener {
@@ -69,14 +78,16 @@ class NotificationAdapter(val mContext: Context) : RecyclerView.Adapter<Notifica
                     mPlayer?.start()
                     holder.itemView.item_notification_audio_button.setImageResource(R.drawable.ic_stop)
                 }
-                position -> {
+                position -> { //If this same notification's audio is currently played
                     mPlayer?.release()
                     mPlayer = null
                     mIsPlaying = -1
                     holder.itemView.item_notification_audio_button.setImageResource(R.drawable.ic_play)
                 }
-                else -> Toast.makeText(mContext, R.string.stop_audio_first, Toast.LENGTH_SHORT).show()
-
+                else -> { //If an other notification's audio is currently played
+                    Toast.makeText(mContext, R.string.stop_audio_first, Toast.LENGTH_SHORT).show()
+                    //TODO: If an other notif is playing, stop it, change it's button, load the new sound and play
+                }
             }
         }
     }

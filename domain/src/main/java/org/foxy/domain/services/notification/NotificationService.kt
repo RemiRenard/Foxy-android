@@ -11,11 +11,13 @@ import org.foxy.data.Data
 import org.foxy.data.cache.Cache
 import org.foxy.data.database.table.TableNotification
 import org.foxy.data.model.Notification
+import org.foxy.data.model.User
 import org.foxy.data.network.api_response.SimpleSuccessResponse
 import org.foxy.data.network.api_resquest.NotificationIdRequest
 import org.foxy.domain.event_bus.NetworkErrorEvent
 import org.greenrobot.eventbus.EventBus
 import java.io.File
+import java.util.*
 
 
 /**
@@ -58,8 +60,9 @@ class NotificationService : INotificationService {
                 TableNotification.getNotifications()).mapToList { cursor ->
             val notification = Notification()
             notification.id = cursor.getString(cursor.getColumnIndexOrThrow(TableNotification.TABLE_NOTIFICATION_ID))
-            notification.title = cursor.getString(cursor.getColumnIndexOrThrow(TableNotification.TABLE_NOTIFICATION_TITLE))
-            notification.content = cursor.getString(cursor.getColumnIndexOrThrow(TableNotification.TABLE_NOTIFICATION_CONTENT))
+            notification.message = cursor.getString(cursor.getColumnIndexOrThrow(TableNotification.TABLE_NOTIFICATION_MESSAGE))
+            notification.userSource = User(cursor.getString(cursor.getColumnIndexOrThrow(TableNotification.TABLE_NOTIFICATION_USERNAME)))
+            notification.createdAt = Date(cursor.getString(cursor.getColumnIndexOrThrow(TableNotification.TABLE_NOTIFICATION_CREATED_AT)).toLong())
             notification.type = cursor.getString(cursor.getColumnIndexOrThrow(TableNotification.TABLE_NOTIFICATION_TYPE))
             notification.song = cursor.getString(cursor.getColumnIndexOrThrow(TableNotification.TABLE_NOTIFICATION_SONG))
             notification.isRead = cursor.getInt(cursor.getColumnIndexOrThrow(TableNotification.TABLE_NOTIFICATION_IS_READ)) == 1
@@ -77,7 +80,9 @@ class NotificationService : INotificationService {
                 .getNotifications(token)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnNext { addNotificationsToDb(it) }
+                .doOnNext {
+                    addNotificationsToDb(it)
+                }
                 .onErrorReturn {
                     EventBus.getDefault().post(NetworkErrorEvent(it))
                     mNotifications
@@ -116,8 +121,8 @@ class NotificationService : INotificationService {
         return Data.networkService!!
                 .sendNotification(
                         Cache.token!!,
-                        RequestBody.create(MediaType.parse(Constants.MEDIA_TYPE_TEXT), Cache.tmpNotification?.title!!),
-                        RequestBody.create(MediaType.parse(Constants.MEDIA_TYPE_TEXT), Cache.tmpNotification?.content!!),
+                        RequestBody.create(MediaType.parse(Constants.MEDIA_TYPE_TEXT), Cache.tmpNotification?.message!!),
+                        RequestBody.create(MediaType.parse(Constants.MEDIA_TYPE_TEXT), Cache.tmpNotification?.keyword!!),
                         RequestBody.create(MediaType.parse(Constants.MEDIA_TYPE_TEXT), Cache.tmpNotification?.type!!),
                         RequestBody.create(MediaType.parse(Constants.MEDIA_TYPE_TEXT), userIds.joinToString { it }),
                         if (Cache.audioFile!!.length().toInt() == 0) {

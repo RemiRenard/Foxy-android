@@ -1,6 +1,7 @@
 package org.foxy.data.model
 
 import java.io.Serializable
+import java.util.*
 
 /**
  * Notification entity.
@@ -8,22 +9,30 @@ import java.io.Serializable
 class Notification : Serializable {
 
     var id: String? = null
-    var title: String? = null
-    var content: String? = null
+    var message: String? = null
+    var keyword: String? = null
+    var userSource: User? = null
+    var createdAt: Date? = null
     var type: String? = null
     var song: String? = null
     var isRead: Boolean = false
 
     constructor()
 
-    constructor(title: String, content: String) {
-        this.title = title
-        this.content = content
+    constructor(message: String, keyword: String) {
+        this.message = message
+        this.keyword = keyword
     }
 
-    constructor(title: String, content: String, type: String, song: String) {
-        this.title = title
-        this.content = content
+    constructor(message: String, type: String, song: String) {
+        this.message = message
+        this.type = type
+        this.song = song
+    }
+
+    constructor(message: String, keyword: String, type: String, song: String) {
+        this.message = message
+        this.keyword = keyword
         this.type = type
         this.song = song
     }

@@ -125,8 +125,7 @@
         android:layout_marginStart="50dp"
         android:background="@drawable/bg_dark_blue_rect_oval_border"
         android:text="@string/Logout"
-        android:textAllCaps="false"
-        android:textColor="@android:color/white"
+        android:textColor="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />

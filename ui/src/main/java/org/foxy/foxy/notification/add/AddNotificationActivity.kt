@@ -38,11 +38,11 @@ class AddNotificationActivity : BaseActivity(), IAddNotificationView {
     private var mIsRecording: Boolean = false
     private var mIsPlaying: Boolean = false
 
-    @BindView(R.id.add_notification_title)
-    lateinit var mTitle: EditText
+    @BindView(R.id.add_notification_message)
+    lateinit var mMessage: EditText
 
-    @BindView(R.id.add_notification_content)
-    lateinit var mContent: EditText
+    @BindView(R.id.add_notification_keyword)
+    lateinit var mKeyword: EditText
 
     @BindView(R.id.add_notification_micro)
     lateinit var mMicro: ImageView
@@ -50,11 +50,11 @@ class AddNotificationActivity : BaseActivity(), IAddNotificationView {
     @BindView(R.id.add_notification_play_audio)
     lateinit var mPlayAudio: ImageView
 
-    @BindView(R.id.add_notification_button_next)
-    lateinit var mButtonSend: Button
-
     @BindView(R.id.add_notification_keyword_text)
     lateinit var mKeywordText: TextView
+
+    @BindView(R.id.add_notification_button_next)
+    lateinit var mButtonSend: Button
 
     @Inject
     lateinit var mPresenter: IAddNotificationPresenter
@@ -73,8 +73,8 @@ class AddNotificationActivity : BaseActivity(), IAddNotificationView {
 
     @OnClick(R.id.add_notification_button_next)
     fun sendNotification() {
-        if (!mTitle.text.isEmpty() && !mContent.text.isEmpty()) {
-            mPresenter.saveTmpNotification(mTitle.text.toString(), mContent.text.toString(), "message", "", mAudioFile)
+        if (!mMessage.text.isEmpty() && !mKeyword.text.isEmpty()) {
+            mPresenter.saveTmpNotification(mMessage.text.toString(), mKeyword.text.toString(), "message", "", mAudioFile)
         } else {
             Toast.makeText(this, R.string.error_form, Toast.LENGTH_SHORT).show()
         }

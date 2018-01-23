@@ -67,8 +67,8 @@ interface NetworkService {
     @Multipart
     @POST("notification/send")
     fun sendNotification(@Header(Constants.AUTHORIZATION) token: String,
-                         @Part("title") title: RequestBody,
-                         @Part("content") content: RequestBody,
+                         @Part("message") message: RequestBody,
+                         @Part("keyword") keyword: RequestBody,
                          @Part("type") type: RequestBody,
                          @Part("userIds") userIds: RequestBody,
                          @Part("song\"; filename=\"song.mp3\"") audio: RequestBody?): Observable<SimpleSuccessResponse>

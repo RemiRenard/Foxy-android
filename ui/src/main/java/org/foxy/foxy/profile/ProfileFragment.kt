@@ -39,14 +39,7 @@ import javax.inject.Inject
 class ProfileFragment : Fragment(), IProfileView {
 
     private var mView: View? = null
-    private var mBottomSheetDialog: BottomSheetDialog? = null
-    private val ACTIVITY_RESULT_LIBRARY = 1
-    private val ACTIVITY_RESULT_CAMERA = 2
-    private var mCameraFile: File? = null
     private var mCurrentUser: User? = null
-    private var mDatePicker: DatePickerDialog.OnDateSetListener? = null
-    private val mDatePattern: String = "yyyy-MM-dd"
-    private var mCalendar: Calendar? = null
 
     @BindView(R.id.profile_progress_bar)
     lateinit var mProgressBar: ProgressBar

@@ -1,6 +1,7 @@
 package org.foxy.data.database.table
 
 import android.content.ContentValues
+import android.util.Log
 import org.foxy.data.model.Notification
 
 /**
@@ -10,8 +11,9 @@ object TableNotification {
 
     val DATABASE_TABLE_NAME = "Notification"
     val TABLE_NOTIFICATION_ID = "id"
-    val TABLE_NOTIFICATION_TITLE = "title"
-    val TABLE_NOTIFICATION_CONTENT = "content"
+    val TABLE_NOTIFICATION_MESSAGE = "message"
+    val TABLE_NOTIFICATION_USERNAME = "username"
+    val TABLE_NOTIFICATION_CREATED_AT = "created_at"
     val TABLE_NOTIFICATION_TYPE = "type"
     val TABLE_NOTIFICATION_SONG = "song"
     val TABLE_NOTIFICATION_IS_READ = "isRead"
@@ -23,8 +25,9 @@ object TableNotification {
     fun createTableNotification(): String {
         return "CREATE TABLE $DATABASE_TABLE_NAME (" +
                 "$TABLE_NOTIFICATION_ID TEXT NOT NULL PRIMARY KEY," +
-                "$TABLE_NOTIFICATION_TITLE TEXT NOT NULL," +
-                "$TABLE_NOTIFICATION_CONTENT TEXT NOT NULL," +
+                "$TABLE_NOTIFICATION_MESSAGE TEXT NOT NULL," +
+                "$TABLE_NOTIFICATION_USERNAME TEXT," +
+                "$TABLE_NOTIFICATION_CREATED_AT TEXT," +
                 "$TABLE_NOTIFICATION_TYPE TEXT NOT NULL," +
                 "$TABLE_NOTIFICATION_IS_READ INTEGER DEFAULT 0," +
                 "$TABLE_NOTIFICATION_SONG TEXT)"
@@ -37,8 +40,9 @@ object TableNotification {
     fun createNotification(notification: Notification): ContentValues {
         val values = ContentValues()
         values.put(TABLE_NOTIFICATION_ID, notification.id)
-        values.put(TABLE_NOTIFICATION_TITLE, notification.title)
-        values.put(TABLE_NOTIFICATION_CONTENT, notification.content)
+        values.put(TABLE_NOTIFICATION_MESSAGE, notification.message)
+        values.put(TABLE_NOTIFICATION_USERNAME, notification.userSource?.username)
+        values.put(TABLE_NOTIFICATION_CREATED_AT, notification.createdAt?.time.toString())
         values.put(TABLE_NOTIFICATION_TYPE, notification.type)
         values.put(TABLE_NOTIFICATION_SONG, notification.song)
         if (notification.isRead) {
@@ -53,7 +57,8 @@ object TableNotification {
      * Get notifications from database.
      * @return SQL String
      */
-    fun getNotifications(): String = "SELECT $TABLE_NOTIFICATION_ID,$TABLE_NOTIFICATION_TITLE," +
-            "$TABLE_NOTIFICATION_CONTENT, $TABLE_NOTIFICATION_TYPE, $TABLE_NOTIFICATION_SONG, $TABLE_NOTIFICATION_IS_READ " +
+    fun getNotifications(): String = "SELECT $TABLE_NOTIFICATION_ID,$TABLE_NOTIFICATION_MESSAGE," +
+            "$TABLE_NOTIFICATION_USERNAME, $TABLE_NOTIFICATION_CREATED_AT, $TABLE_NOTIFICATION_TYPE, " +
+            "$TABLE_NOTIFICATION_SONG, $TABLE_NOTIFICATION_IS_READ " +
             "FROM $DATABASE_TABLE_NAME"
 }

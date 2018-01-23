@@ -28,10 +28,7 @@ class FriendsAdapter(val mContext: Context) : RecyclerView.Adapter<FriendsAdapte
         if (mFriends[position].avatar.isNullOrEmpty()) {
             holder.itemView?.item_friends_avatar?.setImageResource(R.drawable.ic_placeholder_male)
         } else {
-            Glide.with(mContext).load(mFriends[position].avatar).apply(RequestOptions
-                    .bitmapTransform(RoundedCornersTransformation(46, 0, RoundedCornersTransformation.CornerType.LEFT))
-                    .placeholder(R.drawable.ic_placeholder_circle_gray))
-                    .into(holder.itemView?.item_friends_avatar)
+            Glide.with(mContext).load(mFriends[position].avatar).into(holder.itemView?.item_friends_avatar)
         }
     }
 

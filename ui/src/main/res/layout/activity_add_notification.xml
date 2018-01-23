@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@color/colorWhite"
     tools:context="org.foxy.foxy.notification.add.AddNotificationActivity">
 
     <android.support.design.widget.AppBarLayout
@@ -37,15 +37,16 @@
     </android.support.design.widget.AppBarLayout>
 
     <EditText
-        android:id="@+id/add_notification_title"
+        android:id="@+id/add_notification_message"
         android:layout_width="0dp"
-        android:layout_height="40dp"
+        android:layout_height="100dp"
         android:layout_marginEnd="50dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="64dp"
-        android:background="@drawable/bg_white_round_corner"
-        android:hint="@string/Title"
-        android:inputType="text"
+        android:background="@drawable/bg_dark_blue_rect_oval_border"
+        android:hint="@string/Message"
+        android:gravity="top"
+        android:inputType="textLongMessage"
         android:lines="1"
         android:padding="8dp"
         android:paddingTop="8dp"
@@ -57,23 +58,22 @@
         app:layout_constraintTop_toBottomOf="@id/app_bar_layout" />
 
     <EditText
-        android:id="@+id/add_notification_content"
+        android:id="@+id/add_notification_keyword"
         android:layout_width="0dp"
-        android:layout_height="100dp"
+        android:layout_height="40dp"
         android:layout_marginEnd="50dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="16dp"
-        android:background="@drawable/bg_white_round_corner"
-        android:gravity="top"
-        android:hint="@string/Content"
-        android:inputType="textLongMessage"
+        android:background="@drawable/bg_dark_blue_rect_oval_border"
+        android:hint="@string/Keyword"
+        android:inputType=""
         android:padding="8dp"
         android:textColor="@android:color/black"
         android:textColorHint="@color/colorAccent"
         android:textSize="14sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/add_notification_title" />
+        app:layout_constraintTop_toBottomOf="@id/add_notification_message" />
 
     <Button
         android:id="@+id/add_notification_button_next"
@@ -98,7 +98,7 @@
         android:src="@drawable/ic_micro_not_recording"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/add_notification_content" />
+        app:layout_constraintTop_toBottomOf="@id/add_notification_keyword"/>
 
     <ImageView
         android:id="@+id/add_notification_play_audio"

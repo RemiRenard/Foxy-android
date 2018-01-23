@@ -24,8 +24,7 @@ class FirebaseService : FirebaseMessagingService() {
         if (remoteMessage?.data?.isNotEmpty()!!) {
             // Create the notification object.
             getNotification(Notification(
-                    remoteMessage.data["title"].orEmpty(),
-                    remoteMessage.data["content"].orEmpty(),
+                    remoteMessage.data["message"].orEmpty(),
                     remoteMessage.data["type"].orEmpty(),
                     remoteMessage.data["song"].orEmpty()
             ))
@@ -58,8 +57,8 @@ class FirebaseService : FirebaseMessagingService() {
     private fun sendNotifToLowApi(notification: Notification, notificationManager: NotificationManager,
                                   pendingIntent: PendingIntent) {
         val builder = NotificationCompat.Builder(this)
-                .setContentTitle(notification.title)
-                .setContentText(notification.content)
+                .setContentTitle(notification.message)
+                .setContentText("new_notif")
                 .setAutoCancel(true)
                 .setSmallIcon(R.drawable.logo_foxy)
                 .setPriority(1)
@@ -74,12 +73,13 @@ class FirebaseService : FirebaseMessagingService() {
     private fun sendNotifToHighApi(notification: Notification, notificationManager: NotificationManager,
                                    pendingIntent: PendingIntent) {
         val channel = NotificationChannel(Constants.CHANNEL_ID, Constants.NOTIFICATION_CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH)
+        channel.setSound(null, null)
         notificationManager.createNotificationChannel(channel)
         val builder = android.app.Notification.Builder(this, channel.id)
                 .setSmallIcon(R.drawable.logo_foxy)
                 .setContentIntent(pendingIntent)
-                .setContentTitle(notification.title)
-                .setContentText(notification.content)
+                .setContentTitle(notification.message)
+                .setContentText("new_notif")
                 .setAutoCancel(true)
         notificationManager.notify(0 /* ID */, builder.build())
     }

@@ -27,9 +27,9 @@ class AddNotificationPresenter(private val mNotificationService: INotificationSe
         mView = null
     }
 
-    override fun saveTmpNotification(title: String, content: String, type: String, song: String, audioFile: File?) {
+    override fun saveTmpNotification(message: String, keyword: String, type: String, song: String, audioFile: File?) {
         mView?.showProgressBar()
-        mNotificationService.saveTmpNotification(Notification(title, content, type, song), audioFile).doOnComplete {
+        mNotificationService.saveTmpNotification(Notification(message, keyword, type, song), audioFile).doOnComplete {
             mView?.hideProgressBar()
             mView?.openFriendsActivity()
         }.subscribe()

@@ -8,5 +8,5 @@ import java.io.File
  */
 interface IAddNotificationPresenter : IPresenter<IAddNotificationView> {
 
-    fun saveTmpNotification(title: String, content: String, type: String, song: String, audioFile: File?)
+    fun saveTmpNotification(message: String, keyword: String, type: String, song: String, audioFile: File?)
 }
