@@ -55,34 +55,29 @@ class NotificationAdapter(val mContext: Context) : RecyclerView.Adapter<Notifica
             holder.itemView?.item_notification_audio_button?.visibility = View.VISIBLE
 
         holder.itemView?.item_notification_audio_button?.setOnClickListener {
-            Log.i("OnclickListener BEGIN", mIsPlaying.toString())
-            if (mIsPlaying==-1) {
-                mIsPlaying=position
-                mPlayer = MediaPlayer()
-                mPlayer?.setDataSource(mContext, Uri.parse(mNotifications[position].song))
-                mPlayer?.setOnCompletionListener {
-                    mIsPlaying = -1
-                    mPlayer = null
-                    holder.itemView.item_notification_audio_button.setImageResource(R.drawable.ic_play)
-                    Log.i("OnclickListener FINISH", mIsPlaying.toString())
+            when (mIsPlaying) {
+                -1 -> {
+                    mIsPlaying = position
+                    mPlayer = MediaPlayer()
+                    mPlayer?.setDataSource(mContext, Uri.parse(mNotifications[position].song))
+                    mPlayer?.setOnCompletionListener {
+                        mIsPlaying = -1
+                        mPlayer = null
+                        holder.itemView.item_notification_audio_button.setImageResource(R.drawable.ic_play)
+                    }
+                    mPlayer?.prepare()
+                    mPlayer?.start()
+                    holder.itemView.item_notification_audio_button.setImageResource(R.drawable.ic_stop)
                 }
-                mPlayer?.prepare()
-                mPlayer?.start()
-                holder.itemView.item_notification_audio_button.setImageResource(R.drawable.ic_stop)
+                position -> {
+                    mPlayer?.release()
+                    mPlayer = null
+                    mIsPlaying = -1
+                    holder.itemView.item_notification_audio_button.setImageResource(R.drawable.ic_play)
+                }
+                else -> Toast.makeText(mContext, R.string.stop_audio_first, Toast.LENGTH_SHORT).show()
 
-                Log.i("OnclickListener PLAY", mIsPlaying.toString())
-            } else if(mIsPlaying==position){
-                mPlayer?.release()
-                mPlayer = null
-                mIsPlaying = -1
-                holder.itemView.item_notification_audio_button.setImageResource(R.drawable.ic_play)
-
-                Log.i("OnclickListener STOP", mIsPlaying.toString())
-            } else {
-                Toast.makeText(mContext, R.string.stop_audio_first, Toast.LENGTH_SHORT).show()
-                Log.i("OnclickListener STUCK", mIsPlaying.toString())
             }
-            Log.i("OnclickListener END", mIsPlaying.toString())
         }
     }
 
