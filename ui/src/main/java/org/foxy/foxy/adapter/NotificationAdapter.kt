@@ -53,9 +53,9 @@ class NotificationAdapter(val mContext: Context) : RecyclerView.Adapter<Notifica
         }
 
         if (mNotifications[position].isRead)
-            holder.itemView?.item_notification_layout?.alpha = 0.5F
+            holder.itemView?.item_notification_layout?.setBackgroundResource(R.color.colorWhite)
         else
-            holder.itemView?.item_notification_layout?.alpha = 1F
+            holder.itemView?.item_notification_layout?.setBackgroundResource(R.color.colorWhite)
 
         if (TextUtils.equals(mNotifications[position].song, "default_song_location")
                 || TextUtils.equals(mNotifications[position].song, ""))
