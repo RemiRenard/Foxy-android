@@ -2,31 +2,26 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <TextView
-        android:id="@+id/item_friends_block"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="4dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
-        android:background="@drawable/bg_primary_rect_oval_border"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="4dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="4dp"
+    android:background="@drawable/bg_primary_rect_oval_border">
 
     <ImageView
         android:id="@+id/item_friends_avatar"
         android:layout_width="@dimen/friends_avatar_width"
         android:layout_height="@dimen/friends_avatar_height"
-        android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="@+id/item_friends_block"
-        app:layout_constraintLeft_toLeftOf="@+id/item_friends_block"
+        android:layout_margin="8dp"
+        android:background="@color/colorPrimary"
+        android:padding="1dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_placeholder_male"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/item_friends_name"
-        app:layout_constraintTop_toTopOf="@+id/item_friends_block" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/item_friends_name"
@@ -34,10 +29,36 @@
         android:layout_height="wrap_content"
         android:lines="1"
         android:padding="8dp"
+        android:text="MyFriend"
         android:textColor="@color/colorPrimary"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@id/item_friends_block"
         app:layout_constraintLeft_toRightOf="@id/item_friends_avatar"
-        app:layout_constraintRight_toRightOf="@+id/item_friends_block"
-        app:layout_constraintTop_toTopOf="@id/item_friends_block" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/item_friends_send_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:lines="1"
+        android:paddingStart="8dp"
+        android:paddingEnd="0dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:text="@string/Send_notification"
+        android:textColor="@color/colorPrimary"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/item_friends_send_button" />
+
+    <ImageView
+        android:id="@+id/item_friends_send_button"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_margin="8dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_send_primary"
+        app:layout_constraintBottom_toBottomOf="@id/item_friends_send_text"
+        app:layout_constraintTop_toTopOf="@id/item_friends_send_text"
+        app:layout_constraintRight_toRightOf="parent"/>
 </android.support.constraint.ConstraintLayout>
