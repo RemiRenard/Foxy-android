@@ -1,5 +1,7 @@
 <resources>
-	<dimen name="profile_avatar_height">120dp</dimen>
-	<dimen name="profile_avatar_width">120dp</dimen>
-	<dimen name="simple_view_height">42dp</dimen>
+    <dimen name="profile_avatar_height">120dp</dimen>
+    <dimen name="profile_avatar_width">120dp</dimen>
+    <dimen name="simple_view_height">42dp</dimen>
+    <dimen name="profile_avatar_width_rank">70dp</dimen>
+    <dimen name="profile_avatar_height_rank">70dp</dimen>
 </resources>

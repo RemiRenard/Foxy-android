@@ -96,4 +96,7 @@
     <string name="Keyword">Keyword</string>
     <string name="Message">Message</string>
     <string name="Top_songs_played">Top song played</string>
+    <string name="Global">Global</string>
+    <string name="Month">Month</string>
+    <string name="Week">Week</string>
 </resources>

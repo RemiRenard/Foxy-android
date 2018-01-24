@@ -13,7 +13,6 @@ import android.support.v4.content.ContextCompat
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.Toast
 import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.OnClick
@@ -21,12 +20,14 @@ import org.foxy.data.Constants
 import org.foxy.foxy.BaseActivity
 import org.foxy.foxy.FoxyApp
 import org.foxy.foxy.R
+import org.foxy.foxy.achievement.AchievementFragment
 import org.foxy.foxy.event_bus.CameraPermsResultEvent
 import org.foxy.foxy.event_bus.WriteStoragePermResultEvent
 import org.foxy.foxy.main.dagger.MainModule
 import org.foxy.foxy.notification.NotificationFragment
 import org.foxy.foxy.notification.add.AddNotificationActivity
 import org.foxy.foxy.profile.ProfileFragment
+import org.foxy.foxy.ranking.RankingFragment
 import org.greenrobot.eventbus.EventBus
 import javax.inject.Inject
 
@@ -90,8 +91,8 @@ class MainActivity : BaseActivity(), IMainView {
         when (view.id) {
             R.id.navigation_notification -> fragment = NotificationFragment()
             R.id.navigation_profile -> fragment = ProfileFragment()
-            R.id.navigation_rank -> Toast.makeText(this, R.string.Not_available, Toast.LENGTH_SHORT).show() // fragment = RankingFragment()
-            R.id.navigation_achievement -> Toast.makeText(this, R.string.Not_available, Toast.LENGTH_SHORT).show() // fragment = AchievementFragment()
+            R.id.navigation_rank -> fragment = RankingFragment()
+            R.id.navigation_achievement -> fragment = AchievementFragment()
         }
         val bundle = Bundle()
         fragment?.arguments = bundle
