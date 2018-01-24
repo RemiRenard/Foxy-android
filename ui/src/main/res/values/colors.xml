@@ -9,6 +9,7 @@
     <color name="colorWhiteTransparent">#CCFFFFFF</color>
     <color name="colorWhiteVeryTransparent">#99FFFFFF</color>
     <color name="colorLightGray">#DDDDDD</color>
+    <color name="colorPaleBlue">#a3c0de</color>
     <color name="colorLightBlue">#5aa1cb</color>
     <color name="colorDarkBlue">#0f60b1</color>
     <color name="colorTransparent">#00000000</color>
