@@ -6,17 +6,11 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.PorterDuff
-import android.graphics.Rect
 import android.os.Bundle
-import android.support.design.widget.FloatingActionButton
 import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentActivity
 import android.support.v4.app.FragmentManager
 import android.support.v4.content.ContextCompat
-import android.util.Log
-import android.view.MotionEvent
 import android.view.View
-import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Toast
@@ -24,7 +18,6 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.OnClick
 import org.foxy.data.Constants
-import org.foxy.data.Constants.MAX_CLICK_DURATION
 import org.foxy.foxy.BaseActivity
 import org.foxy.foxy.FoxyApp
 import org.foxy.foxy.R
@@ -90,7 +83,7 @@ class MainActivity : BaseActivity(), IMainView {
         mFragmentManager?.beginTransaction()?.replace(R.id.content, fragment)?.commit()
     }
 
-    @OnClick( R.id.navigation_profile, R.id.navigation_notification, R.id.navigation_rank, R.id.navigation_achievement)
+    @OnClick(R.id.navigation_profile, R.id.navigation_notification, R.id.navigation_rank, R.id.navigation_achievement)
     fun manageBottomBar(view: View) {
         manageColorBottomBar(view)
         var fragment: Fragment? = null

@@ -8,8 +8,16 @@
     <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="?attr/actionBarSize"
-        tools:background="@drawable/background">
+        android:paddingBottom="?attr/actionBarSize">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/background_gradient_blue"
+            app:layout_constraintBottom_toTopOf="@+id/profile_chart_title"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/profile_avatar"
@@ -26,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="24sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -38,7 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="20sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -62,11 +70,11 @@
             app:layout_constraintTop_toBottomOf="@+id/profile_username" />
 
         <TextView
-            android:id="@+id/profile_chart_time_played_title"
+            android:id="@+id/profile_chart_top_songs_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="@string/Time_played_chart_title"
+            android:text="@string/Top_songs_played"
             android:textColor="@color/colorPrimary"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -75,7 +83,7 @@
             app:layout_constraintTop_toBottomOf="@+id/profile_chart_title" />
 
         <com.github.mikephil.charting.charts.BarChart
-            android:id="@+id/profile_chart_time_played"
+            android:id="@+id/profile_chart_top_songs_played"
             android:layout_width="0dp"
             android:layout_height="200dp"
             android:layout_marginEnd="16dp"
@@ -83,7 +91,7 @@
             android:layout_marginTop="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profile_chart_time_played_title" />
+            app:layout_constraintTop_toBottomOf="@+id/profile_chart_top_songs_title" />
 
         <TextView
             android:id="@+id/profile_see_more_stats"
@@ -99,7 +107,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profile_chart_time_played" />
+            app:layout_constraintTop_toBottomOf="@+id/profile_chart_top_songs_played" />
 
         <View
             android:id="@+id/profile_view_under_bar_chart"

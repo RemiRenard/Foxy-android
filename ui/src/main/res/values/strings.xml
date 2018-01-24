@@ -7,7 +7,7 @@
     <string name="Ok">OK</string>
     <string name="Profile">Profile</string>
     <string name="Search">Discover</string>
-    <string name="slogan">You\'re not ready!</string>
+    <string name="slogan">Be ready for this!</string>
     <string name="Money">Money</string>
     <string name="Ranking">Ranking</string>
     <string name="My_challenges">My challenges</string>
@@ -73,7 +73,6 @@
     <string name="Friend_request_declined">Friend request declined</string>
     <string name="You_dont_have_friends_requests">You don\'t have friends requests</string>
     <string name="Charts">Charts</string>
-    <string name="Time_played_chart_title">Time played (in hours)</string>
     <string name="Best_friends">Best friends</string>
     <string name="share_the_app">Share the app</string>
     <string name="Terms_and_conditions">Terms and conditions</string>
@@ -96,4 +95,5 @@
     <string name="user_time">%1$s at %2$s</string>
     <string name="Keyword">Keyword</string>
     <string name="Message">Message</string>
+    <string name="Top_songs_played">Top song played</string>
 </resources>

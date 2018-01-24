@@ -12,7 +12,10 @@ import android.provider.Settings
 import android.support.design.widget.Snackbar
 import android.support.v4.app.ActivityCompat
 import android.view.View
-import android.widget.*
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
 import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.OnClick
@@ -22,7 +25,6 @@ import org.foxy.foxy.FoxyApp
 import org.foxy.foxy.R
 import org.foxy.foxy.notification.dagger.NotificationModule
 import org.foxy.foxy.notification.select_friends.SelectFriendsActivity
-import org.w3c.dom.Text
 import java.io.File
 import javax.inject.Inject
 
@@ -52,9 +54,6 @@ class AddNotificationActivity : BaseActivity(), IAddNotificationView {
 
     @BindView(R.id.add_notification_keyword_text)
     lateinit var mKeywordText: TextView
-
-    @BindView(R.id.add_notification_button_next)
-    lateinit var mButtonSend: Button
 
     @Inject
     lateinit var mPresenter: IAddNotificationPresenter
@@ -230,7 +229,7 @@ class AddNotificationActivity : BaseActivity(), IAddNotificationView {
 
     companion object {
 
-        private val REQUEST_PERMISSIONS_AUDIO_RECORD = 12
+        const val REQUEST_PERMISSIONS_AUDIO_RECORD = 12
 
         /**
          * Return the intent to start this activity.

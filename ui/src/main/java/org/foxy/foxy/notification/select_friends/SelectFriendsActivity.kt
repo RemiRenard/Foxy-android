@@ -30,8 +30,6 @@ import javax.inject.Inject
  */
 class SelectFriendsActivity : BaseActivity(), ISelectFriendsView {
 
-    private var mAudioFileName: String? = null
-
     @BindView(R.id.select_friends_recycler_view)
     lateinit var mRecyclerView: RecyclerView
 
