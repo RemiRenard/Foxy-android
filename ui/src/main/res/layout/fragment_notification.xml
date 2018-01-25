@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        android:src="@drawable/night_mountain" />
+        android:src="@drawable/dusk_mountain" />
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar_layout"
@@ -73,7 +73,7 @@
         android:layout_marginEnd="24dp"
         android:layout_marginStart="24dp"
         android:text="@string/You_dont_have_notifications"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@android:color/white"
         android:textSize="20sp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
