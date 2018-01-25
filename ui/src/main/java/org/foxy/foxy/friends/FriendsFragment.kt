@@ -1,13 +1,15 @@
-package org.foxy.foxy.profile.friends
+package org.foxy.foxy.friends
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.view.animation.Animation
-import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -16,20 +18,21 @@ import butterknife.ButterKnife
 import butterknife.OnClick
 import org.foxy.data.model.User
 import org.foxy.data.network.api_response.FriendsRequestsResponse
-import org.foxy.foxy.BaseActivity
 import org.foxy.foxy.FoxyApp
 import org.foxy.foxy.R
 import org.foxy.foxy.adapter.FriendsAdapter
-import org.foxy.foxy.profile.dagger.ProfileModule
-import org.foxy.foxy.profile.friends.add.AddFriendsActivity
-import org.foxy.foxy.profile.friends.requests.FriendsRequestsActivity
+import org.foxy.foxy.friends.add.AddFriendsActivity
+import org.foxy.foxy.friends.dagger.FriendsModule
+import org.foxy.foxy.friends.requests.FriendsRequestsActivity
+import org.greenrobot.eventbus.EventBus
 import javax.inject.Inject
 
 /**
- * Friends activity class.
+ * Friends fragment class.
  */
-class FriendsActivity : BaseActivity(), IFriendsView {
+class FriendsFragment : Fragment(), IFriendsView {
 
+    private var mView: View? = null
     private var mScaleAnimation: Animation? = null
 
     @BindView(R.id.friends_recycler_view)
@@ -53,19 +56,15 @@ class FriendsActivity : BaseActivity(), IFriendsView {
     @Inject
     lateinit var mAdapter: FriendsAdapter
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        overridePendingTransition(R.anim.view_fade_in, R.anim.view_fade_out)
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_friends)
-        ButterKnife.bind(this)
+    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        mView = inflater?.inflate(R.layout.fragment_friends, container, false)
+        ButterKnife.bind(this, mView!!)
         // Register this target with dagger.
-        FoxyApp.get(this).getAppComponent()?.plus(ProfileModule())?.inject(this)
+        FoxyApp.get(context).getAppComponent()?.plus(FriendsModule())?.inject(this)
         initRecyclerView()
-        // Animation
-        mScaleAnimation = AnimationUtils.loadAnimation(this, R.anim.bounce)
-        mScaleAnimation?.repeatMode = Animation.REVERSE
-        mScaleAnimation?.repeatCount = -1
         mPresenter.attachView(this)
+        mPresenter.getFriends()
+        return mView
     }
 
     override fun onResume() {
@@ -79,23 +78,18 @@ class FriendsActivity : BaseActivity(), IFriendsView {
      */
     private fun initRecyclerView() {
         mRecyclerView.setHasFixedSize(true)
-        mRecyclerView.layoutManager = LinearLayoutManager(this)
+        mRecyclerView.layoutManager = LinearLayoutManager(context)
         mRecyclerView.adapter = mAdapter
     }
 
     @OnClick(R.id.toolbar_add)
     fun addFriends() {
-        startActivity(AddFriendsActivity.getStartingIntent(this))
-    }
-
-    @OnClick(R.id.toolbar_cancel)
-    fun cancel() {
-        onBackPressed()
+        startActivity(AddFriendsActivity.getStartingIntent(context))
     }
 
     @OnClick(R.id.friends_banner_requests)
     fun openFriendsRequests() {
-        startActivity(FriendsRequestsActivity.getStartingIntent(this))
+        startActivity(FriendsRequestsActivity.getStartingIntent(context))
     }
 
     override fun displayFriends(friends: List<User>) {
@@ -103,7 +97,6 @@ class FriendsActivity : BaseActivity(), IFriendsView {
         mNoFriends.visibility = if (friends.isNotEmpty()) View.GONE else View.VISIBLE
         mCurvedArrow.clearAnimation()
         if (friends.isEmpty()) {
-            mCurvedArrow.startAnimation(mScaleAnimation)
             mCurvedArrow.visibility = View.VISIBLE
         } else {
             mCurvedArrow.visibility = View.GONE
@@ -129,11 +122,6 @@ class FriendsActivity : BaseActivity(), IFriendsView {
         mProgressBar.visibility = View.GONE
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-        overridePendingTransition(R.anim.view_fade_in, R.anim.view_fade_out)
-    }
-
     override fun onDestroy() {
         mPresenter.detachView()
         super.onDestroy()
@@ -147,6 +135,6 @@ class FriendsActivity : BaseActivity(), IFriendsView {
          * @return Intent
          */
         fun getStartingIntent(callingContext: Context): Intent = Intent(callingContext,
-                FriendsActivity::class.java)
+                FriendsFragment::class.java)
     }
 }

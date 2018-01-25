@@ -17,14 +17,14 @@
         android:src="@drawable/ic_profile_white" />
 
     <ImageView
-        android:id="@+id/navigation_notification"
+        android:id="@+id/navigation_friends"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_weight="1"
         android:adjustViewBounds="true"
         android:padding="12dp"
-        android:src="@drawable/ic_notifications_white" />
+        android:src="@drawable/ic_friends" />
 
     <ImageView
         android:id="@+id/navigation_space"
@@ -36,6 +36,16 @@
         android:padding="12dp" />
 
     <ImageView
+        android:id="@+id/navigation_notification"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:adjustViewBounds="true"
+        android:padding="12dp"
+        android:src="@drawable/ic_notifications_white" />
+
+    <ImageView
         android:id="@+id/navigation_rank"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -44,14 +54,4 @@
         android:adjustViewBounds="true"
         android:padding="12dp"
         android:src="@drawable/ic_podium_white" />
-
-    <ImageView
-        android:id="@+id/navigation_achievement"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        android:adjustViewBounds="true"
-        android:padding="12dp"
-        android:src="@drawable/ic_achievement_white" />
 </LinearLayout>

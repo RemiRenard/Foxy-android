@@ -1,5 +1,6 @@
 package org.foxy.domain.services.notification
 
+import android.content.ContentValues
 import android.util.Log
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -160,6 +161,8 @@ class NotificationService : INotificationService {
      * @return Observable<SimpleSuccessResponse>
      */
     override fun markNotificationAsRead(notificationId: String): Observable<SimpleSuccessResponse> {
+        Log.i("test", "mark as read")
+        TableNotification.setNotifToRead(notificationId)
         return Data.networkService!!
                 .markNotificationAsRead(Cache.token!!, NotificationIdRequest(notificationId))
                 .subscribeOn(Schedulers.io())

@@ -1,4 +1,4 @@
-package org.foxy.foxy.profile.friends.requests
+package org.foxy.foxy.friends.requests
 
 import org.foxy.data.network.api_response.FriendsRequestsResponse
 import org.foxy.foxy.IPresenter

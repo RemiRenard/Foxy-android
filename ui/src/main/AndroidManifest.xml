@@ -84,15 +84,15 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".profile.friends.FriendsActivity"
+            android:name=".friends.FriendsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".profile.friends.add.AddFriendsActivity"
+            android:name=".friends.add.AddFriendsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".profile.friends.requests.FriendsRequestsActivity"
+            android:name=".friends.requests.FriendsRequestsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

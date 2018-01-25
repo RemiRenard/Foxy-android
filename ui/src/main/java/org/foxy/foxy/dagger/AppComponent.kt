@@ -5,6 +5,8 @@ import org.foxy.foxy.BaseActivity
 import org.foxy.foxy.FoxyApp
 import org.foxy.foxy.connect.dagger.ConnectComponent
 import org.foxy.foxy.connect.dagger.ConnectModule
+import org.foxy.foxy.friends.dagger.FriendsComponent
+import org.foxy.foxy.friends.dagger.FriendsModule
 import org.foxy.foxy.main.dagger.MainComponent
 import org.foxy.foxy.main.dagger.MainModule
 import org.foxy.foxy.notification.dagger.NotificationComponent
@@ -32,6 +34,8 @@ interface AppComponent {
     fun plus(notificationModule: NotificationModule): NotificationComponent
 
     fun plus(profileModule: ProfileModule): ProfileComponent
+
+    fun plus(friendsModule: FriendsModule): FriendsComponent
 
     fun inject(application: FoxyApp)
 

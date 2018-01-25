@@ -13,6 +13,7 @@ import android.support.v4.content.ContextCompat
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.Toast
 import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.OnClick
@@ -20,9 +21,9 @@ import org.foxy.data.Constants
 import org.foxy.foxy.BaseActivity
 import org.foxy.foxy.FoxyApp
 import org.foxy.foxy.R
-import org.foxy.foxy.achievement.AchievementFragment
 import org.foxy.foxy.event_bus.CameraPermsResultEvent
 import org.foxy.foxy.event_bus.WriteStoragePermResultEvent
+import org.foxy.foxy.friends.FriendsFragment
 import org.foxy.foxy.main.dagger.MainModule
 import org.foxy.foxy.notification.NotificationFragment
 import org.foxy.foxy.notification.add.AddNotificationActivity
@@ -84,15 +85,15 @@ class MainActivity : BaseActivity(), IMainView {
         mFragmentManager?.beginTransaction()?.replace(R.id.content, fragment)?.commit()
     }
 
-    @OnClick(R.id.navigation_profile, R.id.navigation_notification, R.id.navigation_rank, R.id.navigation_achievement)
+    @OnClick(R.id.navigation_profile, R.id.navigation_notification, R.id.navigation_rank, R.id.navigation_friends)
     fun manageBottomBar(view: View) {
         manageColorBottomBar(view)
         var fragment: Fragment? = null
         when (view.id) {
             R.id.navigation_notification -> fragment = NotificationFragment()
             R.id.navigation_profile -> fragment = ProfileFragment()
-            R.id.navigation_rank -> fragment = RankingFragment()
-            R.id.navigation_achievement -> fragment = AchievementFragment()
+            R.id.navigation_rank -> Toast.makeText(this, "Not implemented yet!", Toast.LENGTH_SHORT).show()
+            R.id.navigation_friends -> fragment = FriendsFragment()
         }
         val bundle = Bundle()
         fragment?.arguments = bundle

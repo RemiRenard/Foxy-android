@@ -1,4 +1,4 @@
-package org.foxy.foxy.profile.friends.add
+package org.foxy.foxy.friends.add
 
 import android.content.Context
 import android.content.Intent
@@ -21,6 +21,7 @@ import org.foxy.foxy.FoxyApp
 import org.foxy.foxy.R
 import org.foxy.foxy.adapter.AddFriendsAdapter
 import org.foxy.foxy.event_bus.AddFriendsIconClickedEvent
+import org.foxy.foxy.friends.dagger.FriendsModule
 import org.foxy.foxy.profile.dagger.ProfileModule
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -57,7 +58,7 @@ class AddFriendsActivity : BaseActivity(), IAddFriendsView {
         setContentView(R.layout.activity_add_friends)
         ButterKnife.bind(this)
         // Register this target with dagger.
-        FoxyApp.get(this).getAppComponent()?.plus(ProfileModule())?.inject(this)
+        FoxyApp.get(this).getAppComponent()?.plus(FriendsModule())?.inject(this)
         initRecyclerView()
         mPresenter.attachView(this)
         //Reactive search bar

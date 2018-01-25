@@ -61,4 +61,8 @@ object TableNotification {
             "$TABLE_NOTIFICATION_USERNAME, $TABLE_NOTIFICATION_CREATED_AT, $TABLE_NOTIFICATION_TYPE, " +
             "$TABLE_NOTIFICATION_SONG, $TABLE_NOTIFICATION_IS_READ " +
             "FROM $DATABASE_TABLE_NAME"
+
+    fun setNotifToRead(notificationId:String): String = "UPDATE $DATABASE_TABLE_NAME" +
+            "SET $TABLE_NOTIFICATION_IS_READ=1" +
+            "WHERE $TABLE_NOTIFICATION_ID="+ notificationId
 }

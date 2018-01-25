@@ -1,4 +1,4 @@
-package org.foxy.foxy.profile.friends.add
+package org.foxy.foxy.friends.add
 
 import org.foxy.data.model.User
 import org.foxy.foxy.IPresenter

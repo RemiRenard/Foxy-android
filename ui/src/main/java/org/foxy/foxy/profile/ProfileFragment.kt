@@ -22,10 +22,7 @@ import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.ProgressBar
-import android.widget.TextView
+import android.widget.*
 import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.OnClick
@@ -47,7 +44,6 @@ import org.foxy.foxy.R
 import org.foxy.foxy.event_bus.CameraPermsResultEvent
 import org.foxy.foxy.event_bus.WriteStoragePermResultEvent
 import org.foxy.foxy.profile.dagger.ProfileModule
-import org.foxy.foxy.profile.friends.FriendsActivity
 import org.foxy.foxy.profile.settings.SettingsActivity
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -59,6 +55,9 @@ import java.io.IOException
 import java.util.*
 import javax.inject.Inject
 
+/**
+ * Profile fragment class.
+ */
 class ProfileFragment : Fragment(), IProfileView {
 
     private var mView: View? = null
@@ -235,9 +234,9 @@ class ProfileFragment : Fragment(), IProfileView {
         startActivity(SettingsActivity.getStartingIntent(context))
     }
 
-    @OnClick(R.id.toolbar_friends)
-    fun friendsClicked() {
-        startActivity(FriendsActivity.getStartingIntent(context))
+    @OnClick(R.id.toolbar_achievements)
+    fun achievementsClicked() {
+        Toast.makeText(context, "Not implemented yet!", Toast.LENGTH_SHORT).show()
     }
 
     override fun showProgressBar() {

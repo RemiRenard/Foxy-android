@@ -72,7 +72,7 @@ class AddNotificationActivity : BaseActivity(), IAddNotificationView {
 
     @OnClick(R.id.add_notification_button_next)
     fun sendNotification() {
-        if (!mMessage.text.isEmpty() && !mKeyword.text.isEmpty()) {
+        if (!mMessage.text.isEmpty()) {
             mPresenter.saveTmpNotification(mMessage.text.toString(), mKeyword.text.toString(), "message", "", mAudioFile)
         } else {
             Toast.makeText(this, R.string.error_form, Toast.LENGTH_SHORT).show()
@@ -212,7 +212,7 @@ class AddNotificationActivity : BaseActivity(), IAddNotificationView {
     override fun onBackPressed() {
         super.onBackPressed()
         overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right)
-        
+
     }
 
     public override fun onStop() {

@@ -22,12 +22,12 @@
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
             <ImageView
-                android:id="@+id/toolbar_friends"
+                android:id="@+id/toolbar_achievements"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
                 android:padding="16dp"
-                android:src="@drawable/ic_friends" />
+                android:src="@drawable/ic_achievement_white" />
 
             <TextView
                 android:id="@+id/toolbar_title"

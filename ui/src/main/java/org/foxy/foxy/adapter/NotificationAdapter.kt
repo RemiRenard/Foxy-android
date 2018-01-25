@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.item_notification.view.*
 import org.foxy.data.model.Notification
 import org.foxy.foxy.R
 import org.foxy.foxy.event_bus.NotificationClickedEvent
-import org.foxy.foxy.profile.friends.requests.FriendsRequestsActivity
+import org.foxy.foxy.friends.requests.FriendsRequestsActivity
 import org.greenrobot.eventbus.EventBus
 import java.text.SimpleDateFormat
 import java.util.*

@@ -1,4 +1,4 @@
-package org.foxy.foxy.profile.friends
+package org.foxy.foxy.friends
 
 import android.content.Context
 import android.widget.Toast

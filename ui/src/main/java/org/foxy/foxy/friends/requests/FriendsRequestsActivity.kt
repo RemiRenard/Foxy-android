@@ -1,4 +1,4 @@
-package org.foxy.foxy.profile.friends.requests
+package org.foxy.foxy.friends.requests
 
 import android.content.Context
 import android.content.Intent
@@ -18,6 +18,7 @@ import org.foxy.foxy.R
 import org.foxy.foxy.adapter.FriendsRequestsAdapter
 import org.foxy.foxy.custom.SimpleDividerItemDecoration
 import org.foxy.foxy.event_bus.FriendRequestClickedEvent
+import org.foxy.foxy.friends.dagger.FriendsModule
 import org.foxy.foxy.profile.dagger.ProfileModule
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -49,7 +50,7 @@ class FriendsRequestsActivity : BaseActivity(), IFriendsRequestsView {
         setContentView(R.layout.activity_friends_requests)
         ButterKnife.bind(this)
         // Register this target with dagger.
-        FoxyApp.get(this).getAppComponent()?.plus(ProfileModule())?.inject(this)
+        FoxyApp.get(this).getAppComponent()?.plus(FriendsModule())?.inject(this)
         initRecyclerView()
         mPresenter.attachView(this)
         mPresenter.getFriendsRequests()
