@@ -24,6 +24,7 @@
     <string name="Confirm_password">Confirm your password</string>
     <string name="error_form">Please complete all fields</string>
     <string name="Notification">Notification</string>
+    <string name="New_Notification">New notif from %1$s</string>
     <string name="Custom_notification">Custom notification</string>
     <string name="Friends">Friends</string>
     <string name="Title">Title</string>

@@ -20,8 +20,8 @@
 
     <ImageView
         android:id="@+id/item_add_friends_avatar"
-        android:layout_width="@dimen/friends_avatar_width"
-        android:layout_height="@dimen/friends_avatar_height"
+        android:layout_width="@dimen/add_friends_avatar_width"
+        android:layout_height="@dimen/add_friends_avatar_height"
         android:scaleType="fitXY"
         android:src="@drawable/ic_placeholder_male"
         app:layout_constraintBottom_toBottomOf="@+id/item_add_friends_block"

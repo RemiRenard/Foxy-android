@@ -165,4 +165,10 @@ class NotificationService : INotificationService {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
     }
+
+
+    override fun clearNotificationCache(){
+        Cache.tmpNotification = null
+        Cache.audioFile = null
+    }
 }

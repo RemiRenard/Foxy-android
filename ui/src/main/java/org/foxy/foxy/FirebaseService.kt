@@ -12,8 +12,10 @@ import android.support.annotation.RequiresApi
 import android.support.v4.app.NotificationCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import com.google.gson.Gson
 import org.foxy.data.Constants
 import org.foxy.data.model.Notification
+import org.foxy.data.model.User
 import org.foxy.foxy.main.MainActivity
 
 
@@ -23,9 +25,10 @@ class FirebaseService : FirebaseMessagingService() {
         // Check if message contains a data payload.
         if (remoteMessage?.data?.isNotEmpty()!!) {
             // Create the notification object.
+
             getNotification(Notification(
                     remoteMessage.data["message"].orEmpty(),
-                    remoteMessage.data["type"].orEmpty(),
+                    Gson().fromJson(remoteMessage.data["user"].orEmpty(), User::class.java), //Gson convert because object received
                     remoteMessage.data["song"].orEmpty()
             ))
         }
@@ -57,8 +60,8 @@ class FirebaseService : FirebaseMessagingService() {
     private fun sendNotifToLowApi(notification: Notification, notificationManager: NotificationManager,
                                   pendingIntent: PendingIntent) {
         val builder = NotificationCompat.Builder(this)
-                .setContentTitle(notification.message)
-                .setContentText("new_notif")
+                .setContentTitle(getString(R.string.New_Notification, notification.userSource?.username))
+                .setContentText(notification.message)
                 .setAutoCancel(true)
                 .setSmallIcon(R.drawable.logo_foxy)
                 .setPriority(1)
@@ -78,8 +81,8 @@ class FirebaseService : FirebaseMessagingService() {
         val builder = android.app.Notification.Builder(this, channel.id)
                 .setSmallIcon(R.drawable.logo_foxy)
                 .setContentIntent(pendingIntent)
-                .setContentTitle(notification.message)
-                .setContentText("new_notif")
+                .setContentTitle(getString(R.string.New_Notification, notification.userSource?.username))
+                .setContentText(notification.message)
                 .setAutoCancel(true)
         notificationManager.notify(0 /* ID */, builder.build())
     }

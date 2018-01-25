@@ -1,14 +1,17 @@
 package org.foxy.foxy.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
+import com.thefinestartist.utils.content.ContextUtil.startActivity
 import kotlinx.android.synthetic.main.item_friends.view.*
 import org.foxy.data.model.User
 import org.foxy.foxy.R
+import org.foxy.foxy.notification.add.AddNotificationActivity
 import java.util.*
 
 /**
@@ -27,6 +30,10 @@ class FriendsAdapter(val mContext: Context) : RecyclerView.Adapter<FriendsAdapte
             holder.itemView?.item_friends_avatar?.setImageResource(R.drawable.ic_placeholder_male)
         } else {
             Glide.with(mContext).load(mFriends[position].avatar).into(holder.itemView?.item_friends_avatar)
+        }
+        holder.itemView?.item_friends_send_button?.setOnClickListener {
+            mContext.startActivity(AddNotificationActivity.getStartingIntent(mContext)
+                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
         }
     }
 

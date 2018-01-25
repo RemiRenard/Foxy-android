@@ -19,4 +19,6 @@ interface INotificationService {
     fun saveTmpNotification(notification: Notification, audioFile: File?): Observable<Notification>
 
     fun markNotificationAsRead(notificationId: String): Observable<SimpleSuccessResponse>
+
+    fun clearNotificationCache()
 }

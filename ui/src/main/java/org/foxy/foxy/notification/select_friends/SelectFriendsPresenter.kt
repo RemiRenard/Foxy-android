@@ -85,4 +85,9 @@ class SelectFriendsPresenter(private val mContext: Context, private val mFriendS
                     }
                 })
     }
+
+    override fun clearNotificationCache()
+    {
+        mNotificationService.clearNotificationCache()
+    }
 }

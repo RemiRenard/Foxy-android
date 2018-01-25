@@ -30,6 +30,12 @@ class Notification : Serializable {
         this.song = song
     }
 
+    constructor(message: String, userSource: User, song: String) {
+        this.message = message
+        this.userSource = userSource
+        this.song = song
+    }
+
     constructor(message: String, keyword: String, type: String, song: String) {
         this.message = message
         this.keyword = keyword

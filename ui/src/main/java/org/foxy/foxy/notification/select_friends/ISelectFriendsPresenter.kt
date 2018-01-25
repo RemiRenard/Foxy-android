@@ -10,4 +10,6 @@ interface ISelectFriendsPresenter : IPresenter<ISelectFriendsView> {
     fun getFriends()
 
     fun sendNotification(userIds: List<String>)
+
+    fun clearNotificationCache()
 }
