@@ -190,9 +190,9 @@ class ProfileFragment : Fragment(), IProfileView {
         for (i in 0 until nbGames) {
             val value = (Math.random() * nbGames) + 15
             yVal.add(BarEntry(i.toFloat(), value.toFloat()))
-            games.add("Game" + i)
+            games.add("Song" + i)
         }
-        val set = BarDataSet(yVal, "Games")
+        val set = BarDataSet(yVal, "Songs")
         val colors: MutableList<Int> = ArrayList()
         ColorTemplate.VORDIPLOM_COLORS.forEach { colors.add(it) }
         set.colors = colors

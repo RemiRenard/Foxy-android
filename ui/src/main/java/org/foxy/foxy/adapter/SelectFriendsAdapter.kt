@@ -26,7 +26,7 @@ class SelectFriendsAdapter(private val mContext: Context) : RecyclerView.Adapter
             ItemViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_select_friends, parent, false))
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        holder.itemView?.item_select_friends_name?.text = mFriends[position].email
+        holder.itemView?.item_select_friends_name?.text = mFriends[position].username
         holder.itemView?.item_select_friends_check?.setImageResource(if (mFriendsSelected.contains(mFriends[position]))
             R.drawable.ic_checked else R.drawable.ic_unchecked)
         holder.itemView.setOnClickListener {
