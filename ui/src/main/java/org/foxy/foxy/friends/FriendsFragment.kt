@@ -9,7 +9,6 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -24,7 +23,6 @@ import org.foxy.foxy.adapter.FriendsAdapter
 import org.foxy.foxy.friends.add.AddFriendsActivity
 import org.foxy.foxy.friends.dagger.FriendsModule
 import org.foxy.foxy.friends.requests.FriendsRequestsActivity
-import org.greenrobot.eventbus.EventBus
 import javax.inject.Inject
 
 /**
@@ -33,7 +31,6 @@ import javax.inject.Inject
 class FriendsFragment : Fragment(), IFriendsView {
 
     private var mView: View? = null
-    private var mScaleAnimation: Animation? = null
 
     @BindView(R.id.friends_recycler_view)
     lateinit var mRecyclerView: RecyclerView

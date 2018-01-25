@@ -3,25 +3,17 @@ package org.foxy.foxy.friends.dagger
 import android.content.Context
 import dagger.Module
 import dagger.Provides
-import org.foxy.domain.services.friend.FriendService
 import org.foxy.domain.services.friend.IFriendService
 import org.foxy.domain.services.user.IUserService
-import org.foxy.domain.services.user.UserService
 import org.foxy.foxy.adapter.AddFriendsAdapter
 import org.foxy.foxy.adapter.FriendsAdapter
 import org.foxy.foxy.adapter.FriendsRequestsAdapter
-import org.foxy.foxy.profile.IProfilePresenter
-import org.foxy.foxy.profile.ProfilePresenter
-import org.foxy.foxy.profile.edit.EditProfilePresenter
-import org.foxy.foxy.profile.edit.IEditProfilePresenter
 import org.foxy.foxy.friends.FriendsPresenter
 import org.foxy.foxy.friends.IFriendsPresenter
 import org.foxy.foxy.friends.add.AddFriendsPresenter
 import org.foxy.foxy.friends.add.IAddFriendsPresenter
 import org.foxy.foxy.friends.requests.FriendsRequestsPresenter
 import org.foxy.foxy.friends.requests.IFriendsRequestsPresenter
-import org.foxy.foxy.profile.settings.ISettingsPresenter
-import org.foxy.foxy.profile.settings.SettingsPresenter
 
 @Module
 class FriendsModule {

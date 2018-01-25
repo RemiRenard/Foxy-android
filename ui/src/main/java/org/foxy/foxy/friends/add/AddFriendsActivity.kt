@@ -22,7 +22,6 @@ import org.foxy.foxy.R
 import org.foxy.foxy.adapter.AddFriendsAdapter
 import org.foxy.foxy.event_bus.AddFriendsIconClickedEvent
 import org.foxy.foxy.friends.dagger.FriendsModule
-import org.foxy.foxy.profile.dagger.ProfileModule
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
