@@ -6,12 +6,12 @@ import android.media.MediaPlayer
 import android.net.Uri
 import android.support.v7.widget.RecyclerView
 import android.text.TextUtils
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import kotlinx.android.synthetic.main.item_notification.view.*
+import org.foxy.data.Constants
 import org.foxy.data.model.Notification
 import org.foxy.foxy.R
 import org.foxy.foxy.event_bus.NotificationClickedEvent
@@ -53,11 +53,11 @@ class NotificationAdapter(val mContext: Context) : RecyclerView.Adapter<Notifica
         }
 
         if (mNotifications[position].isRead)
-            holder.itemView?.item_notification_layout?.alpha = 0.8F
+            holder.itemView?.item_notification_layout?.alpha = 0.6F
         else
             holder.itemView?.item_notification_layout?.alpha = 1F
 
-        if (TextUtils.equals(mNotifications[position].song, "default_song_location")
+        if (TextUtils.equals(mNotifications[position].song, Constants.DEFAULT_SONG_LOCATION)
                 || TextUtils.equals(mNotifications[position].song, ""))
             holder.itemView?.item_notification_audio_button?.visibility = View.GONE
         else

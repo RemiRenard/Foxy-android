@@ -23,7 +23,7 @@ object Constants {
     const val NOTIFICATION_CHANNEL_NAME = "NOTIFICATION_CHANNEL_NAME"
     const val REQUEST_PERMISSION_WRITE_STORAGE = 1
     const val REQUEST_PERMISSION_GROUP_CAMERA = 5
-    const val MAX_CLICK_DURATION = 150
+    const val DEFAULT_SONG_LOCATION = "https://s3.eu-west-3.amazonaws.com/foxy-sounds/default_song.mp3"
 
     // DEV
     const val SERVER_URL_DEV = "http://192.168.1.135:3000/api/"
