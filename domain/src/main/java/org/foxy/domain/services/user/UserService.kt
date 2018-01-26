@@ -176,7 +176,7 @@ class UserService : IUserService {
             Data.database?.insert(TableUser.DATABASE_TABLE_NAME, TableUser.insertUser(user, true))
             transaction?.markSuccessful()
         } catch (e: Exception) {
-            Log.e(javaClass.simpleName, "updateFriendDb: ", e)
+            Log.e(javaClass.simpleName, "updateCurrentUserDb: ", e)
         } finally {
             transaction?.end()
         }

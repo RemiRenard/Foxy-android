@@ -1,7 +1,6 @@
 package org.foxy.data.database.table
 
 import android.content.ContentValues
-import android.util.Log
 import org.foxy.data.model.Notification
 
 /**
@@ -62,7 +61,9 @@ object TableNotification {
             "$TABLE_NOTIFICATION_SONG, $TABLE_NOTIFICATION_IS_READ " +
             "FROM $DATABASE_TABLE_NAME"
 
-    fun setNotifToRead(notificationId:String): String = "UPDATE $DATABASE_TABLE_NAME" +
-            "SET $TABLE_NOTIFICATION_IS_READ=1" +
-            "WHERE $TABLE_NOTIFICATION_ID="+ notificationId
+    fun setNotifToRead(): ContentValues {
+        val values = ContentValues()
+        values.put(TABLE_NOTIFICATION_IS_READ, 1)
+        return values
+    }
 }

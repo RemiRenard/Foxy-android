@@ -1,6 +1,5 @@
 package org.foxy.domain.services.notification
 
-import android.content.ContentValues
 import android.util.Log
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -161,8 +160,15 @@ class NotificationService : INotificationService {
      * @return Observable<SimpleSuccessResponse>
      */
     override fun markNotificationAsRead(notificationId: String): Observable<SimpleSuccessResponse> {
-        Log.i("test", "mark as read")
-        TableNotification.setNotifToRead(notificationId)
+
+        try {
+            Data.database!!
+                    .update(TableNotification.DATABASE_TABLE_NAME,
+                            TableNotification.setNotifToRead(),
+                            TableNotification.TABLE_NOTIFICATION_ID+"=\'"+notificationId+"\'")
+        } catch (e: Exception) {
+            Log.e(javaClass.simpleName, "marNotificationAsRead: ", e)
+        }
         return Data.networkService!!
                 .markNotificationAsRead(Cache.token!!, NotificationIdRequest(notificationId))
                 .subscribeOn(Schedulers.io())
@@ -170,7 +176,7 @@ class NotificationService : INotificationService {
     }
 
 
-    override fun clearNotificationCache(){
+    override fun clearNotificationCache() {
         Cache.tmpNotification = null
         Cache.audioFile = null
     }
