@@ -78,7 +78,6 @@ class SelectFriendsPresenter(private val mContext: Context, private val mFriendS
                     }
 
                     override fun onComplete() {
-                        Toast.makeText(mContext, R.string.Success, Toast.LENGTH_SHORT).show()
                         File(mContext.externalCacheDir.absolutePath + "/foxyAudioRecord.mp3").delete()
                         mView?.notificationSent()
                         mView?.enableButton(true)
