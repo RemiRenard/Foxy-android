@@ -53,7 +53,7 @@ class NotificationAdapter(val mContext: Context) : RecyclerView.Adapter<Notifica
         }
 
         if (mNotifications[position].isRead)
-            holder.itemView?.item_notification_layout?.alpha = 0.6F
+            holder.itemView?.item_notification_layout?.alpha = 0.8F
         else
             holder.itemView?.item_notification_layout?.alpha = 1F
 
@@ -73,9 +73,14 @@ class NotificationAdapter(val mContext: Context) : RecyclerView.Adapter<Notifica
                         mIsPlaying = -1
                         mPlayer = null
                         holder.itemView.item_notification_audio_button.setImageResource(R.drawable.ic_play)
+                        // Mark notification as read.
+                        EventBus.getDefault().post(NotificationClickedEvent(mNotifications[position].id!!))
+                        mNotifications[position].isRead = true
+                        notifyDataSetChanged()
                     }
                     mPlayer?.prepare()
                     mPlayer?.start()
+
                     holder.itemView.item_notification_audio_button.setImageResource(R.drawable.ic_stop)
                 }
                 position -> { //If this same notification's audio is currently played

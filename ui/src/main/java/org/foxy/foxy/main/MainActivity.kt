@@ -92,7 +92,7 @@ class MainActivity : BaseActivity(), IMainView {
         when (view.id) {
             R.id.navigation_notification -> fragment = NotificationFragment()
             R.id.navigation_profile -> fragment = ProfileFragment()
-            R.id.navigation_rank -> Toast.makeText(this, "Not implemented yet!", Toast.LENGTH_SHORT).show()
+            R.id.navigation_rank -> fragment = RankingFragment()
             R.id.navigation_friends -> fragment = FriendsFragment()
         }
         val bundle = Bundle()

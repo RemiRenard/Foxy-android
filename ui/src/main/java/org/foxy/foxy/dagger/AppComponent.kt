@@ -13,6 +13,8 @@ import org.foxy.foxy.notification.dagger.NotificationComponent
 import org.foxy.foxy.notification.dagger.NotificationModule
 import org.foxy.foxy.profile.dagger.ProfileComponent
 import org.foxy.foxy.profile.dagger.ProfileModule
+import org.foxy.foxy.profile.dagger.RankingModule
+import org.foxy.foxy.ranking.dagger.RankingComponent
 import org.foxy.foxy.splash.dagger.SplashComponent
 import org.foxy.foxy.splash.dagger.SplashModule
 import javax.inject.Singleton
@@ -36,6 +38,8 @@ interface AppComponent {
     fun plus(profileModule: ProfileModule): ProfileComponent
 
     fun plus(friendsModule: FriendsModule): FriendsComponent
+
+    fun plus(rankingModule: RankingModule): RankingComponent
 
     fun inject(application: FoxyApp)
 

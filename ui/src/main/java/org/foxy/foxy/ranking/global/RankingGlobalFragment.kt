@@ -11,7 +11,7 @@ import android.view.ViewGroup
 import butterknife.BindView
 import butterknife.ButterKnife
 import org.foxy.foxy.R
-import org.foxy.foxy.adapter.RankingGlobalAdapter
+import org.foxy.foxy.adapter.RankingAdapter
 import org.foxy.foxy.custom.SimpleDividerItemDecoration
 import javax.inject.Inject
 
@@ -26,7 +26,7 @@ class RankingGlobalFragment : Fragment() {
     lateinit var mSwipeRefresh: SwipeRefreshLayout
 
     @Inject
-    lateinit var mAdapter: RankingGlobalAdapter
+    lateinit var mAdapter: RankingAdapter
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mView = inflater?.inflate(R.layout.fragment_ranking_global, container, false)
@@ -45,8 +45,9 @@ class RankingGlobalFragment : Fragment() {
         mRecyclerView.setHasFixedSize(true)
         mRecyclerView.addItemDecoration(SimpleDividerItemDecoration(context))
         mRecyclerView.layoutManager = LinearLayoutManager(context)
-        mAdapter = RankingGlobalAdapter(context)
+        mAdapter = RankingAdapter(context)
         mRecyclerView.adapter = mAdapter
+        mAdapter.notifyDataSetChanged()
     }
 
 }

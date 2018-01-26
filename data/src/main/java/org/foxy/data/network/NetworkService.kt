@@ -76,4 +76,7 @@ interface NetworkService {
     @POST("notification/mark-as-read")
     fun markNotificationAsRead(@Header(Constants.AUTHORIZATION) token: String,
                                @Body params: NotificationIdRequest): Observable<SimpleSuccessResponse>
+
+    //RANKING SECTION
+
 }
