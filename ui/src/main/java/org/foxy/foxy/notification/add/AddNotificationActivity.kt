@@ -19,6 +19,7 @@ import android.widget.Toast
 import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.OnClick
+import org.foxy.data.Constants
 import org.foxy.foxy.BaseActivity
 import org.foxy.foxy.BuildConfig
 import org.foxy.foxy.FoxyApp
@@ -89,7 +90,9 @@ class AddNotificationActivity : BaseActivity(), IAddNotificationView {
     }
 
     @OnClick(R.id.add_notification_micro)
-    fun startAudioClicked() {
+    fun startRecordClicked() {
+        if(mIsPlaying)
+            stopPlaying()
         if (mIsRecording) {
             stopRecordVoice()
         } else {
@@ -114,6 +117,12 @@ class AddNotificationActivity : BaseActivity(), IAddNotificationView {
         mRecorder?.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
         mRecorder?.setOutputFile(mAudioFileName)
         mRecorder?.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
+        mRecorder?.setMaxDuration(Constants.RECORD_MAX_DURATION)
+        mRecorder?.setOnInfoListener { mr, what, extra ->
+            if (what == MediaRecorder.MEDIA_RECORDER_INFO_MAX_DURATION_REACHED) {
+                stopRecordVoice()
+            }
+        }
         mRecorder?.prepare()
         mRecorder?.start()
         mMicro.setImageResource(R.drawable.ic_micro_recording)
@@ -135,13 +144,15 @@ class AddNotificationActivity : BaseActivity(), IAddNotificationView {
         mPlayer?.setDataSource(mAudioFileName)
         mPlayer?.prepare()
         mPlayer?.start()
-        mPlayer?.setOnCompletionListener { mIsPlaying = false }
+        mPlayer?.setOnCompletionListener { stopPlaying() }
+        mPlayAudio.setImageResource(R.drawable.ic_speaker_off)
     }
 
     private fun stopPlaying() {
         mPlayer?.release()
         mPlayer = null
         mIsPlaying = false
+        mPlayAudio.setImageResource(R.drawable.ic_speaker_on)
     }
 
     /**
