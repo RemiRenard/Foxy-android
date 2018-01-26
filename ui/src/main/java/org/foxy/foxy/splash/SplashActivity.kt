@@ -62,7 +62,7 @@ class SplashActivity : AppCompatActivity(), ISplashView {
      */
     private fun startFirstAnimation() {
         val animationLoadLogo = AnimationUtils.loadAnimation(this, R.anim.scale_0_to_1)
-        animationLoadLogo.duration = 1000
+        animationLoadLogo.duration = 500
         animationLoadLogo.setAnimationListener(object : Animation.AnimationListener {
             override fun onAnimationStart(animation: Animation) {}
 
@@ -103,7 +103,7 @@ class SplashActivity : AppCompatActivity(), ISplashView {
      */
     private fun startLastAnimation() {
         val increaseSize = AnimationUtils.loadAnimation(this@SplashActivity, R.anim.scale08to1)
-        increaseSize.duration = 200
+        increaseSize.duration = 100
         increaseSize.setAnimationListener(object : Animation.AnimationListener {
             override fun onAnimationStart(animation: Animation) {}
 
@@ -115,7 +115,7 @@ class SplashActivity : AppCompatActivity(), ISplashView {
                         startActivity(ConnectActivity.getStartingIntent(this@SplashActivity))
                     }
                     finish()
-                }, 1500)
+                }, 1000)
             }
 
             override fun onAnimationRepeat(animation: Animation) {
