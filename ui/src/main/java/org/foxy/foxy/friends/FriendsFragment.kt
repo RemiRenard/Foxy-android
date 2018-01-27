@@ -60,7 +60,6 @@ class FriendsFragment : Fragment(), IFriendsView {
         FoxyApp.get(context).getAppComponent()?.plus(FriendsModule())?.inject(this)
         initRecyclerView()
         mPresenter.attachView(this)
-        mPresenter.getFriends()
         return mView
     }
 
