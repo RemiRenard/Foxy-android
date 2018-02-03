@@ -92,9 +92,6 @@ class ProfileFragment : Fragment(), IProfileView {
     @BindView(R.id.profile_chart_top_songs_played_none)
     lateinit var mBarChartTvNone: TextView
 
-    @BindView(R.id.profile_chart_best_friends_none)
-    lateinit var mPieChartTvNone: TextView
-
     @BindView(R.id.profile_see_more_stats)
     lateinit var mMoreStats: TextView
 
@@ -202,12 +199,13 @@ class ProfileFragment : Fragment(), IProfileView {
                 && mCurrentUser?.stats?.topFriends?.isNotEmpty()!!) {
             setPieChartData(mCurrentUser?.stats?.topFriends!!)
             mPieChart.visibility = View.VISIBLE
-            mPieChartTvNone.visibility = View.GONE
+            mMoreStats.text = getString(R.string.See_less_stats)
         } else {
-            mPieChart.visibility = View.INVISIBLE
-            mPieChartTvNone.visibility = View.VISIBLE
+            mMoreStats.text = getString(R.string.See_more_stats)
+            mViewBarChart.visibility = View.GONE
+            mPieChart.visibility = View.GONE
+            mTopFriendsTitle.visibility = View.GONE
         }
-        mMoreStats.text = getString(R.string.See_less_stats)
     }
 
     /**
