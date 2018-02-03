@@ -100,4 +100,5 @@
     <string name="Global">Global</string>
     <string name="Week">Week</string>
     <string name="Day">Day</string>
+    <string name="No_data_to_display">No data to display</string>
 </resources>

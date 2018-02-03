@@ -89,6 +89,9 @@ class ProfileFragment : Fragment(), IProfileView {
     @BindView(R.id.profile_chart_best_friends)
     lateinit var mPieChart: PieChart
 
+    @BindView(R.id.profile_chart_top_songs_played_none)
+    lateinit var mBarChartTvNone: TextView
+
     @BindView(R.id.profile_view_under_bar_chart)
     lateinit var mViewBarChart: View
 
@@ -132,7 +135,6 @@ class ProfileFragment : Fragment(), IProfileView {
      */
     private fun displayBarChart() {
         mChart.description.isEnabled = false
-        mChart.setPinchZoom(false)
         mChart.setDrawBarShadow(false)
         mChart.setDrawGridBackground(false)
         mChart.xAxis.position = XAxis.XAxisPosition.BOTTOM
@@ -177,8 +179,14 @@ class ProfileFragment : Fragment(), IProfileView {
         }
         mProfileName.text = context.getString(R.string.placeholder_name, mCurrentUser?.firstName, mCurrentUser?.lastName)
         mProfileUsername.text = mCurrentUser?.username
-        if (mCurrentUser?.stats != null) {
+        if (mCurrentUser?.stats != null && mCurrentUser?.stats?.topSongs != null
+                && mCurrentUser?.stats?.topSongs?.isNotEmpty()!!) {
             setBarChartData(mCurrentUser?.stats?.topSongs!!)
+            mChart.visibility = View.VISIBLE
+            mBarChartTvNone.visibility = View.GONE
+        } else {
+            mChart.visibility = View.INVISIBLE
+            mBarChartTvNone.visibility = View.VISIBLE
         }
     }
 
@@ -186,12 +194,12 @@ class ProfileFragment : Fragment(), IProfileView {
      * Add data to the bar chart
      */
     private fun setBarChartData(songs: List<Song>) {
-        val games = ArrayList<String>()
+        val songList = ArrayList<String>()
         val yVal = ArrayList<BarEntry>()
         songs.mapIndexed { index, song ->
             val value = song.nbUsed
             yVal.add(BarEntry(index.toFloat(), value!!.toFloat()))
-            games.add(song.name!!)
+            songList.add(song.name!!)
         }
         val set = BarDataSet(yVal, "Songs")
         val colors: MutableList<Int> = ArrayList()
@@ -200,9 +208,7 @@ class ProfileFragment : Fragment(), IProfileView {
         set.setDrawValues(false)
         val data = BarData(set)
         mChart.data = data
-        mChart.xAxis.valueFormatter = IndexAxisValueFormatter(games)
-        mChart.xAxis.axisMinimum = data.xMin - .5f
-        mChart.xAxis.axisMaximum = data.xMax + .5f
+        mChart.xAxis.valueFormatter = IndexAxisValueFormatter(songList)
         mChart.xAxis.labelCount = songs.size
         mChart.invalidate()
         mChart.animateY(500)
