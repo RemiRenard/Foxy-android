@@ -95,6 +95,9 @@ class ProfileFragment : Fragment(), IProfileView {
     @BindView(R.id.profile_chart_best_friends_none)
     lateinit var mPieChartTvNone: TextView
 
+    @BindView(R.id.profile_see_more_stats)
+    lateinit var mMoreStats: TextView
+
     @BindView(R.id.profile_view_under_bar_chart)
     lateinit var mViewBarChart: View
 
@@ -204,6 +207,7 @@ class ProfileFragment : Fragment(), IProfileView {
             mPieChart.visibility = View.INVISIBLE
             mPieChartTvNone.visibility = View.VISIBLE
         }
+        mMoreStats.text = getString(R.string.See_less_stats)
     }
 
     /**
