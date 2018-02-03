@@ -37,7 +37,7 @@ import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.utils.ColorTemplate
 import org.foxy.data.Constants
-import org.foxy.data.model.Song
+import org.foxy.data.model.Stats
 import org.foxy.data.model.User
 import org.foxy.foxy.BuildConfig
 import org.foxy.foxy.FoxyApp
@@ -91,6 +91,9 @@ class ProfileFragment : Fragment(), IProfileView {
 
     @BindView(R.id.profile_chart_top_songs_played_none)
     lateinit var mBarChartTvNone: TextView
+
+    @BindView(R.id.profile_chart_best_friends_none)
+    lateinit var mPieChartTvNone: TextView
 
     @BindView(R.id.profile_view_under_bar_chart)
     lateinit var mViewBarChart: View
@@ -167,8 +170,6 @@ class ProfileFragment : Fragment(), IProfileView {
      * Show profile information
      */
     override fun showProfileInformation(user: User) {
-        // TODO Get the list of games & top friends with the server
-        setPieChartData()
         mCurrentUser = user
         if (mCurrentUser!!.avatar != null) {
             Glide.with(context).load(mCurrentUser?.avatar).apply(RequestOptions()
@@ -179,6 +180,11 @@ class ProfileFragment : Fragment(), IProfileView {
         }
         mProfileName.text = context.getString(R.string.placeholder_name, mCurrentUser?.firstName, mCurrentUser?.lastName)
         mProfileUsername.text = mCurrentUser?.username
+        showStats()
+    }
+
+    private fun showStats() {
+        // BAR CHART
         if (mCurrentUser?.stats != null && mCurrentUser?.stats?.topSongs != null
                 && mCurrentUser?.stats?.topSongs?.isNotEmpty()!!) {
             setBarChartData(mCurrentUser?.stats?.topSongs!!)
@@ -188,12 +194,22 @@ class ProfileFragment : Fragment(), IProfileView {
             mChart.visibility = View.INVISIBLE
             mBarChartTvNone.visibility = View.VISIBLE
         }
+        // PIE CHART
+        if (mCurrentUser?.stats != null && mCurrentUser?.stats?.topFriends != null
+                && mCurrentUser?.stats?.topFriends?.isNotEmpty()!!) {
+            setPieChartData(mCurrentUser?.stats?.topFriends!!)
+            mPieChart.visibility = View.VISIBLE
+            mPieChartTvNone.visibility = View.GONE
+        } else {
+            mPieChart.visibility = View.INVISIBLE
+            mPieChartTvNone.visibility = View.VISIBLE
+        }
     }
 
     /**
      * Add data to the bar chart
      */
-    private fun setBarChartData(songs: List<Song>) {
+    private fun setBarChartData(songs: List<Stats.Song>) {
         val songList = ArrayList<String>()
         val yVal = ArrayList<BarEntry>()
         songs.mapIndexed { index, song ->
@@ -217,12 +233,10 @@ class ProfileFragment : Fragment(), IProfileView {
     /**
      * Add data to the pie chart
      */
-    private fun setPieChartData() {
-        // TODO Get the list of top friends with the server
+    private fun setPieChartData(topFriends: List<Stats.Friend>) {
         val yVal = ArrayList<PieEntry>()
-        for (i in 0 until 5) {
-            val value = i * i + 10
-            yVal.add(PieEntry(value.toFloat(), "Friends " + i))
+        topFriends.map {
+            yVal.add(PieEntry(it.nbNotifSent?.toFloat()!!, it.username))
         }
         val set = PieDataSet(yVal, "Top friends")
         val colors: MutableList<Int> = ArrayList()

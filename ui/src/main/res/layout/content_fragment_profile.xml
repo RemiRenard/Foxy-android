@@ -103,10 +103,10 @@
             android:textColor="@color/colorPrimary"
             android:textSize="26sp"
             android:visibility="gone"
-            app:layout_constraintBottom_toTopOf="@+id/profile_see_more_stats"
+            app:layout_constraintBottom_toBottomOf="@+id/profile_chart_top_songs_played"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profile_chart_top_songs_title" />
+            app:layout_constraintTop_toTopOf="@+id/profile_chart_top_songs_played" />
 
         <TextView
             android:id="@+id/profile_see_more_stats"
@@ -163,5 +163,19 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profile_chart_top_friends_title" />
+
+        <TextView
+            android:id="@+id/profile_chart_best_friends_none"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="@string/No_data_to_display"
+            android:textColor="@color/colorPrimary"
+            android:textSize="26sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/profile_chart_best_friends"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/profile_chart_best_friends" />
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

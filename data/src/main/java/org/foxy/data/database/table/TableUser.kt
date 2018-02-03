@@ -1,7 +1,6 @@
 package org.foxy.data.database.table
 
 import android.content.ContentValues
-import android.util.Log
 import com.google.gson.Gson
 import org.foxy.data.Data
 import org.foxy.data.model.User
@@ -20,7 +19,7 @@ object TableUser {
     val TABLE_USER_BIRTHDAY = "birthday"
     val TABLE_USER_EMAIL_VERIFIED = "emailVerified"
     val TABLE_USER_AVATAR = "avatar"
-    val TABLE_USER_STATS = "topSongs"
+    val TABLE_USER_STATS = "stats"
     private val TABLE_USER_IS_CURRENT = "isCurrent"
 
     /**
