@@ -2,6 +2,7 @@ package org.foxy.domain.services.user
 
 import android.content.Context
 import android.util.Log
+import com.google.gson.Gson
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -11,6 +12,7 @@ import org.foxy.data.Constants
 import org.foxy.data.Data
 import org.foxy.data.cache.Cache
 import org.foxy.data.database.table.TableUser
+import org.foxy.data.model.Stats
 import org.foxy.data.model.User
 import org.foxy.data.network.api_response.ConnectResponse
 import org.foxy.data.network.api_response.SimpleSuccessResponse
@@ -157,6 +159,7 @@ class UserService : IUserService {
                     user.birthday = Date(cursor.getLong(cursor.getColumnIndexOrThrow(TableUser.TABLE_USER_BIRTHDAY)))
                     user.emailVerified = cursor.getInt(cursor.getColumnIndexOrThrow(TableUser.TABLE_USER_EMAIL_VERIFIED)) == 1
                     user.avatar = cursor.getString(cursor.getColumnIndexOrThrow(TableUser.TABLE_USER_AVATAR))
+                    user.stats = Gson().fromJson(cursor.getString(cursor.getColumnIndexOrThrow(TableUser.TABLE_USER_STATS)), Stats::class.java)
                     user
                 }
                 .map { Cache.currentUser = it;it }

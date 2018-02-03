@@ -160,7 +160,6 @@ class NotificationService : INotificationService {
      * @return Observable<SimpleSuccessResponse>
      */
     override fun markNotificationAsRead(notificationId: String): Observable<SimpleSuccessResponse> {
-
         try {
             Data.database!!
                     .update(TableNotification.DATABASE_TABLE_NAME,
@@ -176,6 +175,9 @@ class NotificationService : INotificationService {
     }
 
 
+    /**
+     * Clear notification & the audio file in cache
+     */
     override fun clearNotificationCache() {
         Cache.tmpNotification = null
         Cache.audioFile = null

@@ -15,6 +15,7 @@ class User {
     var birthday: Date? = null
     var emailVerified: Boolean? = null
     var avatar: String? = null
+    var stats: Stats? = null
 
     constructor()
 

@@ -1,6 +1,8 @@
 package org.foxy.data.database.table
 
 import android.content.ContentValues
+import android.util.Log
+import com.google.gson.Gson
 import org.foxy.data.Data
 import org.foxy.data.model.User
 
@@ -18,6 +20,7 @@ object TableUser {
     val TABLE_USER_BIRTHDAY = "birthday"
     val TABLE_USER_EMAIL_VERIFIED = "emailVerified"
     val TABLE_USER_AVATAR = "avatar"
+    val TABLE_USER_STATS = "topSongs"
     private val TABLE_USER_IS_CURRENT = "isCurrent"
 
     /**
@@ -31,6 +34,7 @@ object TableUser {
                 "$TABLE_USER_FIRST_NAME TEXT NOT NULL," +
                 "$TABLE_USER_LAST_NAME TEXT NOT NULL," +
                 "$TABLE_USER_USERNAME TEXT NOT NULL," +
+                "$TABLE_USER_STATS TEXT," +
                 "$TABLE_USER_IS_CURRENT INTEGER DEFAULT 0," +
                 "$TABLE_USER_EMAIL_VERIFIED INTEGER DEFAULT 0," +
                 "$TABLE_USER_AVATAR TEXT," +
@@ -53,6 +57,7 @@ object TableUser {
         values.put(TABLE_USER_BIRTHDAY, user?.birthday?.time)
         values.put(TABLE_USER_EMAIL_VERIFIED, user?.emailVerified)
         values.put(TABLE_USER_AVATAR, user?.avatar)
+        values.put(TABLE_USER_STATS, Gson().toJson(user?.stats))
         if (isCurrent) {
             values.put(TABLE_USER_IS_CURRENT, 1)
         }

@@ -37,6 +37,7 @@ import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.utils.ColorTemplate
 import org.foxy.data.Constants
+import org.foxy.data.model.Song
 import org.foxy.data.model.User
 import org.foxy.foxy.BuildConfig
 import org.foxy.foxy.FoxyApp
@@ -165,7 +166,6 @@ class ProfileFragment : Fragment(), IProfileView {
      */
     override fun showProfileInformation(user: User) {
         // TODO Get the list of games & top friends with the server
-        setBarChartData()
         setPieChartData()
         mCurrentUser = user
         if (mCurrentUser!!.avatar != null) {
@@ -177,20 +177,21 @@ class ProfileFragment : Fragment(), IProfileView {
         }
         mProfileName.text = context.getString(R.string.placeholder_name, mCurrentUser?.firstName, mCurrentUser?.lastName)
         mProfileUsername.text = mCurrentUser?.username
+        if (mCurrentUser?.stats != null) {
+            setBarChartData(mCurrentUser?.stats?.topSongs!!)
+        }
     }
 
     /**
      * Add data to the bar chart
      */
-    private fun setBarChartData() {
-        // TODO Get the list of games with the server
-        val nbGames = 5
+    private fun setBarChartData(songs: List<Song>) {
         val games = ArrayList<String>()
         val yVal = ArrayList<BarEntry>()
-        for (i in 0 until nbGames) {
-            val value = (Math.random() * nbGames) + 15
-            yVal.add(BarEntry(i.toFloat(), value.toFloat()))
-            games.add("Song" + i)
+        songs.mapIndexed { index, song ->
+            val value = song.nbUsed
+            yVal.add(BarEntry(index.toFloat(), value!!.toFloat()))
+            games.add(song.name!!)
         }
         val set = BarDataSet(yVal, "Songs")
         val colors: MutableList<Int> = ArrayList()
@@ -200,6 +201,9 @@ class ProfileFragment : Fragment(), IProfileView {
         val data = BarData(set)
         mChart.data = data
         mChart.xAxis.valueFormatter = IndexAxisValueFormatter(games)
+        mChart.xAxis.axisMinimum = data.xMin - .5f
+        mChart.xAxis.axisMaximum = data.xMax + .5f
+        mChart.xAxis.labelCount = songs.size
         mChart.invalidate()
         mChart.animateY(500)
     }
