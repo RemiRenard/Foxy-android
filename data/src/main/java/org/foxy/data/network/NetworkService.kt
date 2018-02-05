@@ -7,6 +7,7 @@ import org.foxy.data.model.Notification
 import org.foxy.data.model.User
 import org.foxy.data.network.api_response.ConnectResponse
 import org.foxy.data.network.api_response.FriendsRequestsResponse
+import org.foxy.data.network.api_response.RankingResponse
 import org.foxy.data.network.api_response.SimpleSuccessResponse
 import org.foxy.data.network.api_resquest.*
 import retrofit2.http.*
@@ -78,5 +79,6 @@ interface NetworkService {
                                @Body params: NotificationIdRequest): Observable<SimpleSuccessResponse>
 
     //RANKING SECTION
-
+    @GET("ranking")
+    fun getRanking(@Header(Constants.AUTHORIZATION) token: String): Observable<RankingResponse>
 }

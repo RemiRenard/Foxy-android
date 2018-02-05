@@ -6,6 +6,8 @@ import org.foxy.domain.services.friend.FriendService
 import org.foxy.domain.services.friend.IFriendService
 import org.foxy.domain.services.notification.INotificationService
 import org.foxy.domain.services.notification.NotificationService
+import org.foxy.domain.services.ranking.IRankingService
+import org.foxy.domain.services.ranking.RankingService
 import org.foxy.domain.services.user.IUserService
 import org.foxy.domain.services.user.UserService
 import javax.inject.Singleton
@@ -27,4 +29,8 @@ class ServiceModule {
     @Singleton
     @Provides
     fun provideFriendService(): IFriendService = FriendService()
+
+    @Singleton
+    @Provides
+    fun provideRankingervice(): IRankingService = RankingService()
 }

@@ -1,5 +1,6 @@
 package org.foxy.foxy.ranking
 
+import org.foxy.data.network.api_response.RankingResponse
 import org.foxy.foxy.IView
 
 /**

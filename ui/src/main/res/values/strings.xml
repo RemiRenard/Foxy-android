@@ -25,7 +25,6 @@
     <string name="error_form">Please complete all fields</string>
     <string name="Notification">Notification</string>
     <string name="New_Notification">New notif from %1$s</string>
-    <string name="Custom_notification">Custom notification</string>
     <string name="Friends">Friends</string>
     <string name="Title">Title</string>
     <string name="Content">Content</string>
@@ -98,7 +97,7 @@
     <string name="Message">Message</string>
     <string name="Top_songs_played">Top song played</string>
     <string name="Global">Global</string>
-    <string name="Week">Week</string>
-    <string name="Day">Day</string>
-    <string name="No_data_to_display">No data to display, try to refresh</string>
+    <string name="Weekly">Weekly</string>
+    <string name="Daily">Daily</string>
+    <string name="loading">Loading…</string>
 </resources>

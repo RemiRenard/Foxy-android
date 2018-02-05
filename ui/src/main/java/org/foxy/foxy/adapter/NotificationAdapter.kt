@@ -6,6 +6,7 @@ import android.media.MediaPlayer
 import android.net.Uri
 import android.support.v7.widget.RecyclerView
 import android.text.TextUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -80,7 +81,6 @@ class NotificationAdapter(val mContext: Context) : RecyclerView.Adapter<Notifica
                     }
                     mPlayer?.prepare()
                     mPlayer?.start()
-
                     holder.itemView.item_notification_audio_button.setImageResource(R.drawable.ic_stop)
                 }
                 position -> { //If this same notification's audio is currently played
@@ -91,7 +91,6 @@ class NotificationAdapter(val mContext: Context) : RecyclerView.Adapter<Notifica
                 }
                 else -> { //If an other notification's audio is currently played
                     Toast.makeText(mContext, R.string.stop_audio_first, Toast.LENGTH_SHORT).show()
-                    //TODO: If an other notif is playing, stop it, change it's button, load the new sound and play
                 }
             }
         }

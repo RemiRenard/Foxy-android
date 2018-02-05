@@ -7,5 +7,5 @@ import java.io.File
  * Interface of the profile presenter.
  */
 interface IRankingGlobalPresenter : IPresenter<IRankingGlobalView> {
-
+    fun getRankings()
 }

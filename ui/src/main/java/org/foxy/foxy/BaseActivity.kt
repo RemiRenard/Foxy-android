@@ -50,7 +50,6 @@ open class BaseActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         }
-
     }
 
     protected fun alertDialog(): AlertDialog {

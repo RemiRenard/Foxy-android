@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper
 import org.foxy.data.database.table.TableFriend
 import org.foxy.data.database.table.TableNotification
 import org.foxy.data.database.table.TableUser
+import org.foxy.data.database.table.TableUserRank
 
 /**
  * Database open helper class which is extends from SQLiteOpenHelper class.
@@ -26,6 +27,7 @@ class DbOpenHelper
         db.execSQL(TableFriend.createTableFriend())
         db.execSQL(TableNotification.createTableNotification())
         db.execSQL(TableUser.createTableUser())
+        db.execSQL(TableUserRank.createTableUserRank())
     }
 
     /**

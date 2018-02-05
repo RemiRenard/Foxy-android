@@ -10,12 +10,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.ProgressBar
 import butterknife.BindView
 import butterknife.ButterKnife
-import com.eftimoff.viewpagertransformers.ZoomOutSlideTransformer
 import org.foxy.foxy.FoxyApp
 import org.foxy.foxy.R
-import org.foxy.foxy.profile.dagger.RankingModule
+import org.foxy.foxy.ranking.dagger.RankingModule
 import org.foxy.foxy.ranking.global.RankingGlobalFragment
 import javax.inject.Inject
 
@@ -23,8 +23,11 @@ class RankingFragment : Fragment(), IRankingView {
     private var mView: View? = null
     private val mNbItem = 3
     private val mPositionGlobal = 0
-    private val mPositionWeek = 1
-    private val mPositionDay = 2
+    private val mPositionWeekly = 1
+    private val mPositionDaily = 2
+
+    @BindView(R.id.ranking_progress_bar)
+    lateinit var mProgressBar: ProgressBar
 
     @BindView(R.id.ranking_view_pager)
     lateinit var mViewPager: ViewPager
@@ -63,8 +66,8 @@ class RankingFragment : Fragment(), IRankingView {
             var fragment: Fragment? = null
             when (position) {
                 mPositionGlobal -> fragment = RankingGlobalFragment()
-                mPositionWeek -> fragment = RankingGlobalFragment()
-                mPositionDay -> fragment = RankingGlobalFragment()
+                mPositionWeekly -> fragment = RankingGlobalFragment()
+                mPositionDaily -> fragment = RankingGlobalFragment()
             }
             return fragment
         }
@@ -72,8 +75,8 @@ class RankingFragment : Fragment(), IRankingView {
         override fun getPageTitle(position: Int): CharSequence {
             return when (position) {
                 mPositionGlobal -> return getString(R.string.Global)
-                mPositionWeek -> return getString(R.string.Week)
-                mPositionDay -> return getString(R.string.Day)
+                mPositionWeekly -> return getString(R.string.Weekly)
+                mPositionDaily -> return getString(R.string.Daily)
                 else -> String()
             }
         }
@@ -82,14 +85,13 @@ class RankingFragment : Fragment(), IRankingView {
     }
 
     override fun showProgressBar() {
-        //mProgressBar.visibility = View.VISIBLE
+        mProgressBar.visibility = View.VISIBLE
     }
 
     override fun hideProgressBar() {
-        /*
+
         mProgressBar.visibility = View.GONE
-        mSwipeRefresh.isRefreshing = false
-        */
+
     }
 
     override fun onDestroyView() {
