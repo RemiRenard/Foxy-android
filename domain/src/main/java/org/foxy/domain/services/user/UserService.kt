@@ -136,7 +136,7 @@ class UserService : IUserService {
                 .getMyProfile(token)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnNext({ updateCurrentUserDb(it) })
+                .doOnNext({ updateCurrentUserDb(it); Cache.currentUser = it })
                 .onErrorReturn {
                     EventBus.getDefault().post(NetworkErrorEvent(it))
                     Cache.currentUser!!
@@ -160,9 +160,9 @@ class UserService : IUserService {
                     user.emailVerified = cursor.getInt(cursor.getColumnIndexOrThrow(TableUser.TABLE_USER_EMAIL_VERIFIED)) == 1
                     user.avatar = cursor.getString(cursor.getColumnIndexOrThrow(TableUser.TABLE_USER_AVATAR))
                     user.stats = Gson().fromJson(cursor.getString(cursor.getColumnIndexOrThrow(TableUser.TABLE_USER_STATS)), Stats::class.java)
+                    Cache.currentUser = user
                     user
                 }
-                .map { Cache.currentUser = it;it }
     }
 
     /**

@@ -100,4 +100,5 @@
     <string name="Weekly">Weekly</string>
     <string name="Daily">Daily</string>
     <string name="loading">Loading…</string>
+    <string name="No_data_to_display">No data to display, try to refresh</string>
 </resources>
