@@ -24,6 +24,9 @@ interface NetworkService {
     @POST("user/login")
     fun login(@Body params: ConnectRequest): Observable<ConnectResponse>
 
+    @POST("user/loginFacebook")
+    fun loginFacebook(@Body params: ConnectWithFacebookRequest): Observable<ConnectResponse>
+
     @POST("user/forgot-password")
     fun forgotPassword(@Body params: ForgotPasswordRequest): Observable<SimpleSuccessResponse>
 

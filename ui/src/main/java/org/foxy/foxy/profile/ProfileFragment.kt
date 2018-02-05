@@ -179,7 +179,11 @@ class ProfileFragment : Fragment(), IProfileView {
                     .into(mProfileAvatar)
         }
         mProfileName.text = context.getString(R.string.placeholder_name, mCurrentUser?.firstName, mCurrentUser?.lastName)
-        mProfileUsername.text = mCurrentUser?.username
+        if (!TextUtils.equals(user.firstName + " " + user.lastName, user.username)) {
+            mProfileUsername.text = mCurrentUser?.username
+        } else {
+            mProfileUsername.visibility = View.GONE
+        }
         showStats()
     }
 

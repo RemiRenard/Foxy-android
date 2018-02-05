@@ -100,7 +100,7 @@ class LoginFragment : Fragment(), IConnectView {
     @OnClick(R.id.login_connect_facebook)
     fun loginFacebook() {
         LoginManager.getInstance().logInWithReadPermissions(this,
-                Arrays.asList("email", "public_profile", "user_friends"))
+                Arrays.asList("email", "public_profile", "user_friends", "user_birthday"))
     }
 
     @OnClick(R.id.login_login_button)

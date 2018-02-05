@@ -16,10 +16,7 @@ import org.foxy.data.model.Stats
 import org.foxy.data.model.User
 import org.foxy.data.network.api_response.ConnectResponse
 import org.foxy.data.network.api_response.SimpleSuccessResponse
-import org.foxy.data.network.api_resquest.ConnectRequest
-import org.foxy.data.network.api_resquest.CreateAccountRequest
-import org.foxy.data.network.api_resquest.FindUsersRequest
-import org.foxy.data.network.api_resquest.ForgotPasswordRequest
+import org.foxy.data.network.api_resquest.*
 import org.foxy.domain.event_bus.NetworkErrorEvent
 import org.greenrobot.eventbus.EventBus
 import java.io.File
@@ -31,7 +28,7 @@ import java.util.*
 class UserService : IUserService {
 
     /**
-     * Return an observable link to an endpoint of the api to create an account
+     * Return an observable linked to an endpoint of the api to create an account
      */
     override fun createAccount(email: String, password: String, firstName: String, lastName: String,
                                username: String, birthday: Date, deviceId: String): Observable<ConnectResponse> {
@@ -43,11 +40,21 @@ class UserService : IUserService {
     }
 
     /**
-     * Return an observable link to an endpoint of the api to login
+     * Return an observable linked to an endpoint of the api to login
      */
     override fun login(email: String, password: String, deviceId: String): Observable<ConnectResponse> {
         return Data.networkService!!
                 .login(ConnectRequest(email, password, deviceId))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    /**
+     * Return an observable linked to an endpoint of the api to login with facebook
+     */
+    override fun loginFacebook(facebookId: String, facebookToken: String, deviceId: String): Observable<ConnectResponse> {
+        return Data.networkService!!
+                .loginFacebook(ConnectWithFacebookRequest(facebookId, facebookToken, deviceId))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
     }

@@ -18,6 +18,8 @@ interface IUserService {
 
     fun login(email: String, password: String, deviceId: String): Observable<ConnectResponse>
 
+    fun loginFacebook(facebookId: String, facebookToken: String, deviceId: String): Observable<ConnectResponse>
+
     fun logout(context: Context): Observable<SimpleSuccessResponse>
 
     fun forgotPassword(email: String): Observable<SimpleSuccessResponse>

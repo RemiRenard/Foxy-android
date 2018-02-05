@@ -11,7 +11,6 @@ import io.reactivex.disposables.Disposable
 import org.foxy.data.Constants
 import org.foxy.data.network.ExceptionHandler
 import org.foxy.data.network.api_response.ConnectResponse
-import org.foxy.domain.Domain
 import org.foxy.domain.services.notification.INotificationService
 import org.foxy.domain.services.user.IUserService
 import org.foxy.foxy.R
@@ -42,9 +41,40 @@ class ConnectPresenter(private val mContext: Context, private val mUserService: 
     }
 
     override fun loginFacebook(loginResult: LoginResult) {
-        if (mToken != null) {
-            EventBus.getDefault().post(ConnectStepCompleteEvent())
-        }
+        mView?.showProgressBar()
+        mCompositeDisposable.add(mNotificationService.getTokenOnIoThread()
+                .doOnComplete {
+                    mUserService.loginFacebook(loginResult.accessToken.userId, loginResult.accessToken.token, mDeviceId!!)
+                            .subscribe(object : Observer<ConnectResponse> {
+                                override fun onSubscribe(@NonNull d: Disposable) {
+                                    mCompositeDisposable.add(d)
+                                }
+
+                                override fun onNext(@NonNull connectResponse: ConnectResponse) {
+                                    if (connectResponse.token != null) {
+                                        mToken = connectResponse.token
+                                        mUserService.setToken(mToken, mContext)
+                                        mUserService.saveCurrentUser(connectResponse.user)
+                                    }
+                                }
+
+                                override fun onError(@NonNull e: Throwable) {
+                                    Toast.makeText(mContext, ExceptionHandler.getMessage(e, mContext), Toast.LENGTH_LONG).show()
+                                    mView?.hideProgressBar()
+                                    mView?.enableButtons(true)
+                                }
+
+                                override fun onComplete() {
+                                    mView?.hideProgressBar()
+                                    mView?.enableButtons(true)
+                                    if (mToken != null) {
+                                        EventBus.getDefault().post(ConnectStepCompleteEvent())
+                                    }
+                                }
+                            })
+                }
+                .subscribe({ scope -> mDeviceId = FirebaseInstanceId.getInstance().getToken(Constants.PROJECT_NUMBER, scope) },
+                        { error -> error.printStackTrace() }))
     }
 
     override fun login(email: String, password: String) {
