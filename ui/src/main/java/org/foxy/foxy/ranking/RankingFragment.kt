@@ -11,15 +11,22 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ProgressBar
+import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import org.foxy.data.model.UserRank
 import org.foxy.foxy.FoxyApp
 import org.foxy.foxy.R
 import org.foxy.foxy.ranking.dagger.RankingModule
-import org.foxy.foxy.ranking.global.RankingGlobalFragment
+import org.foxy.foxy.ranking.subFragment.RankingDailyFragment
+import org.foxy.foxy.ranking.subFragment.RankingGlobalFragment
+import org.foxy.foxy.ranking.subFragment.RankingWeeklyFragment
 import javax.inject.Inject
 
 class RankingFragment : Fragment(), IRankingView {
+
     private var mView: View? = null
     private val mNbItem = 3
     private val mPositionGlobal = 0
@@ -38,6 +45,12 @@ class RankingFragment : Fragment(), IRankingView {
     @BindView(R.id.ranking_profile_avatar)
     lateinit var mProfileAvatar: ImageView
 
+    @BindView(R.id.ranking_score)
+    lateinit var mScore: TextView
+
+    @BindView(R.id.ranking_rank)
+    lateinit var mRank: TextView
+
     @Inject
     lateinit var mPresenter: IRankingPresenter
 
@@ -48,13 +61,23 @@ class RankingFragment : Fragment(), IRankingView {
         FoxyApp.get(context).getAppComponent()?.plus(RankingModule())?.inject(this)
         // setting up the view pager with the sections adapter.
         mViewPager.adapter = SectionsPagerAdapter(childFragmentManager)
+        mViewPager.offscreenPageLimit = mNbItem
         mTabLayout.setupWithViewPager(mViewPager)
-
         mPresenter.attachView(this)
-
+        mPresenter.getRanking()
         return mView
     }
 
+    override fun showCurrentUserData(currentUserData: UserRank) {
+        Glide.with(context)
+                .load(currentUserData.avatar)
+                .apply(RequestOptions()
+                        .circleCrop()
+                        .placeholder(R.drawable.ic_placeholder_circle_gray))
+                .into(mProfileAvatar)
+        mScore.text = currentUserData.score.toString()
+        mRank.text = currentUserData.rank.toString()
+    }
 
     /**
      * A [FragmentPagerAdapter] that returns a fragment corresponding to
@@ -66,8 +89,8 @@ class RankingFragment : Fragment(), IRankingView {
             var fragment: Fragment? = null
             when (position) {
                 mPositionGlobal -> fragment = RankingGlobalFragment()
-                mPositionWeekly -> fragment = RankingGlobalFragment()
-                mPositionDaily -> fragment = RankingGlobalFragment()
+                mPositionWeekly -> fragment = RankingWeeklyFragment()
+                mPositionDaily -> fragment = RankingDailyFragment()
             }
             return fragment
         }
@@ -89,9 +112,7 @@ class RankingFragment : Fragment(), IRankingView {
     }
 
     override fun hideProgressBar() {
-
         mProgressBar.visibility = View.GONE
-
     }
 
     override fun onDestroyView() {

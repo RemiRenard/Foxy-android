@@ -1,11 +1,11 @@
 package org.foxy.foxy.ranking
 
 import org.foxy.foxy.IPresenter
-import java.io.File
 
 /**
- * Interface of the profile presenter.
+ * Interface of the ranking presenter.
  */
 interface IRankingPresenter : IPresenter<IRankingView> {
 
+    fun getRanking()
 }

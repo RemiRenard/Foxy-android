@@ -2,15 +2,14 @@ package org.foxy.foxy.adapter
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.item_ranking.view.*
 import org.foxy.data.model.UserRank
 import org.foxy.foxy.R
-import kotlin.collections.ArrayList
 
 /**
  * Adapter used to display ranking.
@@ -28,10 +27,14 @@ class RankingAdapter(val mContext: Context) : RecyclerView.Adapter<RankingAdapte
         if (mUserRanks[position].avatar.isNullOrEmpty()) {
             holder.itemView?.item_ranking_avatar?.setImageResource(R.drawable.ic_placeholder_male)
         } else {
-            Glide.with(mContext).load(mUserRanks[position].avatar).into(holder.itemView?.item_ranking_avatar)
+            Glide.with(mContext)
+                    .load(mUserRanks[position].avatar)
+                    .apply(RequestOptions()
+                            .circleCrop()
+                            .placeholder(R.drawable.ic_placeholder_circle_gray))
+                    .into(holder.itemView?.item_ranking_avatar)
         }
-
-        holder.itemView?.item_ranking_score?.text = mUserRanks[position].score
+        holder.itemView?.item_ranking_score?.text = mUserRanks[position].score.toString()
     }
 
     override fun getItemCount(): Int = mUserRanks.size

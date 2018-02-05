@@ -2,7 +2,7 @@ package org.foxy.foxy.ranking.dagger
 
 import dagger.Subcomponent
 import org.foxy.foxy.ranking.RankingFragment
-import org.foxy.foxy.ranking.global.RankingGlobalFragment
+import org.foxy.foxy.ranking.subFragment.RankingGlobalFragment
 
 /**
  * Ranking sub component.
