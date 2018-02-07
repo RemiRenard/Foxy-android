@@ -85,7 +85,7 @@ class SettingsActivity : BaseActivity(), ISettingsView {
         FinestWebView.Builder(this)
                 .setCustomAnimations(R.anim.activity_open_enter, R.anim.activity_open_exit,
                         R.anim.activity_close_enter, R.anim.activity_close_exit)
-                .show("http://google.com/")
+                .show("http://foxy-app.com/terms-and-conditions")
     }
 
     @OnClick(R.id.settings_privacy_policy)
@@ -93,7 +93,7 @@ class SettingsActivity : BaseActivity(), ISettingsView {
         FinestWebView.Builder(this)
                 .setCustomAnimations(R.anim.activity_open_enter, R.anim.activity_open_exit,
                         R.anim.activity_close_enter, R.anim.activity_close_exit)
-                .show("http://google.com/")
+                .show("http://foxy-app.com/privacy-policy")
     }
 
     @OnClick(R.id.settings_logout_button)

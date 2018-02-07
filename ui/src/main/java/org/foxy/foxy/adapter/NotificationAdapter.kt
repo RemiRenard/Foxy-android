@@ -18,6 +18,7 @@ import org.foxy.foxy.R
 import org.foxy.foxy.event_bus.NotificationClickedEvent
 import org.foxy.foxy.friends.requests.FriendsRequestsActivity
 import org.greenrobot.eventbus.EventBus
+import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -69,19 +70,25 @@ class NotificationAdapter(val mContext: Context) : RecyclerView.Adapter<Notifica
                 -1 -> { //If nothing is currently played
                     mIsPlaying = holder.adapterPosition //mIsPlayed is set to it's item position
                     mPlayer = MediaPlayer()
-                    mPlayer?.setDataSource(mContext, Uri.parse(mNotifications[position].song))
-                    mPlayer?.setOnCompletionListener {
-                        mIsPlaying = -1
-                        mPlayer = null
-                        holder.itemView.item_notification_audio_button.setImageResource(R.drawable.ic_play)
-                        // Mark notification as read.
-                        EventBus.getDefault().post(NotificationClickedEvent(mNotifications[position].id!!))
-                        mNotifications[position].isRead = true
-                        notifyDataSetChanged()
+                    try {
+                        mPlayer?.setDataSource(mContext, Uri.parse(mNotifications[position].song))
+                        mPlayer?.setOnCompletionListener {
+                            mIsPlaying = -1
+                            mPlayer = null
+                            holder.itemView.item_notification_audio_button.setImageResource(R.drawable.ic_play)
+                            // Mark notification as read.
+                            EventBus.getDefault().post(NotificationClickedEvent(mNotifications[position].id!!))
+                            mNotifications[position].isRead = true
+                            notifyDataSetChanged()
+                        }
+                        mPlayer?.prepare()
+                        mPlayer?.start()
+                        holder.itemView.item_notification_audio_button.setImageResource(R.drawable.ic_stop)
+                    } catch (e: IOException) {
+                        Log.e(javaClass.simpleName, e.message)
+                    } catch (e: IllegalStateException) {
+                        Log.e(javaClass.simpleName, e.message)
                     }
-                    mPlayer?.prepare()
-                    mPlayer?.start()
-                    holder.itemView.item_notification_audio_button.setImageResource(R.drawable.ic_stop)
                 }
                 position -> { //If this same notification's audio is currently played
                     mPlayer?.release()
