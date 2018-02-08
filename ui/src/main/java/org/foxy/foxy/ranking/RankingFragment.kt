@@ -75,8 +75,24 @@ class RankingFragment : Fragment(), IRankingView {
                         .circleCrop()
                         .placeholder(R.drawable.ic_placeholder_circle_gray))
                 .into(mProfileAvatar)
-        mScore.text = currentUserData.score.toString()
-        mRank.text = currentUserData.rank.toString()
+        mScore.text = context.getString(R.string.Score, currentUserData.score)
+        mRank.text = getRankString(currentUserData.rank!!)
+    }
+
+    /**
+     * return the string of the rank + its ending ('st', 'nd', 'rd' or 'th')
+     */
+    private fun getRankString(n : Int) : String
+    {
+        if (n in 11..13) {
+            return n.toString()+"th"
+        }
+        return when (n % 10) {
+            1 -> n.toString()+"st"
+            2 -> n.toString()+"nd"
+            3 -> n.toString()+"rd"
+            else -> n.toString()+"th"
+        }
     }
 
     /**
