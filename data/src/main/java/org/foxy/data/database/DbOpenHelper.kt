@@ -3,10 +3,7 @@ package org.foxy.data.database
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import org.foxy.data.database.table.TableFriend
-import org.foxy.data.database.table.TableNotification
-import org.foxy.data.database.table.TableUser
-import org.foxy.data.database.table.TableUserRank
+import org.foxy.data.database.table.*
 
 /**
  * Database open helper class which is extends from SQLiteOpenHelper class.
@@ -28,6 +25,7 @@ class DbOpenHelper
         db.execSQL(TableNotification.createTableNotification())
         db.execSQL(TableUser.createTableUser())
         db.execSQL(TableUserRank.createTableUserRank())
+        db.execSQL(TableAchievement.createTableAchievement())
     }
 
     /**

@@ -3,6 +3,7 @@ package org.foxy.data.network
 import io.reactivex.Observable
 import okhttp3.RequestBody
 import org.foxy.data.Constants
+import org.foxy.data.model.Achievement
 import org.foxy.data.model.Notification
 import org.foxy.data.model.User
 import org.foxy.data.network.api_response.ConnectResponse
@@ -84,4 +85,8 @@ interface NetworkService {
     //RANKING SECTION
     @GET("ranking")
     fun getRanking(@Header(Constants.AUTHORIZATION) token: String): Observable<RankingResponse>
+
+    //ACHIEVEMENT SECTION
+    @GET("achievement")
+    fun getAchievements(@Header(Constants.AUTHORIZATION) token: String): Observable<List<Achievement>>
 }
