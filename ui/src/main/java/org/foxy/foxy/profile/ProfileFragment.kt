@@ -92,9 +92,6 @@ class ProfileFragment : Fragment(), IProfileView {
     @BindView(R.id.profile_chart_top_songs_played_none)
     lateinit var mBarChartTvNone: TextView
 
-    @BindView(R.id.profile_see_more_stats)
-    lateinit var mMoreStats: TextView
-
     @BindView(R.id.profile_view_under_bar_chart)
     lateinit var mViewBarChart: View
 
@@ -116,21 +113,6 @@ class ProfileFragment : Fragment(), IProfileView {
         displayBarChart()
         displayPieChart()
         return mView
-    }
-
-    @OnClick(R.id.profile_see_more_stats)
-    fun seeMoreStats(view: TextView) {
-        if (TextUtils.equals(view.text, getString(R.string.See_more_stats))) {
-            mViewBarChart.visibility = View.VISIBLE
-            mPieChart.visibility = View.VISIBLE
-            mTopFriendsTitle.visibility = View.VISIBLE
-            view.text = getString(R.string.See_less_stats)
-        } else {
-            view.text = getString(R.string.See_more_stats)
-            mViewBarChart.visibility = View.GONE
-            mPieChart.visibility = View.GONE
-            mTopFriendsTitle.visibility = View.GONE
-        }
     }
 
     /**
@@ -203,9 +185,7 @@ class ProfileFragment : Fragment(), IProfileView {
                 && mCurrentUser?.stats?.topFriends?.isNotEmpty()!!) {
             setPieChartData(mCurrentUser?.stats?.topFriends!!)
             mPieChart.visibility = View.VISIBLE
-            mMoreStats.text = getString(R.string.See_less_stats)
         } else {
-            mMoreStats.text = getString(R.string.See_more_stats)
             mViewBarChart.visibility = View.GONE
             mPieChart.visibility = View.GONE
             mTopFriendsTitle.visibility = View.GONE

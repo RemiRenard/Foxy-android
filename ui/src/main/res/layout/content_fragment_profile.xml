@@ -108,22 +108,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/profile_chart_top_songs_played" />
 
-        <TextView
-            android:id="@+id/profile_see_more_stats"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="4dp"
-            android:padding="8dp"
-            android:text="@string/See_more_stats"
-            android:textColor="@color/colorPrimary"
-            android:textStyle="italic"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profile_chart_top_songs_played" />
-
         <View
             android:id="@+id/profile_view_under_bar_chart"
             android:layout_width="0dp"
@@ -133,10 +117,9 @@
             android:layout_marginTop="16dp"
             android:alpha="0.7"
             android:background="@color/colorPrimary"
-            android:visibility="gone"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profile_see_more_stats" />
+            app:layout_constraintTop_toBottomOf="@+id/profile_chart_top_songs_played" />
 
         <TextView
             android:id="@+id/profile_chart_top_friends_title"
@@ -147,7 +130,6 @@
             android:textColor="@color/colorPrimary"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profile_view_under_bar_chart" />
@@ -159,7 +141,6 @@
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="6dp"
-            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profile_chart_top_friends_title" />
