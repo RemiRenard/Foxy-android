@@ -29,24 +29,26 @@ class NotificationAdapter(val mContext: Context) : RecyclerView.Adapter<Notifica
 
     private var mNotifications: MutableList<Notification> = ArrayList()
     private var mPlayer: MediaPlayer? = null
-    private var mIsPlaying: Int = -1
+    private var mIsPlaying: Boolean = false
+    private var mPositionPlaying: Int = -1
     private val mDatePattern: String = "HH:mm"
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder =
             ItemViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_notification, parent, false))
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-
         holder.itemView?.item_notification_message?.text = mNotifications[position].message
         holder.itemView?.item_notification_user_time?.text = mContext.getString(
                 R.string.user_time,
                 mNotifications[position].userSource?.username,
                 SimpleDateFormat(mDatePattern, Locale.US).format(mNotifications[position].createdAt))
         holder.itemView?.item_notification_layout?.setOnClickListener {
-            // Mark notification as read.
-            EventBus.getDefault().post(NotificationClickedEvent(mNotifications[position].id!!))
-            mNotifications[position].isRead = true
-            notifyDataSetChanged()
+            if (!mIsPlaying) {
+                // Mark notification as read.
+                EventBus.getDefault().post(NotificationClickedEvent(mNotifications[position].id!!))
+                mNotifications[position].isRead = true
+                notifyDataSetChanged()
+            }
             // Manage the type of notification
             if (mNotifications[position].type.equals("friendRequest")) {
                 mContext.startActivity(FriendsRequestsActivity.getStartingIntent(mContext)
@@ -64,39 +66,46 @@ class NotificationAdapter(val mContext: Context) : RecyclerView.Adapter<Notifica
             holder.itemView?.item_notification_audio_button?.visibility = View.GONE
         else
             holder.itemView?.item_notification_audio_button?.visibility = View.VISIBLE
-
+        // When the use click on "play"
         holder.itemView?.item_notification_audio_button?.setOnClickListener {
-            when (mIsPlaying) {
-                -1 -> { //If nothing is currently played
-                    mIsPlaying = holder.adapterPosition //mIsPlayed is set to it's item position
-                    mPlayer = MediaPlayer()
-                    try {
-                        mPlayer?.setDataSource(mContext, Uri.parse(mNotifications[position].song))
-                        mPlayer?.setOnCompletionListener {
-                            mIsPlaying = -1
-                            mPlayer = null
-                            holder.itemView.item_notification_audio_button.setImageResource(R.drawable.ic_play)
-                            // Mark notification as read.
-                            EventBus.getDefault().post(NotificationClickedEvent(mNotifications[position].id!!))
-                            mNotifications[position].isRead = true
-                            notifyDataSetChanged()
-                        }
-                        mPlayer?.prepare()
-                        mPlayer?.start()
+            if (!mIsPlaying) {
+                mIsPlaying = true
+                mPositionPlaying = position
+                //If nothing is currently played
+                holder.itemView.item_notification_progress_bar.visibility = View.VISIBLE
+                holder.itemView.item_notification_audio_button.visibility = View.GONE
+                mPlayer = MediaPlayer()
+                try {
+                    mPlayer?.setDataSource(mContext, Uri.parse(mNotifications[position].song))
+                    mPlayer?.prepareAsync()
+                    mPlayer?.setOnPreparedListener {
+                        holder.itemView.item_notification_progress_bar.visibility = View.GONE
+                        holder.itemView.item_notification_audio_button.visibility = View.VISIBLE
                         holder.itemView.item_notification_audio_button.setImageResource(R.drawable.ic_stop)
-                    } catch (e: IOException) {
-                        Log.e(javaClass.simpleName, e.message)
-                    } catch (e: IllegalStateException) {
-                        Log.e(javaClass.simpleName, e.message)
+                        mPlayer?.start()
                     }
+                    mPlayer?.setOnCompletionListener {
+                        mPlayer = null
+                        holder.itemView.item_notification_audio_button.setImageResource(R.drawable.ic_play)
+                        mIsPlaying = false
+                        mPositionPlaying = -1
+                        // Mark notification as read.
+                        EventBus.getDefault().post(NotificationClickedEvent(mNotifications[position].id!!))
+                        mNotifications[position].isRead = true
+                        notifyDataSetChanged()
+                    }
+                } catch (e: IOException) {
+                    Log.e(javaClass.simpleName, e.message)
+                } catch (e: IllegalStateException) {
+                    Log.e(javaClass.simpleName, e.message)
                 }
-                position -> { //If this same notification's audio is currently played
+            } else { //If an other notification's audio is currently played
+                if (mPositionPlaying == position) {
                     mPlayer?.release()
-                    mPlayer = null
-                    mIsPlaying = -1
+                    mIsPlaying = false
+                    mPositionPlaying = -1
                     holder.itemView.item_notification_audio_button.setImageResource(R.drawable.ic_play)
-                }
-                else -> { //If an other notification's audio is currently played
+                } else {
                     Toast.makeText(mContext, R.string.stop_audio_first, Toast.LENGTH_SHORT).show()
                 }
             }
