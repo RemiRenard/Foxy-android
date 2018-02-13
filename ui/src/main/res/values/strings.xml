@@ -77,9 +77,8 @@
     <string name="share_the_app">Share the app</string>
     <string name="Terms_and_conditions">Terms and conditions</string>
     <string name="Privacy_policy">Privacy policy</string>
-    <string name="share_app_message">Join us on Foxy !</string>
+    <string name="share_app_message">Join me on Foxy ! Download the app with this link : %1$s</string>
     <string name="What_do_you_want_to_do">What do you want to do ?</string>
-    <string name="Findit">Findit</string>
     <string name="look_for_a_friend">Type your friend\'s name</string>
     <string name="Lobby">Lobby</string>
     <string name="No_friends_to_display">No friends to display</string>
