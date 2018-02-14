@@ -1,5 +1,4 @@
 <resources>
     <string name="app_name">data</string>
     <string name="Unexpected_server_error">Unexpected server error</string>
-    <string name="Rate_the_app">Rate the app</string>
 </resources>

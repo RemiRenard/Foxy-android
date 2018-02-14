@@ -60,7 +60,7 @@
     <TextView
         android:id="@+id/item_friends_send_text"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:lines="1"
         android:paddingBottom="8dp"

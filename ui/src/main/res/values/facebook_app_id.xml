@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="facebook_app_id">1946376668910735</string>
+    <string name="facebook_app_id" translatable="false">1946376668910735</string>
 </resources>
