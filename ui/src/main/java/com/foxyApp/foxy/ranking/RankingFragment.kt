@@ -75,8 +75,16 @@ class RankingFragment : Fragment(), IRankingView {
                         .circleCrop()
                         .placeholder(R.drawable.ic_placeholder_circle_gray))
                 .into(mProfileAvatar)
-        mScore.text = context.getString(R.string.Score, currentUserData.score)
-        mRank.text = getRankString(currentUserData.rank!!)
+        if (currentUserData.score != null) {
+            mScore.text = context.getString(R.string.Score, currentUserData.score)
+        } else {
+            mScore.text = getString(R.string.Unranked)
+        }
+        if (currentUserData.rank != null) {
+            mRank.text = getRankString(currentUserData.rank!!)
+        } else {
+            mRank.text = getString(R.string.No_points)
+        }
     }
 
     /**

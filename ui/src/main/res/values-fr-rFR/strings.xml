@@ -101,4 +101,6 @@
     <string name="No_data_to_display">Aucune donnée à afficher, essayez de rafraîchir</string>
     <string name="Score">%1$d pts</string>
     <string name="Rate_the_app">Notez l\'application</string>
+    <string name="No_points">Pas de points</string>
+    <string name="Unranked">Non classé</string>
 </resources>

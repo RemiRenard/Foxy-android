@@ -102,4 +102,6 @@
     <string name="No_data_to_display">No data to display, try to refresh</string>
     <string name="Score">%1$d pts</string>
     <string name="Rate_the_app">Rate the app</string>
+    <string name="No_points">No points</string>
+    <string name="Unranked">Unranked</string>
 </resources>
