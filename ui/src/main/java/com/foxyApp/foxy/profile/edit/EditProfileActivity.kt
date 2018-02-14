@@ -4,7 +4,6 @@ import android.app.DatePickerDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.BottomSheetDialog
 import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
@@ -17,7 +16,6 @@ import com.foxyApp.foxy.BaseActivity
 import com.foxyApp.foxy.FoxyApp
 import com.foxyApp.foxy.R
 import com.foxyApp.foxy.profile.dagger.ProfileModule
-import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
@@ -28,10 +26,6 @@ import javax.inject.Inject
  */
 class EditProfileActivity : BaseActivity(), IEditProfileView {
 
-    private var mBottomSheetDialog: BottomSheetDialog? = null
-    private val ACTIVITY_RESULT_LIBRARY = 1
-    private val ACTIVITY_RESULT_CAMERA = 2
-    private var mCameraFile: File? = null
     private var mCurrentUser: User? = null
     private var mDatePicker: DatePickerDialog.OnDateSetListener? = null
     private val mDatePattern: String = "yyyy-MM-dd"

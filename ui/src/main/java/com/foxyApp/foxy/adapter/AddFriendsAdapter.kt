@@ -10,7 +10,6 @@ import com.bumptech.glide.request.RequestOptions
 import com.foxyApp.data.model.User
 import com.foxyApp.foxy.R
 import com.foxyApp.foxy.event_bus.AddFriendsIconClickedEvent
-import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 import kotlinx.android.synthetic.main.item_add_friends.view.*
 import org.greenrobot.eventbus.EventBus
 import java.util.*
@@ -34,8 +33,7 @@ class AddFriendsAdapter(val mContext: Context) : RecyclerView.Adapter<AddFriends
             holder.itemView?.item_add_friends_avatar?.setImageResource(R.drawable.ic_placeholder_male)
         } else {
             Glide.with(mContext).load(mUsers[position].avatar).apply(RequestOptions
-                    .bitmapTransform(RoundedCornersTransformation(46, 0, RoundedCornersTransformation.CornerType.LEFT))
-                    .placeholder(R.drawable.ic_placeholder_circle_gray))
+                    .placeholderOf(R.drawable.ic_placeholder_circle_gray))
                     .into(holder.itemView?.item_add_friends_avatar)
         }
     }

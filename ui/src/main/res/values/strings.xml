@@ -92,7 +92,7 @@
     <string name="notif_keywords">You can try to find special ringtones by typing secret keywords in the title field while not sending any custom voice record.</string>
     <string name="stop_audio_first">An other notification sound is playing. Please stop it before playing an other one.</string>
     <string name="user_time">%1$s at %2$s</string>
-    <string name="Keyword">Keyword</string>
+    <string name="Keyword">Keyword (god, win, illuminati…)</string>
     <string name="Message">Message</string>
     <string name="Top_songs_played">Top song played</string>
     <string name="Global">Global</string>

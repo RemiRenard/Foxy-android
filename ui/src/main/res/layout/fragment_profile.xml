@@ -27,7 +27,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
                 android:padding="16dp"
-                android:src="@drawable/ic_achievement_white" />
+                android:src="@drawable/ic_achievement_white"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/toolbar_title"
