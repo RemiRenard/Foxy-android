@@ -8,7 +8,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import com.foxyApp.data.model.User
 import com.foxyApp.data.network.ExceptionHandler
-import com.foxyApp.data.network.api_response.FriendsRequestsResponse
+import com.foxyApp.data.network.apiResponse.FriendsRequestsResponse
 import com.foxyApp.domain.services.friend.IFriendService
 import com.foxyApp.foxy.profile.dagger.ProfileScope
 

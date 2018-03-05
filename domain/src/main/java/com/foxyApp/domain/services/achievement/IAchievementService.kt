@@ -1,7 +1,7 @@
 package com.foxyApp.domain.services.achievement
 
-import io.reactivex.Observable
 import com.foxyApp.data.model.Achievement
+import io.reactivex.Observable
 
 
 /**

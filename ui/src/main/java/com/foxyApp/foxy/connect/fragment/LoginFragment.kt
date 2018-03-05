@@ -24,8 +24,8 @@ import com.foxyApp.foxy.R
 import com.foxyApp.foxy.connect.IConnectPresenter
 import com.foxyApp.foxy.connect.IConnectView
 import com.foxyApp.foxy.connect.dagger.ConnectModule
-import com.foxyApp.foxy.connect.forgot_password.ForgotPasswordActivity
-import com.foxyApp.foxy.event_bus.CreateAccountViewClickedEvent
+import com.foxyApp.foxy.connect.forgotPassword.ForgotPasswordActivity
+import com.foxyApp.foxy.eventBus.CreateAccountViewClickedEvent
 import org.greenrobot.eventbus.EventBus
 import java.util.*
 import javax.inject.Inject
@@ -59,11 +59,11 @@ class LoginFragment : Fragment(), IConnectView {
     @Inject
     lateinit var mPresenter: IConnectPresenter
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        mView = inflater!!.inflate(R.layout.fragment_login, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        mView = inflater.inflate(R.layout.fragment_login, container, false)
         ButterKnife.bind(this, mView!!)
         // Register this target with dagger.
-        FoxyApp.get(context).getAppComponent()?.plus(ConnectModule())?.inject(this)
+        FoxyApp.get(context!!).getAppComponent()?.plus(ConnectModule())?.inject(this)
         setFonts()
         initFacebookLogin()
         return mView
@@ -115,7 +115,7 @@ class LoginFragment : Fragment(), IConnectView {
 
     @OnClick(R.id.login_forgot_password)
     fun forgotPassword() {
-        startActivity(ForgotPasswordActivity.getStartingIntent(context).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+        startActivity(ForgotPasswordActivity.getStartingIntent(context!!).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
     }
 
     @OnClick(R.id.login_create_account_button)
@@ -144,8 +144,8 @@ class LoginFragment : Fragment(), IConnectView {
      * Set fonts.
      */
     private fun setFonts() {
-        val appTitle = Typeface.createFromAsset(context.assets, "fonts/appNameFont.otf")
-        val standard = Typeface.createFromAsset(context.assets, "fonts/SourceSansPro-Regular.ttf")
+        val appTitle = Typeface.createFromAsset(context!!.assets, "fonts/appNameFont.otf")
+        val standard = Typeface.createFromAsset(context!!.assets, "fonts/SourceSansPro-Regular.ttf")
         mAppName.typeface = appTitle
         mForgotPassword.typeface = standard
         mEmail.typeface = standard

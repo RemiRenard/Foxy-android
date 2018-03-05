@@ -14,7 +14,7 @@ import butterknife.ButterKnife
 import com.foxyApp.foxy.R
 import com.foxyApp.foxy.adapter.RankingAdapter
 import com.foxyApp.foxy.custom.SimpleDividerItemDecoration
-import com.foxyApp.foxy.event_bus.RankingCompleteEvent
+import com.foxyApp.foxy.eventBus.RankingCompleteEvent
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -36,8 +36,8 @@ class RankingWeeklyFragment : Fragment() {
     @Inject
     lateinit var mAdapter: RankingAdapter
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        mView = inflater?.inflate(R.layout.fragment_ranking_content, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        mView = inflater.inflate(R.layout.fragment_ranking_content, container, false)
         ButterKnife.bind(this, mView!!)
         initRecyclerView()
         EventBus.getDefault().register(this)
@@ -63,9 +63,9 @@ class RankingWeeklyFragment : Fragment() {
      */
     private fun initRecyclerView() {
         mRecyclerView.setHasFixedSize(true)
-        mRecyclerView.addItemDecoration(SimpleDividerItemDecoration(context))
+        mRecyclerView.addItemDecoration(SimpleDividerItemDecoration(context!!))
         mRecyclerView.layoutManager = LinearLayoutManager(context)
-        mAdapter = RankingAdapter(context)
+        mAdapter = RankingAdapter(context!!)
         mRecyclerView.adapter = mAdapter
         mAdapter.notifyDataSetChanged()
     }

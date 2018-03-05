@@ -1,20 +1,20 @@
 package com.foxyApp.domain.services.notification
 
 import android.util.Log
-import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
-import okhttp3.MediaType
-import okhttp3.RequestBody
 import com.foxyApp.data.Constants
 import com.foxyApp.data.Data
 import com.foxyApp.data.cache.Cache
 import com.foxyApp.data.database.table.TableNotification
 import com.foxyApp.data.model.Notification
 import com.foxyApp.data.model.User
-import com.foxyApp.data.network.api_response.SimpleSuccessResponse
-import com.foxyApp.data.network.api_resquest.NotificationIdRequest
-import com.foxyApp.domain.event_bus.NetworkErrorEvent
+import com.foxyApp.data.network.apiResponse.SimpleSuccessResponse
+import com.foxyApp.data.network.apiRequest.NotificationIdRequest
+import com.foxyApp.domain.eventBus.NetworkErrorEvent
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
+import okhttp3.MediaType
+import okhttp3.RequestBody
 import org.greenrobot.eventbus.EventBus
 import java.io.File
 import java.util.*
@@ -164,7 +164,7 @@ class NotificationService : INotificationService {
             Data.database!!
                     .update(TableNotification.DATABASE_TABLE_NAME,
                             TableNotification.setNotifToRead(),
-                            TableNotification.TABLE_NOTIFICATION_ID+"=\'"+notificationId+"\'")
+                            TableNotification.TABLE_NOTIFICATION_ID + "=\'" + notificationId + "\'")
         } catch (e: Exception) {
             Log.e(javaClass.simpleName, "marNotificationAsRead: ", e)
         }

@@ -1,6 +1,5 @@
 package com.foxyApp.foxy.dagger
 
-import dagger.Component
 import com.foxyApp.foxy.BaseActivity
 import com.foxyApp.foxy.FoxyApp
 import com.foxyApp.foxy.connect.dagger.ConnectComponent
@@ -17,13 +16,14 @@ import com.foxyApp.foxy.ranking.dagger.RankingComponent
 import com.foxyApp.foxy.ranking.dagger.RankingModule
 import com.foxyApp.foxy.splash.dagger.SplashComponent
 import com.foxyApp.foxy.splash.dagger.SplashModule
+import dagger.Component
 import javax.inject.Singleton
 
 /**
  * Dependency injection application component.
  */
 @Singleton
-@Component(modules = arrayOf(AppModule::class, ServiceModule::class))
+@Component(modules = [(AppModule::class), (ServiceModule::class)])
 interface AppComponent {
 
     // exposing downstream dependencies

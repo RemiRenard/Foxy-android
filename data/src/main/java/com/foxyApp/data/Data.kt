@@ -1,12 +1,12 @@
 package com.foxyApp.data
 
 import android.app.Application
-import com.squareup.sqlbrite2.BriteDatabase
-import com.squareup.sqlbrite2.SqlBrite
-import io.reactivex.schedulers.Schedulers
 import com.foxyApp.data.database.DbOpenHelper
 import com.foxyApp.data.network.NetworkService
 import com.foxyApp.data.network.RetrofitHelper
+import com.squareup.sqlbrite2.BriteDatabase
+import com.squareup.sqlbrite2.SqlBrite
+import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 
 /**

@@ -18,7 +18,7 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.OnClick
 import com.foxyApp.data.model.User
-import com.foxyApp.data.network.api_response.FriendsRequestsResponse
+import com.foxyApp.data.network.apiResponse.FriendsRequestsResponse
 import com.foxyApp.foxy.FoxyApp
 import com.foxyApp.foxy.R
 import com.foxyApp.foxy.adapter.FriendsAdapter
@@ -56,11 +56,11 @@ class FriendsFragment : Fragment(), IFriendsView {
     @Inject
     lateinit var mAdapter: FriendsAdapter
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        mView = inflater?.inflate(R.layout.fragment_friends, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        mView = inflater.inflate(R.layout.fragment_friends, container, false)
         ButterKnife.bind(this, mView!!)
         // Register this target with dagger.
-        FoxyApp.get(context).getAppComponent()?.plus(FriendsModule())?.inject(this)
+        FoxyApp.get(context!!).getAppComponent()?.plus(FriendsModule())?.inject(this)
         initRecyclerView()
         mPresenter.attachView(this)
         // animation
@@ -88,12 +88,12 @@ class FriendsFragment : Fragment(), IFriendsView {
 
     @OnClick(R.id.toolbar_add)
     fun addFriends() {
-        startActivity(AddFriendsActivity.getStartingIntent(context))
+        startActivity(AddFriendsActivity.getStartingIntent(context!!))
     }
 
     @OnClick(R.id.friends_banner_requests)
     fun openFriendsRequests() {
-        startActivity(FriendsRequestsActivity.getStartingIntent(context))
+        startActivity(FriendsRequestsActivity.getStartingIntent(context!!))
     }
 
     override fun displayFriends(friends: List<User>) {

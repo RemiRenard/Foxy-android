@@ -9,7 +9,7 @@ import com.foxyApp.foxy.profile.settings.SettingsActivity
  * Profile sub component.
  */
 @ProfileScope
-@Subcomponent(modules = arrayOf(ProfileModule::class))
+@Subcomponent(modules = [(ProfileModule::class)])
 interface ProfileComponent {
 
     // inject target here

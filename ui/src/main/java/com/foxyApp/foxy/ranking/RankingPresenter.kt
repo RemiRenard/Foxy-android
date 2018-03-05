@@ -6,9 +6,9 @@ import io.reactivex.Observer
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import com.foxyApp.data.network.ExceptionHandler
-import com.foxyApp.data.network.api_response.RankingResponse
+import com.foxyApp.data.network.apiResponse.RankingResponse
 import com.foxyApp.domain.services.ranking.IRankingService
-import com.foxyApp.foxy.event_bus.RankingCompleteEvent
+import com.foxyApp.foxy.eventBus.RankingCompleteEvent
 import com.foxyApp.foxy.profile.dagger.ProfileScope
 import org.greenrobot.eventbus.EventBus
 

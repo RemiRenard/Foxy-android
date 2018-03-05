@@ -2,7 +2,6 @@ package com.foxyApp.data.database.table
 
 import android.content.ContentValues
 import com.foxyApp.data.model.Achievement
-import com.foxyApp.data.model.Notification
 
 /**
  * Table Notification of the local database, which contains mainly SQL

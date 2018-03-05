@@ -1,10 +1,10 @@
 package com.foxyApp.domain.services.user
 
 import android.content.Context
-import io.reactivex.Observable
 import com.foxyApp.data.model.User
-import com.foxyApp.data.network.api_response.ConnectResponse
-import com.foxyApp.data.network.api_response.SimpleSuccessResponse
+import com.foxyApp.data.network.apiResponse.ConnectResponse
+import com.foxyApp.data.network.apiResponse.SimpleSuccessResponse
+import io.reactivex.Observable
 import java.io.File
 import java.util.*
 

@@ -9,7 +9,7 @@ import com.foxyApp.foxy.friends.requests.FriendsRequestsActivity
  * Friends sub component.
  */
 @FriendsScope
-@Subcomponent(modules = arrayOf(FriendsModule::class))
+@Subcomponent(modules = [(FriendsModule::class)])
 interface FriendsComponent {
 
     // inject target here

@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.item_select_friends.view.*
 import com.foxyApp.data.model.User
 import com.foxyApp.foxy.R
-import com.foxyApp.foxy.event_bus.FriendsSelectedNotifEvent
+import com.foxyApp.foxy.eventBus.FriendsSelectedNotifEvent
 import org.greenrobot.eventbus.EventBus
 
 /**

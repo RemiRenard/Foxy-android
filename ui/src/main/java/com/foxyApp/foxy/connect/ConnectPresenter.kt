@@ -10,12 +10,12 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import com.foxyApp.data.Constants
 import com.foxyApp.data.network.ExceptionHandler
-import com.foxyApp.data.network.api_response.ConnectResponse
+import com.foxyApp.data.network.apiResponse.ConnectResponse
 import com.foxyApp.domain.services.notification.INotificationService
 import com.foxyApp.domain.services.user.IUserService
 import com.foxyApp.foxy.R
 import com.foxyApp.foxy.connect.dagger.ConnectScope
-import com.foxyApp.foxy.event_bus.ConnectStepCompleteEvent
+import com.foxyApp.foxy.eventBus.ConnectStepCompleteEvent
 import org.greenrobot.eventbus.EventBus
 import java.util.*
 

@@ -9,9 +9,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
-import com.foxyApp.data.network.api_response.FriendsRequestsResponse
+import com.foxyApp.data.network.apiResponse.FriendsRequestsResponse
 import com.foxyApp.foxy.R
-import com.foxyApp.foxy.event_bus.FriendRequestClickedEvent
+import com.foxyApp.foxy.eventBus.FriendRequestClickedEvent
 import org.greenrobot.eventbus.EventBus
 import java.util.*
 

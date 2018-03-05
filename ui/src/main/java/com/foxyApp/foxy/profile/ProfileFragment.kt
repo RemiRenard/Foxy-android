@@ -42,8 +42,8 @@ import com.foxyApp.data.model.User
 import com.foxyApp.foxy.BuildConfig
 import com.foxyApp.foxy.FoxyApp
 import com.foxyApp.foxy.R
-import com.foxyApp.foxy.event_bus.CameraPermsResultEvent
-import com.foxyApp.foxy.event_bus.WriteStoragePermResultEvent
+import com.foxyApp.foxy.eventBus.CameraPermsResultEvent
+import com.foxyApp.foxy.eventBus.WriteStoragePermResultEvent
 import com.foxyApp.foxy.profile.dagger.ProfileModule
 import com.foxyApp.foxy.profile.settings.SettingsActivity
 import org.greenrobot.eventbus.EventBus
@@ -101,11 +101,11 @@ class ProfileFragment : Fragment(), IProfileView {
     @Inject
     lateinit var mPresenter: IProfilePresenter
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        mView = inflater?.inflate(R.layout.fragment_profile, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        mView = inflater.inflate(R.layout.fragment_profile, container, false)
         ButterKnife.bind(this, mView!!)
         // Register this target with dagger.
-        FoxyApp.get(context).getAppComponent()?.plus(ProfileModule())?.inject(this)
+        FoxyApp.get(context!!).getAppComponent()?.plus(ProfileModule())?.inject(this)
         mPresenter.attachView(this)
         EventBus.getDefault().register(this)
         mPresenter.getProfile(forceNetworkRefresh = false)
@@ -160,7 +160,7 @@ class ProfileFragment : Fragment(), IProfileView {
                     .placeholder(R.drawable.ic_placeholder_circle_gray))
                     .into(mProfileAvatar)
         }
-        mProfileName.text = context.getString(R.string.placeholder_name, mCurrentUser?.firstName, mCurrentUser?.lastName)
+        mProfileName.text = context!!.getString(R.string.placeholder_name, mCurrentUser?.firstName, mCurrentUser?.lastName)
         if (!TextUtils.equals(user.firstName + " " + user.lastName, user.username)) {
             mProfileUsername.text = mCurrentUser?.username
         } else {
@@ -241,7 +241,7 @@ class ProfileFragment : Fragment(), IProfileView {
 
     @OnClick(R.id.toolbar_settings)
     fun settingsClicked() {
-        startActivity(SettingsActivity.getStartingIntent(context))
+        startActivity(SettingsActivity.getStartingIntent(context!!))
     }
 
     @OnClick(R.id.toolbar_achievements)
@@ -272,7 +272,7 @@ class ProfileFragment : Fragment(), IProfileView {
      * This method brings up the Bottom Sheet Dialog for picture Selection.
      */
     private fun openBottomSheetDialog() {
-        mBottomSheetDialog = BottomSheetDialog(context)
+        mBottomSheetDialog = BottomSheetDialog(context!!)
         val view = LayoutInflater.from(context).inflate(R.layout.dialog_bottom_sheet_edit_profile, null)
         val btnAddFromCamera = view.findViewById<Button>(R.id.dialog_bottom_edit_profile_camera)
         val btnAddFromLibrary = view.findViewById<Button>(R.id.dialog_bottom_edit_profile_library)
@@ -294,9 +294,9 @@ class ProfileFragment : Fragment(), IProfileView {
      * Open the library of the phone
      */
     private fun openLibrary() {
-        if (ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        if (ContextCompat.checkSelfPermission(context!!, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(activity, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+            ActivityCompat.requestPermissions(activity!!, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
                     Constants.REQUEST_PERMISSION_WRITE_STORAGE)
         } else {
             val pickPhoto = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
@@ -308,8 +308,8 @@ class ProfileFragment : Fragment(), IProfileView {
      * Open the native camera of the phone
      */
     private fun openCamera() {
-        if (ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED &&
-                ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(context!!, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(context!!, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
             val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             mCameraFile = mPresenter.setUpPhotoFile()
             takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(mCameraFile))
@@ -319,7 +319,7 @@ class ProfileFragment : Fragment(), IProfileView {
                 startActivityForResult(takePictureIntent, ACTIVITY_RESULT_CAMERA)
             }
         } else {
-            ActivityCompat.requestPermissions(activity, arrayOf(Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE),
+            ActivityCompat.requestPermissions(activity!!, arrayOf(Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE),
                     Constants.REQUEST_PERMISSION_GROUP_CAMERA)
         }
     }
@@ -348,7 +348,7 @@ class ProfileFragment : Fragment(), IProfileView {
      */
     private fun showSnackbar(mainTextStringId: Int, actionStringId: Int,
                              listener: View.OnClickListener) {
-        Snackbar.make(activity.findViewById(android.R.id.content), getString(mainTextStringId), Snackbar.LENGTH_LONG)
+        Snackbar.make(activity!!.findViewById(android.R.id.content), getString(mainTextStringId), Snackbar.LENGTH_LONG)
                 .setAction(getString(actionStringId), listener).show()
     }
 
@@ -362,7 +362,7 @@ class ProfileFragment : Fragment(), IProfileView {
     @Throws(IOException::class)
     private fun compressPicture(bitmap: Bitmap): File {
         //create a file to write bitmap data
-        val f = File(context.cacheDir, "tmpPicture")
+        val f = File(context!!.cacheDir, "tmpPicture")
         f.createNewFile()
         //Convert bitmap to byte array
         val bos = ByteArrayOutputStream()
@@ -383,7 +383,7 @@ class ProfileFragment : Fragment(), IProfileView {
      */
     private fun getRealPathFromURI(contentURI: Uri): String? {
         var result: String? = null
-        val cursor = context.contentResolver.query(contentURI, null, null, null, null)
+        val cursor = context!!.contentResolver.query(contentURI, null, null, null, null)
         if (cursor == null) {
             result = contentURI.path
         } else {

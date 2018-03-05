@@ -1,15 +1,15 @@
 package com.foxyApp.foxy.notification.dagger
 
-import dagger.Subcomponent
 import com.foxyApp.foxy.notification.NotificationFragment
 import com.foxyApp.foxy.notification.add.AddNotificationActivity
-import com.foxyApp.foxy.notification.select_friends.SelectFriendsActivity
+import com.foxyApp.foxy.notification.selectFriends.SelectFriendsActivity
+import dagger.Subcomponent
 
 /**
  * Notification sub component.
  */
 @NotificationScope
-@Subcomponent(modules = arrayOf(NotificationModule::class))
+@Subcomponent(modules = [(NotificationModule::class)])
 interface NotificationComponent {
 
     // inject target here

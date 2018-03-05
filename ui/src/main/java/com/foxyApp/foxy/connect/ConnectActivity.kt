@@ -14,9 +14,9 @@ import com.foxyApp.foxy.BaseActivity
 import com.foxyApp.foxy.R
 import com.foxyApp.foxy.connect.fragment.LoginFragment
 import com.foxyApp.foxy.connect.fragment.SignupFragment
-import com.foxyApp.foxy.event_bus.ConnectStepCompleteEvent
-import com.foxyApp.foxy.event_bus.CreateAccountViewClickedEvent
-import com.foxyApp.foxy.event_bus.LoginViewClickedEvent
+import com.foxyApp.foxy.eventBus.ConnectStepCompleteEvent
+import com.foxyApp.foxy.eventBus.CreateAccountViewClickedEvent
+import com.foxyApp.foxy.eventBus.LoginViewClickedEvent
 import com.foxyApp.foxy.main.MainActivity
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode

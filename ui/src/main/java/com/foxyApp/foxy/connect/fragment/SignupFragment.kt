@@ -17,7 +17,7 @@ import com.foxyApp.foxy.R
 import com.foxyApp.foxy.connect.IConnectPresenter
 import com.foxyApp.foxy.connect.IConnectView
 import com.foxyApp.foxy.connect.dagger.ConnectModule
-import com.foxyApp.foxy.event_bus.LoginViewClickedEvent
+import com.foxyApp.foxy.eventBus.LoginViewClickedEvent
 import org.greenrobot.eventbus.EventBus
 import java.text.SimpleDateFormat
 import java.util.*
@@ -63,11 +63,11 @@ class SignupFragment : Fragment(), IConnectView {
     @Inject
     lateinit var mPresenter: IConnectPresenter
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        mView = inflater?.inflate(R.layout.fragment_signup, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        mView = inflater.inflate(R.layout.fragment_signup, container, false)
         ButterKnife.bind(this, mView!!)
         // Register this target with dagger.
-        FoxyApp.get(context).getAppComponent()?.plus(ConnectModule())?.inject(this)
+        FoxyApp.get(context!!).getAppComponent()?.plus(ConnectModule())?.inject(this)
         setFonts()
         mCalendar = Calendar.getInstance()
         mDatePicker = DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
@@ -122,7 +122,7 @@ class SignupFragment : Fragment(), IConnectView {
      * Set fonts.
      */
     private fun setFonts() {
-        val standard = Typeface.createFromAsset(context.assets, "fonts/SourceSansPro-Regular.ttf")
+        val standard = Typeface.createFromAsset(context!!.assets, "fonts/SourceSansPro-Regular.ttf")
         mTitle.typeface = standard
         mConfirmPassword.typeface = standard
         mEmail.typeface = standard

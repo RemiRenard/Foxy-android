@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.item_notification.view.*
 import com.foxyApp.data.Constants
 import com.foxyApp.data.model.Notification
 import com.foxyApp.foxy.R
-import com.foxyApp.foxy.event_bus.NotificationClickedEvent
+import com.foxyApp.foxy.eventBus.NotificationClickedEvent
 import com.foxyApp.foxy.friends.requests.FriendsRequestsActivity
 import org.greenrobot.eventbus.EventBus
 import java.io.IOException

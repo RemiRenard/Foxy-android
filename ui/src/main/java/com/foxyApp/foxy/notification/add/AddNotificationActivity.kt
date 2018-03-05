@@ -25,7 +25,7 @@ import com.foxyApp.foxy.BuildConfig
 import com.foxyApp.foxy.FoxyApp
 import com.foxyApp.foxy.R
 import com.foxyApp.foxy.notification.dagger.NotificationModule
-import com.foxyApp.foxy.notification.select_friends.SelectFriendsActivity
+import com.foxyApp.foxy.notification.selectFriends.SelectFriendsActivity
 import java.io.File
 import javax.inject.Inject
 
@@ -118,7 +118,7 @@ class AddNotificationActivity : BaseActivity(), IAddNotificationView {
         mRecorder?.setOutputFile(mAudioFileName)
         mRecorder?.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
         mRecorder?.setMaxDuration(Constants.RECORD_MAX_DURATION)
-        mRecorder?.setOnInfoListener { mr, what, extra ->
+        mRecorder?.setOnInfoListener { _, what, _ ->
             if (what == MediaRecorder.MEDIA_RECORDER_INFO_MAX_DURATION_REACHED) {
                 stopRecordVoice()
             }

@@ -9,7 +9,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.foxyApp.data.model.User
 import com.foxyApp.foxy.R
-import com.foxyApp.foxy.event_bus.AddFriendsIconClickedEvent
+import com.foxyApp.foxy.eventBus.AddFriendsIconClickedEvent
 import kotlinx.android.synthetic.main.item_add_friends.view.*
 import org.greenrobot.eventbus.EventBus
 import java.util.*

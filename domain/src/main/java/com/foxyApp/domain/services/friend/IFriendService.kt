@@ -1,9 +1,9 @@
 package com.foxyApp.domain.services.friend
 
-import io.reactivex.Observable
 import com.foxyApp.data.model.User
-import com.foxyApp.data.network.api_response.FriendsRequestsResponse
-import com.foxyApp.data.network.api_response.SimpleSuccessResponse
+import com.foxyApp.data.network.apiResponse.FriendsRequestsResponse
+import com.foxyApp.data.network.apiResponse.SimpleSuccessResponse
+import io.reactivex.Observable
 
 /**
  * Interface of the Friend service which contains method called by the presenter.

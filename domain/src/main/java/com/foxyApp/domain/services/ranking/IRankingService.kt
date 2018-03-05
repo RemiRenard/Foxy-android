@@ -1,7 +1,7 @@
 package com.foxyApp.domain.services.ranking
 
+import com.foxyApp.data.network.apiResponse.RankingResponse
 import io.reactivex.Observable
-import com.foxyApp.data.network.api_response.RankingResponse
 
 
 /**

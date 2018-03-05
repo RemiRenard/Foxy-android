@@ -1,7 +1,7 @@
 package com.foxyApp.foxy.friends
 
 import com.foxyApp.data.model.User
-import com.foxyApp.data.network.api_response.FriendsRequestsResponse
+import com.foxyApp.data.network.apiResponse.FriendsRequestsResponse
 import com.foxyApp.foxy.IView
 
 /**

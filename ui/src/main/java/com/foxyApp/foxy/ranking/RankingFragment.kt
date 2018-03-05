@@ -54,11 +54,11 @@ class RankingFragment : Fragment(), IRankingView {
     @Inject
     lateinit var mPresenter: IRankingPresenter
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        mView = inflater?.inflate(R.layout.fragment_ranking, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        mView = inflater.inflate(R.layout.fragment_ranking, container, false)
         ButterKnife.bind(this, mView!!)
         // Register this target with dagger.
-        FoxyApp.get(context).getAppComponent()?.plus(RankingModule())?.inject(this)
+        FoxyApp.get(context!!).getAppComponent()?.plus(RankingModule())?.inject(this)
         // setting up the view pager with the sections adapter.
         mViewPager.adapter = SectionsPagerAdapter(childFragmentManager)
         mViewPager.offscreenPageLimit = mNbItem
@@ -76,7 +76,7 @@ class RankingFragment : Fragment(), IRankingView {
                         .placeholder(R.drawable.ic_placeholder_circle_gray))
                 .into(mProfileAvatar)
         if (currentUserData.score != null) {
-            mScore.text = context.getString(R.string.Score, currentUserData.score)
+            mScore.text = context!!.getString(R.string.Score, currentUserData.score)
         } else {
             mScore.text = getString(R.string.Unranked)
         }

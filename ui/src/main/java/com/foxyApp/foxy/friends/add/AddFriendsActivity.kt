@@ -20,7 +20,7 @@ import com.foxyApp.foxy.BaseActivity
 import com.foxyApp.foxy.FoxyApp
 import com.foxyApp.foxy.R
 import com.foxyApp.foxy.adapter.AddFriendsAdapter
-import com.foxyApp.foxy.event_bus.AddFriendsIconClickedEvent
+import com.foxyApp.foxy.eventBus.AddFriendsIconClickedEvent
 import com.foxyApp.foxy.friends.dagger.FriendsModule
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe

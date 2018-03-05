@@ -1,16 +1,16 @@
 package com.foxyApp.data.network
 
-import io.reactivex.Observable
-import okhttp3.RequestBody
 import com.foxyApp.data.Constants
 import com.foxyApp.data.model.Achievement
 import com.foxyApp.data.model.Notification
 import com.foxyApp.data.model.User
-import com.foxyApp.data.network.api_response.ConnectResponse
-import com.foxyApp.data.network.api_response.FriendsRequestsResponse
-import com.foxyApp.data.network.api_response.RankingResponse
-import com.foxyApp.data.network.api_response.SimpleSuccessResponse
-import com.foxyApp.data.network.api_resquest.*
+import com.foxyApp.data.network.apiRequest.*
+import com.foxyApp.data.network.apiResponse.ConnectResponse
+import com.foxyApp.data.network.apiResponse.FriendsRequestsResponse
+import com.foxyApp.data.network.apiResponse.RankingResponse
+import com.foxyApp.data.network.apiResponse.SimpleSuccessResponse
+import io.reactivex.Observable
+import okhttp3.RequestBody
 import retrofit2.http.*
 
 /**

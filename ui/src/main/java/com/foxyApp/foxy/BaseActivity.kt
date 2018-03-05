@@ -1,15 +1,14 @@
 package com.foxyApp.foxy
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
 import com.foxyApp.data.Constants
-import com.foxyApp.domain.event_bus.NetworkErrorEvent
-import com.foxyApp.domain.event_bus.NetworkStateChangeEvent
-import com.foxyApp.foxy.FoxyApp
-import com.foxyApp.foxy.R
+import com.foxyApp.domain.eventBus.NetworkErrorEvent
+import com.foxyApp.domain.eventBus.NetworkStateChangeEvent
 import com.foxyApp.foxy.connect.ConnectActivity
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -18,6 +17,7 @@ import org.greenrobot.eventbus.ThreadMode
 /**
  * The basic activity for an activity. All activities should extend it.
  */
+@SuppressLint("Registered")
 open class BaseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

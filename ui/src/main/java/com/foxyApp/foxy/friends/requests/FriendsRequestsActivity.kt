@@ -11,12 +11,12 @@ import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.OnClick
-import com.foxyApp.data.network.api_response.FriendsRequestsResponse
+import com.foxyApp.data.network.apiResponse.FriendsRequestsResponse
 import com.foxyApp.foxy.BaseActivity
 import com.foxyApp.foxy.FoxyApp
 import com.foxyApp.foxy.R
 import com.foxyApp.foxy.adapter.FriendsRequestsAdapter
-import com.foxyApp.foxy.event_bus.FriendRequestClickedEvent
+import com.foxyApp.foxy.eventBus.FriendRequestClickedEvent
 import com.foxyApp.foxy.friends.dagger.FriendsModule
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode

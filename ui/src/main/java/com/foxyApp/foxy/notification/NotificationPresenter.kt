@@ -7,7 +7,7 @@ import io.reactivex.annotations.NonNull
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import com.foxyApp.data.model.Notification
-import com.foxyApp.data.network.api_response.SimpleSuccessResponse
+import com.foxyApp.data.network.apiResponse.SimpleSuccessResponse
 import com.foxyApp.domain.services.notification.INotificationService
 import com.foxyApp.foxy.notification.dagger.NotificationScope
 

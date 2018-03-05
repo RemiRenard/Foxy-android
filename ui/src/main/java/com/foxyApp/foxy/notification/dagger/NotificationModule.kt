@@ -11,8 +11,8 @@ import com.foxyApp.foxy.notification.INotificationPresenter
 import com.foxyApp.foxy.notification.NotificationPresenter
 import com.foxyApp.foxy.notification.add.AddNotificationPresenter
 import com.foxyApp.foxy.notification.add.IAddNotificationPresenter
-import com.foxyApp.foxy.notification.select_friends.ISelectFriendsPresenter
-import com.foxyApp.foxy.notification.select_friends.SelectFriendsPresenter
+import com.foxyApp.foxy.notification.selectFriends.ISelectFriendsPresenter
+import com.foxyApp.foxy.notification.selectFriends.SelectFriendsPresenter
 
 @Module
 class NotificationModule {

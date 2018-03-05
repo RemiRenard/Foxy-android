@@ -12,7 +12,7 @@ import com.foxyApp.foxy.R
  */
 class SimpleDividerItemDecoration(context: Context) : RecyclerView.ItemDecoration() {
 
-    private val mDivider: Drawable = ContextCompat.getDrawable(context, R.drawable.utils_line_divider)
+    private val mDivider: Drawable = ContextCompat.getDrawable(context, R.drawable.utils_line_divider)!!
 
     override fun onDrawOver(c: Canvas, parent: RecyclerView, state: RecyclerView.State?) {
         val left = parent.paddingLeft

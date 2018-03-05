@@ -8,7 +8,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import com.foxyApp.data.model.User
 import com.foxyApp.data.network.ExceptionHandler
-import com.foxyApp.data.network.api_response.SimpleSuccessResponse
+import com.foxyApp.data.network.apiResponse.SimpleSuccessResponse
 import com.foxyApp.domain.services.friend.IFriendService
 import com.foxyApp.domain.services.user.IUserService
 import com.foxyApp.foxy.R

@@ -1,15 +1,15 @@
 package com.foxyApp.domain.services.ranking
 
 import android.util.Log
-import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import com.foxyApp.data.Data
 import com.foxyApp.data.cache.Cache
 import com.foxyApp.data.database.table.TableUserRank
 import com.foxyApp.data.model.UserRank
-import com.foxyApp.data.network.api_response.RankingResponse
-import com.foxyApp.domain.event_bus.NetworkErrorEvent
+import com.foxyApp.data.network.apiResponse.RankingResponse
+import com.foxyApp.domain.eventBus.NetworkErrorEvent
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import org.greenrobot.eventbus.EventBus
 
 /**

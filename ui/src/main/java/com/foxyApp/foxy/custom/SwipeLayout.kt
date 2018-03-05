@@ -358,7 +358,7 @@ class SwipeLayout : ViewGroup {
 
         if (animation) {
             mState = STATE_OPENING
-            mDragHelper?.smoothSlideViewTo(mMainView, mRectMainOpen.left, mRectMainOpen.top)
+            mDragHelper?.smoothSlideViewTo(mMainView!!, mRectMainOpen.left, mRectMainOpen.top)
 
             mDragStateChangeListener?.onDragStateChanged(mState)
         } else {
@@ -395,7 +395,7 @@ class SwipeLayout : ViewGroup {
 
         if (animation) {
             mState = STATE_CLOSING
-            mDragHelper?.smoothSlideViewTo(mMainView, mRectMainClose.left, mRectMainClose.top)
+            mDragHelper?.smoothSlideViewTo(mMainView!!, mRectMainClose.left, mRectMainClose.top)
 
             mDragStateChangeListener?.onDragStateChanged(mState)
 
@@ -679,39 +679,38 @@ class SwipeLayout : ViewGroup {
             return false
         }
 
-        override fun clampViewPositionVertical(child: View?, top: Int, dy: Int): Int {
-            when (dragEdge) {
-                DRAG_EDGE_TOP -> return Math.max(
+        override fun clampViewPositionVertical(child: View, top: Int, dy: Int): Int {
+            return when (dragEdge) {
+                DRAG_EDGE_TOP -> Math.max(
                         Math.min(top, mRectMainClose.top + mSecondaryView!!.height),
                         mRectMainClose.top
                 )
 
-                DRAG_EDGE_BOTTOM -> return Math.max(
+                DRAG_EDGE_BOTTOM -> Math.max(
                         Math.min(top, mRectMainClose.top),
                         mRectMainClose.top - mSecondaryView!!.height
                 )
-
-                else -> return child!!.top
+                else -> child.top
             }
         }
 
-        override fun clampViewPositionHorizontal(child: View?, left: Int, dx: Int): Int {
-            when (dragEdge) {
-                DRAG_EDGE_RIGHT -> return Math.max(
+        override fun clampViewPositionHorizontal(child: View, left: Int, dx: Int): Int {
+            return when (dragEdge) {
+                DRAG_EDGE_RIGHT -> Math.max(
                         Math.min(left, mRectMainClose.left),
                         mRectMainClose.left - mSecondaryView!!.width
                 )
 
-                DRAG_EDGE_LEFT -> return Math.max(
+                DRAG_EDGE_LEFT -> Math.max(
                         Math.min(left, mRectMainClose.left + mSecondaryView!!.width),
                         mRectMainClose.left
                 )
 
-                else -> return child!!.left
+                else -> child.left
             }
         }
 
-        override fun onViewReleased(releasedChild: View?, xvel: Float, yvel: Float) {
+        override fun onViewReleased(releasedChild: View, xvel: Float, yvel: Float) {
             val velRightExceeded = pxToDp(xvel.toInt()) >= minFlingVelocity
             val velLeftExceeded = pxToDp(xvel.toInt()) <= -minFlingVelocity
             val velUpExceeded = pxToDp(yvel.toInt()) <= -minFlingVelocity
@@ -791,7 +790,7 @@ class SwipeLayout : ViewGroup {
             }
         }
 
-        override fun onViewPositionChanged(changedView: View?, left: Int, top: Int, dx: Int, dy: Int) {
+        override fun onViewPositionChanged(changedView: View, left: Int, top: Int, dx: Int, dy: Int) {
             super.onViewPositionChanged(changedView, left, top, dx, dy)
             if (mMode == MODE_SAME_LEVEL) {
                 if (dragEdge == DRAG_EDGE_LEFT || dragEdge == DRAG_EDGE_RIGHT) {

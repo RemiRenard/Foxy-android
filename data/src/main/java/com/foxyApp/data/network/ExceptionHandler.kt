@@ -4,7 +4,7 @@ import android.content.Context
 import android.util.Log
 import com.google.gson.Gson
 import com.foxyApp.data.R
-import com.foxyApp.data.network.api_error.ResponseError
+import com.foxyApp.data.network.apiError.ResponseError
 import retrofit2.HttpException
 
 /**

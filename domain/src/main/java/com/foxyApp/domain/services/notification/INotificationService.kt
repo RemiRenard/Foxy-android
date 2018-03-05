@@ -1,8 +1,8 @@
 package com.foxyApp.domain.services.notification
 
-import io.reactivex.Observable
 import com.foxyApp.data.model.Notification
-import com.foxyApp.data.network.api_response.SimpleSuccessResponse
+import com.foxyApp.data.network.apiResponse.SimpleSuccessResponse
+import io.reactivex.Observable
 import java.io.File
 
 /**

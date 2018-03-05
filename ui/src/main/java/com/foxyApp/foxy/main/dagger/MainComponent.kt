@@ -8,7 +8,7 @@ import dagger.Subcomponent
  * Main sub component.
  */
 @MainScope
-@Subcomponent(modules = arrayOf(MainModule::class))
+@Subcomponent(modules = [(MainModule::class)])
 interface MainComponent {
 
     // inject target here

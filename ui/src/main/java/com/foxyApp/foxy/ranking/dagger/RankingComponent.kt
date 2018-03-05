@@ -8,7 +8,7 @@ import com.foxyApp.foxy.ranking.subFragment.RankingGlobalFragment
  * Ranking sub component.
  */
 @RankingScope
-@Subcomponent(modules = arrayOf(RankingModule::class))
+@Subcomponent(modules = [(RankingModule::class)])
 interface RankingComponent {
 
     // inject target here

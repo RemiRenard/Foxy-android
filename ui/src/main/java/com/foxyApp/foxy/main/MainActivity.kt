@@ -20,8 +20,8 @@ import com.foxyApp.data.Constants
 import com.foxyApp.foxy.BaseActivity
 import com.foxyApp.foxy.FoxyApp
 import com.foxyApp.foxy.R
-import com.foxyApp.foxy.event_bus.CameraPermsResultEvent
-import com.foxyApp.foxy.event_bus.WriteStoragePermResultEvent
+import com.foxyApp.foxy.eventBus.CameraPermsResultEvent
+import com.foxyApp.foxy.eventBus.WriteStoragePermResultEvent
 import com.foxyApp.foxy.friends.FriendsFragment
 import com.foxyApp.foxy.main.dagger.MainModule
 import com.foxyApp.foxy.notification.NotificationFragment

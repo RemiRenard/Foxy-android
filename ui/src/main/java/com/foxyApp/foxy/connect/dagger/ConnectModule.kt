@@ -7,8 +7,8 @@ import com.foxyApp.domain.services.notification.INotificationService
 import com.foxyApp.domain.services.user.IUserService
 import com.foxyApp.foxy.connect.ConnectPresenter
 import com.foxyApp.foxy.connect.IConnectPresenter
-import com.foxyApp.foxy.connect.forgot_password.ForgotPasswordPresenter
-import com.foxyApp.foxy.connect.forgot_password.IForgotPasswordPresenter
+import com.foxyApp.foxy.connect.forgotPassword.ForgotPasswordPresenter
+import com.foxyApp.foxy.connect.forgotPassword.IForgotPasswordPresenter
 
 @Module
 class ConnectModule {

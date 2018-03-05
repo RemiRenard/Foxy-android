@@ -7,7 +7,7 @@ import com.foxyApp.foxy.splash.SplashActivity
  * Splash sub component.
  */
 @SplashScope
-@Subcomponent(modules = arrayOf(SplashModule::class))
+@Subcomponent(modules = [(SplashModule::class)])
 interface SplashComponent {
 
     // inject target here

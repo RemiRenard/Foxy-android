@@ -2,11 +2,11 @@ package com.foxyApp.domain
 
 import android.app.Application
 import android.content.Context
+import com.foxyApp.data.Data
+import com.foxyApp.domain.eventBus.NetworkStateChangeEvent
 import com.github.pwittchen.reactivenetwork.library.rx2.ReactiveNetwork
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import com.foxyApp.data.Data
-import com.foxyApp.domain.event_bus.NetworkStateChangeEvent
 import org.greenrobot.eventbus.EventBus
 
 /**

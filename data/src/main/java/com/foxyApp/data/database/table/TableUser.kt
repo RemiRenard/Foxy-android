@@ -1,9 +1,9 @@
 package com.foxyApp.data.database.table
 
 import android.content.ContentValues
-import com.google.gson.Gson
 import com.foxyApp.data.Data
 import com.foxyApp.data.model.User
+import com.google.gson.Gson
 
 /**
  * Table User of the local database, which contains mainly SQL

@@ -1,18 +1,18 @@
 package com.foxyApp.domain.services.friend
 
 import android.util.Log
-import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import com.foxyApp.data.Data
 import com.foxyApp.data.cache.Cache
 import com.foxyApp.data.database.table.TableFriend
 import com.foxyApp.data.model.User
-import com.foxyApp.data.network.api_response.FriendsRequestsResponse
-import com.foxyApp.data.network.api_response.SimpleSuccessResponse
-import com.foxyApp.data.network.api_resquest.AddFriendRequest
-import com.foxyApp.data.network.api_resquest.FriendRequestRequest
-import com.foxyApp.domain.event_bus.NetworkErrorEvent
+import com.foxyApp.data.network.apiResponse.FriendsRequestsResponse
+import com.foxyApp.data.network.apiResponse.SimpleSuccessResponse
+import com.foxyApp.data.network.apiRequest.AddFriendRequest
+import com.foxyApp.data.network.apiRequest.FriendRequestRequest
+import com.foxyApp.domain.eventBus.NetworkErrorEvent
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import org.greenrobot.eventbus.EventBus
 
 /**

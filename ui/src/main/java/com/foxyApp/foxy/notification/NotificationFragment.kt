@@ -12,15 +12,13 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
-import butterknife.OnClick
 import com.foxyApp.data.Constants
 import com.foxyApp.data.model.Notification
 import com.foxyApp.foxy.FoxyApp
 import com.foxyApp.foxy.R
 import com.foxyApp.foxy.adapter.NotificationAdapter
 import com.foxyApp.foxy.custom.SimpleDividerItemDecoration
-import com.foxyApp.foxy.event_bus.NotificationClickedEvent
-import com.foxyApp.foxy.notification.add.AddNotificationActivity
+import com.foxyApp.foxy.eventBus.NotificationClickedEvent
 import com.foxyApp.foxy.notification.dagger.NotificationModule
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -52,14 +50,14 @@ class NotificationFragment : Fragment(), INotificationView {
     @Inject
     lateinit var mAdapter: NotificationAdapter
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        mView = inflater?.inflate(R.layout.fragment_notification, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        mView = inflater.inflate(R.layout.fragment_notification, container, false)
         ButterKnife.bind(this, mView!!)
         // Register this target with dagger.
-        FoxyApp.get(context).getAppComponent()?.plus(NotificationModule())?.inject(this)
+        FoxyApp.get(context!!).getAppComponent()?.plus(NotificationModule())?.inject(this)
         initRecyclerView()
         mPresenter.attachView(this)
-        mPresenter.getNotifications(arguments.getBoolean(Constants.BUNDLE_IS_NEW_NOTIFICATION, false))
+        mPresenter.getNotifications(arguments!!.getBoolean(Constants.BUNDLE_IS_NEW_NOTIFICATION, false))
         mSwipeRefresh.setOnRefreshListener {
             mPresenter.getNotifications(forceNetworkRefresh = true)
             mSwipeRefresh.isRefreshing = false
@@ -77,7 +75,7 @@ class NotificationFragment : Fragment(), INotificationView {
      */
     private fun initRecyclerView() {
         mRecyclerView.setHasFixedSize(true)
-        mRecyclerView.addItemDecoration(SimpleDividerItemDecoration(context))
+        mRecyclerView.addItemDecoration(SimpleDividerItemDecoration(context!!))
         mRecyclerView.layoutManager = LinearLayoutManager(context)
         mRecyclerView.adapter = mAdapter
     }
