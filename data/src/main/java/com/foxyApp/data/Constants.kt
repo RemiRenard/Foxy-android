@@ -27,7 +27,7 @@ object Constants {
     const val RECORD_MAX_DURATION = 5000 //milliseconds
 
     // DEV
-    const val SERVER_URL_DEV = "http://192.168.1.135:3000/api/"
+    const val SERVER_URL_DEV = "http://192.168.1.138:8888/api/"
 
     //PROD
     const val SERVER_URL_PROD = "http://foxy-api.herokuapp.com/api/"

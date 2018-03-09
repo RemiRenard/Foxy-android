@@ -24,7 +24,7 @@
     <string name="Confirm_password">Confirmer votre mot de passe</string>
     <string name="error_form">Complétez tous les champs de texte</string>
     <string name="Notification">Notification</string>
-    <string name="New_Notification">Nouvelle notification de %1$s</string>
+    <string name="New_Notification">Notification de %1$s</string>
     <string name="Friends">Amis</string>
     <string name="Title">Titre</string>
     <string name="Content">Contenu</string>
@@ -88,11 +88,9 @@
     <string name="Edit_my_profile">Editer mon profil</string>
     <string name="See_more_stats">Voir plus de stats</string>
     <string name="See_less_stats">Voir moins de stats</string>
-    <string name="notif_keywords">Vous pouvez essayer de trouver des sonneries spéciales en tapant des mots-clés secrets dans le champ de mot clé sans envoyer d\'enregistrement vocal personnalisé.</string>
     <string name="stop_audio_first">Un autre son de notification est en cours de lecture. Veuillez l\'arrêter avant d\'en jouer un autre.</string>
     <string name="user_time">%1$s à %2$s</string>
-    <string name="Keyword">Mot clé (canard, orgasme, illuminati…)</string>
-    <string name="Message">Message</string>
+    <string name="Message">Message (optionnel)</string>
     <string name="Top_songs_played">Sons les plus joués</string>
     <string name="Global">Global</string>
     <string name="Weekly">Hebdomadaire</string>
@@ -103,4 +101,5 @@
     <string name="Rate_the_app">Notez l\'application</string>
     <string name="No_points">Pas de points</string>
     <string name="Unranked">Non classé</string>
+    <string name="tutorial_send_song">Pour envoyer un son à un ami, choisi un son dans la liste ou enregistre ta voix.</string>
 </resources>

@@ -25,6 +25,7 @@ class DbOpenHelper
         db.execSQL(TableNotification.createTableNotification())
         db.execSQL(TableUser.createTableUser())
         db.execSQL(TableUserRank.createTableUserRank())
+        db.execSQL(TableSong.createTableSong())
         db.execSQL(TableAchievement.createTableAchievement())
     }
 

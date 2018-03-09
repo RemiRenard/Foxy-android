@@ -24,7 +24,7 @@
     <string name="Confirm_password">Confirm your password</string>
     <string name="error_form">Please complete all fields</string>
     <string name="Notification">Notification</string>
-    <string name="New_Notification">New notif from %1$s</string>
+    <string name="New_Notification">Notification from %1$s</string>
     <string name="Friends">Friends</string>
     <string name="Title">Title</string>
     <string name="Content">Content</string>
@@ -89,11 +89,9 @@
     <string name="Edit_my_profile">Edit my profile</string>
     <string name="See_more_stats">See more stats</string>
     <string name="See_less_stats">See less stats</string>
-    <string name="notif_keywords">You can try to find special ringtones by typing secret keywords in the keyword field while not sending any custom voice record.</string>
     <string name="stop_audio_first">An other notification sound is playing. Please stop it before playing an other one.</string>
     <string name="user_time">%1$s at %2$s</string>
-    <string name="Keyword">Keyword (god, win, illuminati…)</string>
-    <string name="Message">Message</string>
+    <string name="Message">Message (optional)</string>
     <string name="Top_songs_played">Top song played</string>
     <string name="Global">Global</string>
     <string name="Weekly">Weekly</string>
@@ -104,4 +102,5 @@
     <string name="Rate_the_app">Rate the app</string>
     <string name="No_points">No points</string>
     <string name="Unranked">Unranked</string>
+    <string name="tutorial_send_song">To send a song to your friend, choose a song in the list or record your own voice.</string>
 </resources>

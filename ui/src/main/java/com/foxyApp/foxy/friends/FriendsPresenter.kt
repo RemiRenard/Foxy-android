@@ -32,7 +32,7 @@ class FriendsPresenter(private val mFriendService: IFriendService, private val m
     }
 
     override fun getFriends() {
-        mView?.showProgressBar()
+        //mView?.showProgressBar()
         mFriendService.getFriends().subscribe(object : Observer<List<User>> {
             override fun onSubscribe(@NonNull d: Disposable) {
                 mCompositeDisposable?.add(d)

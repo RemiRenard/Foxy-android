@@ -45,7 +45,7 @@ object RetrofitHelper {
      */
     fun createRetrofitBuilder(client: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-                .baseUrl(Constants.SERVER_URL_PROD)
+                .baseUrl(Constants.SERVER_URL_DEV)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(client)

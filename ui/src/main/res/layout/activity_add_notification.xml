@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     tools:context="com.foxyApp.foxy.notification.add.AddNotificationActivity">
 
     <android.support.design.widget.AppBarLayout
@@ -24,6 +26,14 @@
             app:contentInsetStart="0dp"
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
+            <ImageView
+                android:id="@+id/toolbar_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:padding="16dp"
+                android:src="@drawable/ic_arrow_back" />
+
             <TextView
                 android:id="@+id/toolbar_title"
                 android:layout_width="wrap_content"
@@ -39,15 +49,16 @@
     <EditText
         android:id="@+id/add_notification_message"
         android:layout_width="0dp"
-        android:layout_height="100dp"
+        android:layout_height="40dp"
         android:layout_marginEnd="50dp"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/bg_dark_blue_rect_oval_border"
+        android:gravity="center"
         android:hint="@string/Message"
-        android:gravity="top"
-        android:inputType="textLongMessage"
+        android:inputType="text"
         android:lines="1"
+        android:maxLength="40"
         android:padding="8dp"
         android:paddingTop="8dp"
         android:textColor="@android:color/black"
@@ -57,69 +68,69 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/app_bar_layout" />
 
-    <EditText
-        android:id="@+id/add_notification_keyword"
+    <TextView
+        android:id="@+id/add_notification_tutorial"
         android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/bg_dark_blue_rect_oval_border"
-        android:hint="@string/Keyword"
-        android:inputType=""
-        android:padding="8dp"
-        android:textColor="@android:color/black"
-        android:textColorHint="@color/colorAccent"
-        android:textSize="14sp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:padding="4dp"
+        android:text="@string/tutorial_send_song"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimaryDark"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/add_notification_message" />
-
-    <Button
-        android:id="@+id/add_notification_button_next"
-        android:layout_width="0dp"
-        android:layout_height="45dp"
-        android:layout_marginBottom="32dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginStart="50dp"
-        android:background="@drawable/bg_dark_blue_rect_oval_border"
-        android:text="@string/Next"
-        android:textAllCaps="false"
-        android:textColor="@color/colorDarkBlue"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/add_notification_message" />
 
     <ImageView
         android:id="@+id/add_notification_micro"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="4dp"
         android:src="@drawable/ic_micro_not_recording"
+        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/add_notification_keyword"/>
+        app:layout_constraintRight_toLeftOf="@+id/add_notification_play_audio"
+        app:layout_constraintTop_toBottomOf="@id/add_notification_tutorial" />
 
     <ImageView
         android:id="@+id/add_notification_play_audio"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginStart="24dp"
         android:src="@drawable/ic_speaker_on"
         android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/add_notification_micro"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="@+id/add_notification_micro"
+        app:layout_constraintLeft_toRightOf="@+id/add_notification_micro"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/add_notification_micro" />
 
-    <TextView
-        android:id="@+id/add_notification_keyword_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="12dp"
-        android:gravity="center"
-        android:text="@string/notif_keywords"
-        android:textColor="@color/colorPrimary"
-        app:layout_constraintVertical_bias="0.7"
-        app:layout_constraintBottom_toTopOf="@id/add_notification_button_next"
-        app:layout_constraintTop_toBottomOf="@id/add_notification_micro"/>
+    <Button
+        android:id="@+id/add_notification_button_next"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_dark_blue_rect_oval_border"
+        android:text="@string/Next"
+        android:textAllCaps="false"
+        android:textColor="@color/colorDarkBlue"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_notification_recycler_view" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/add_notification_recycler_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/add_notification_button_next"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/add_notification_micro" />
 </android.support.constraint.ConstraintLayout>

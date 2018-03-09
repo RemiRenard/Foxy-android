@@ -8,5 +8,7 @@ import java.io.File
  */
 interface IAddNotificationPresenter : IPresenter<IAddNotificationView> {
 
-    fun saveTmpNotification(message: String, keyword: String, type: String, song: String, audioFile: File?)
+    fun saveTmpNotification(message: String, songId: String, type: String, audioFile: File?)
+
+    fun getSongs(forceNetworkRefresh: Boolean)
 }

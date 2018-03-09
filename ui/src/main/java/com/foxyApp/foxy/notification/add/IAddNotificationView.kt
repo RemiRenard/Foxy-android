@@ -1,5 +1,6 @@
 package com.foxyApp.foxy.notification.add
 
+import com.foxyApp.data.model.Song
 import com.foxyApp.foxy.IView
 
 /**
@@ -8,4 +9,6 @@ import com.foxyApp.foxy.IView
 interface IAddNotificationView : IView {
 
     fun openFriendsActivity()
+
+    fun displaySongs(songs: List<Song>)
 }

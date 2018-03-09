@@ -3,6 +3,7 @@ package com.foxyApp.data.network
 import com.foxyApp.data.Constants
 import com.foxyApp.data.model.Achievement
 import com.foxyApp.data.model.Notification
+import com.foxyApp.data.model.Song
 import com.foxyApp.data.model.User
 import com.foxyApp.data.network.apiRequest.*
 import com.foxyApp.data.network.apiResponse.ConnectResponse
@@ -73,7 +74,7 @@ interface NetworkService {
     @POST("notification/send")
     fun sendNotification(@Header(Constants.AUTHORIZATION) token: String,
                          @Part("message") message: RequestBody,
-                         @Part("keyword") keyword: RequestBody,
+                         @Part("songId") songId: RequestBody,
                          @Part("type") type: RequestBody,
                          @Part("userIds") userIds: RequestBody,
                          @Part("song\"; filename=\"song.mp3\"") audio: RequestBody?): Observable<SimpleSuccessResponse>
@@ -87,6 +88,10 @@ interface NetworkService {
     fun getRanking(@Header(Constants.AUTHORIZATION) token: String): Observable<RankingResponse>
 
     //ACHIEVEMENT SECTION
-    @GET("achievement")
+    @GET("achievements")
     fun getAchievements(@Header(Constants.AUTHORIZATION) token: String): Observable<List<Achievement>>
+
+    //SONG SECTION
+    @GET("songs")
+    fun getSongs(@Header(Constants.AUTHORIZATION) token: String): Observable<List<Song>>
 }

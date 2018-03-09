@@ -5,10 +5,12 @@ import com.foxyApp.data.Constants
 import com.foxyApp.data.Data
 import com.foxyApp.data.cache.Cache
 import com.foxyApp.data.database.table.TableNotification
+import com.foxyApp.data.database.table.TableSong
 import com.foxyApp.data.model.Notification
+import com.foxyApp.data.model.Song
 import com.foxyApp.data.model.User
-import com.foxyApp.data.network.apiResponse.SimpleSuccessResponse
 import com.foxyApp.data.network.apiRequest.NotificationIdRequest
+import com.foxyApp.data.network.apiResponse.SimpleSuccessResponse
 import com.foxyApp.domain.eventBus.NetworkErrorEvent
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -26,6 +28,7 @@ import java.util.*
 class NotificationService : INotificationService {
 
     private var mNotifications = ArrayList<Notification>()
+    private var mSongs = ArrayList<Song>()
 
     override fun getTokenOnIoThread(): Observable<String> {
         return Observable.just(Constants.GCM)
@@ -113,6 +116,82 @@ class NotificationService : INotificationService {
     }
 
     /**
+     * Get songs available
+     * @param forceNetworkRefresh Boolean
+     * @return Observable<List<Song>>
+     */
+    override fun getSongs(forceNetworkRefresh: Boolean): Observable<List<Song>> {
+        mSongs.clear()
+        return if (Cache.notifications.isNotEmpty() && !forceNetworkRefresh) {
+            Observable.just(Cache.songs)
+        } else {
+            return getSongsFromNetwork(Cache.token!!)
+                    .publish { network -> Observable.merge(network, getSongsFromDb().takeUntil(network)) }
+                    .doOnNext { Cache.songs = it }
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+        }
+    }
+
+    /**
+     * Fetch songs from the network.
+     * @return an observable of a list of songs.
+     */
+    private fun getSongsFromNetwork(token: String): Observable<List<Song>> {
+        return Data.networkService!!
+                .getSongs(token)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnNext {
+                    addSongToDb(it)
+                }
+                .onErrorReturn {
+                    EventBus.getDefault().post(NetworkErrorEvent(it))
+                    mSongs
+                }
+    }
+
+    /**
+     * Get users from the database.
+     * @return an observable of a list of users.
+     */
+    private fun getSongsFromDb(): Observable<List<Song>> {
+        return Data.database!!.createQuery(TableSong.DATABASE_TABLE_NAME,
+                TableSong.getSongs()).mapToList { cursor ->
+            val song = Song()
+            song.id = cursor.getString(cursor.getColumnIndexOrThrow(TableSong.TABLE_SONG_ID))
+            song.url = cursor.getString(cursor.getColumnIndexOrThrow(TableSong.TABLE_SONG_URL))
+            song.name = cursor.getString(cursor.getColumnIndexOrThrow(TableSong.TABLE_SONG_NAME))
+            song.picture = cursor.getString(cursor.getColumnIndexOrThrow(TableSong.TABLE_SONG_PICTURE))
+            mSongs.add(song)
+            song
+        }
+    }
+
+    /**
+     * Update songs in the database.
+     * @param songs : a list of songs.
+     */
+    private fun addSongToDb(songs: List<Song>) {
+        // Delete all users from the database.
+        Data.database?.delete(TableSong.DATABASE_TABLE_NAME, "")
+        // Use transaction to dodge the spamming of subscribers.
+        val transaction = Data.database?.newTransaction()
+        try {
+            for (song in songs) {
+                // Insert a user in the database.
+                Data.database?.insert(TableSong.DATABASE_TABLE_NAME,
+                        TableSong.createSong(song))
+            }
+            transaction?.markSuccessful()
+        } catch (e: Exception) {
+            Log.e(javaClass.simpleName, "updateDb with songs from network: ", e)
+        } finally {
+            transaction?.end()
+        }
+    }
+
+    /**
      * Send a notification
      * @param userIds List<String>
      * @return Observable<NotifSentResponse>
@@ -122,7 +201,7 @@ class NotificationService : INotificationService {
                 .sendNotification(
                         Cache.token!!,
                         RequestBody.create(MediaType.parse(Constants.MEDIA_TYPE_TEXT), Cache.tmpNotification?.message!!),
-                        RequestBody.create(MediaType.parse(Constants.MEDIA_TYPE_TEXT), Cache.tmpNotification?.keyword!!),
+                        RequestBody.create(MediaType.parse(Constants.MEDIA_TYPE_TEXT), Cache.tmpNotification?.songId!!),
                         RequestBody.create(MediaType.parse(Constants.MEDIA_TYPE_TEXT), Cache.tmpNotification?.type!!),
                         RequestBody.create(MediaType.parse(Constants.MEDIA_TYPE_TEXT), userIds.joinToString { it }),
                         if (Cache.audioFile!!.length().toInt() == 0) {

@@ -32,7 +32,7 @@ class RankingPresenter(private val rankingService: IRankingService, private val 
     }
 
     override fun getRanking() {
-        mView?.showProgressBar()
+        //mView?.showProgressBar()
         rankingService.getRanking().subscribe(object : Observer<RankingResponse> {
             override fun onComplete() {
                 mView?.hideProgressBar()
@@ -53,7 +53,6 @@ class RankingPresenter(private val rankingService: IRankingService, private val 
                 Toast.makeText(mContext, ExceptionHandler.getMessage(e, mContext), Toast.LENGTH_LONG).show()
                 mView?.hideProgressBar()
             }
-
         })
     }
 }
