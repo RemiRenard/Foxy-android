@@ -103,4 +103,7 @@
     <string name="No_points">No points</string>
     <string name="Unranked">Unranked</string>
     <string name="tutorial_send_song">To send a song to your friend, choose a song in the list or record your own voice.</string>
+    <string name="Time_to_upgrade">Time to upgrade</string>
+    <string name="Upgrade">Upgrade</string>
+    <string name="upgrade_long_text">Your current version is no longer supported. Please update the app to enjoy new features.</string>
 </resources>

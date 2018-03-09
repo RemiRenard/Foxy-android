@@ -1,15 +1,17 @@
 package com.foxyApp.foxy.dagger
 
-import dagger.Module
-import dagger.Provides
 import com.foxyApp.domain.services.friend.FriendService
 import com.foxyApp.domain.services.friend.IFriendService
+import com.foxyApp.domain.services.global.GlobalService
+import com.foxyApp.domain.services.global.IGlobalService
 import com.foxyApp.domain.services.notification.INotificationService
 import com.foxyApp.domain.services.notification.NotificationService
 import com.foxyApp.domain.services.ranking.IRankingService
 import com.foxyApp.domain.services.ranking.RankingService
 import com.foxyApp.domain.services.user.IUserService
 import com.foxyApp.domain.services.user.UserService
+import dagger.Module
+import dagger.Provides
 import javax.inject.Singleton
 
 /**
@@ -17,6 +19,10 @@ import javax.inject.Singleton
  */
 @Module
 class ServiceModule {
+
+    @Singleton
+    @Provides
+    fun provideGlobalService(): IGlobalService = GlobalService()
 
     @Singleton
     @Provides
@@ -32,5 +38,5 @@ class ServiceModule {
 
     @Singleton
     @Provides
-    fun provideRankingervice(): IRankingService = RankingService()
+    fun provideRankingService(): IRankingService = RankingService()
 }

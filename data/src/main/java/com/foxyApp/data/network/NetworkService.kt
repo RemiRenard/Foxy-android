@@ -1,10 +1,7 @@
 package com.foxyApp.data.network
 
 import com.foxyApp.data.Constants
-import com.foxyApp.data.model.Achievement
-import com.foxyApp.data.model.Notification
-import com.foxyApp.data.model.Song
-import com.foxyApp.data.model.User
+import com.foxyApp.data.model.*
 import com.foxyApp.data.network.apiRequest.*
 import com.foxyApp.data.network.apiResponse.ConnectResponse
 import com.foxyApp.data.network.apiResponse.FriendsRequestsResponse
@@ -18,6 +15,10 @@ import retrofit2.http.*
  * Retrofit network service. Contains all the endpoints.
  */
 interface NetworkService {
+
+    // GLOBAL SECTION
+    @GET("config")
+    fun getConfig(): Observable<Config>
 
     // USER SECTION
     @POST("user/create-account")

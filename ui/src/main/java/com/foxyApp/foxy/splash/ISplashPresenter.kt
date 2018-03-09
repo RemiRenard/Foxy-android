@@ -10,4 +10,6 @@ interface ISplashPresenter : IPresenter<ISplashView> {
     fun setSessionToken()
 
     fun getSessionToken(): String
+
+    fun checkConfig()
 }

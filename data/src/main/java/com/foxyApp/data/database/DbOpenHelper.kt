@@ -40,6 +40,6 @@ class DbOpenHelper
     companion object {
 
         private val DATABASE_NAME = "database.db"
-        private val VERSION = 2
+        private val VERSION = 1
     }
 }

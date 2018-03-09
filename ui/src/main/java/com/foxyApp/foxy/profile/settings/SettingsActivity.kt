@@ -78,7 +78,6 @@ class SettingsActivity : BaseActivity(), ISettingsView {
                             R.anim.activity_close_enter, R.anim.activity_close_exit)
                     .show("http://play.google.com/store/apps/details?id=" + this.packageName)
         }
-
     }
 
     @OnClick(R.id.settings_terms_and_conditions)

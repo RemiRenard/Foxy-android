@@ -102,4 +102,6 @@
     <string name="No_points">Pas de points</string>
     <string name="Unranked">Non classé</string>
     <string name="tutorial_send_song">Pour envoyer un son à un ami, choisi un son dans la liste ou enregistre ta voix.</string>
+    <string name="Time_to_upgrade">Mise à jour requise</string>
+    <string name="upgrade_long_text">Votre version actuelle n\'est plus prise en charge. Veuillez mettre à jour l\'application pour bénéficier de nouvelles fonctionnalités.</string>
 </resources>

@@ -3,22 +3,26 @@ package com.foxyApp.foxy.splash
 import android.graphics.Typeface
 import android.os.Bundle
 import android.os.Handler
-import android.support.v7.app.AppCompatActivity
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
+import com.foxyApp.foxy.BaseActivity
 import com.foxyApp.foxy.FoxyApp
 import com.foxyApp.foxy.R
 import com.foxyApp.foxy.connect.ConnectActivity
 import com.foxyApp.foxy.custom.CustomCircle
 import com.foxyApp.foxy.main.MainActivity
 import com.foxyApp.foxy.splash.dagger.SplashModule
+import com.foxyApp.foxy.update.ForceUpdateActivity
 import javax.inject.Inject
 
-class SplashActivity : AppCompatActivity(), ISplashView {
+class SplashActivity : BaseActivity(), ISplashView {
+
+    private var mIsVersionCorrect = false
+    private var mIsAnimationCompleted = false
 
     @BindView(R.id.splash_gradient)
     lateinit var mGradient: CustomCircle
@@ -44,6 +48,7 @@ class SplashActivity : AppCompatActivity(), ISplashView {
         FoxyApp.get(this).getAppComponent()?.plus(SplashModule())?.inject(this)
         mPresenter.setSessionToken()
         mPresenter.attachView(this)
+        mPresenter.checkConfig()
         startFirstAnimation()
     }
 
@@ -109,12 +114,8 @@ class SplashActivity : AppCompatActivity(), ISplashView {
 
             override fun onAnimationEnd(animation: Animation) {
                 Handler().postDelayed({
-                    if (!mPresenter.getSessionToken().isEmpty()) {
-                        startActivity(MainActivity.getStartingIntent(this@SplashActivity, false))
-                    } else {
-                        startActivity(ConnectActivity.getStartingIntent(this@SplashActivity))
-                    }
-                    finish()
+                    mIsAnimationCompleted = true
+                    manageNextScreen()
                 }, 1000)
             }
 
@@ -123,5 +124,29 @@ class SplashActivity : AppCompatActivity(), ISplashView {
             }
         })
         mLogo.startAnimation(increaseSize)
+    }
+
+    private fun manageNextScreen() {
+        if (mIsVersionCorrect && mIsAnimationCompleted) {
+            if (!mPresenter.getSessionToken().isEmpty()) {
+                startActivity(MainActivity.getStartingIntent(this@SplashActivity, false))
+            } else {
+                startActivity(ConnectActivity.getStartingIntent(this@SplashActivity))
+            }
+            finish()
+        } else if (!mIsVersionCorrect && mIsAnimationCompleted) {
+            startActivity(ForceUpdateActivity.getStartingIntent(this@SplashActivity))
+            finish()
+        }
+    }
+
+    override fun forceUpdate(isVersionCorrect: Boolean) {
+        mIsVersionCorrect = isVersionCorrect
+        manageNextScreen()
+    }
+
+    override fun onDestroy() {
+        mPresenter.detachView()
+        super.onDestroy()
     }
 }
