@@ -3,11 +3,6 @@ package com.foxyApp.foxy.connect
 import android.content.Context
 import android.widget.Toast
 import com.facebook.login.LoginResult
-import com.google.firebase.iid.FirebaseInstanceId
-import io.reactivex.Observer
-import io.reactivex.annotations.NonNull
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
 import com.foxyApp.data.Constants
 import com.foxyApp.data.network.ExceptionHandler
 import com.foxyApp.data.network.apiResponse.ConnectResponse
@@ -16,6 +11,11 @@ import com.foxyApp.domain.services.user.IUserService
 import com.foxyApp.foxy.R
 import com.foxyApp.foxy.connect.dagger.ConnectScope
 import com.foxyApp.foxy.eventBus.ConnectStepCompleteEvent
+import com.google.firebase.iid.FirebaseInstanceId
+import io.reactivex.Observer
+import io.reactivex.annotations.NonNull
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
 import org.greenrobot.eventbus.EventBus
 import java.util.*
 

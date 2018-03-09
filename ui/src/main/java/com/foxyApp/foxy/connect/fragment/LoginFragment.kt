@@ -64,19 +64,10 @@ class LoginFragment : Fragment(), IConnectView {
         ButterKnife.bind(this, mView!!)
         // Register this target with dagger.
         FoxyApp.get(context!!).getAppComponent()?.plus(ConnectModule())?.inject(this)
+        mPresenter.attachView(this)
         setFonts()
         initFacebookLogin()
         return mView
-    }
-
-    override fun onResume() {
-        super.onResume()
-        mPresenter.attachView(this)
-    }
-
-    override fun onPause() {
-        mPresenter.detachView()
-        super.onPause()
     }
 
     private fun initFacebookLogin() {
@@ -150,5 +141,10 @@ class LoginFragment : Fragment(), IConnectView {
         mForgotPassword.typeface = standard
         mEmail.typeface = standard
         mPassword.typeface = standard
+    }
+
+    override fun onDestroyView() {
+        mPresenter.detachView()
+        super.onDestroyView()
     }
 }
