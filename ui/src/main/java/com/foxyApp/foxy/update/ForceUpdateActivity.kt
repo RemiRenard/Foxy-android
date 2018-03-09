@@ -26,13 +26,13 @@ class ForceUpdateActivity : BaseActivity() {
         goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY or Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
         try {
             startActivity(goToMarket)
+            finish()
         } catch (e: ActivityNotFoundException) {
             FinestWebView.Builder(this)
                     .setCustomAnimations(R.anim.activity_open_enter, R.anim.activity_open_exit,
                             R.anim.activity_close_enter, R.anim.activity_close_exit)
                     .show("http://play.google.com/store/apps/details?id=" + this.packageName)
         }
-        finish()
     }
 
     companion object {
