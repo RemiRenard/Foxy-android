@@ -8,9 +8,9 @@ import com.foxyApp.data.cache.Cache
 import com.foxyApp.data.database.table.TableUser
 import com.foxyApp.data.model.Stats
 import com.foxyApp.data.model.User
+import com.foxyApp.data.network.apiRequest.*
 import com.foxyApp.data.network.apiResponse.ConnectResponse
 import com.foxyApp.data.network.apiResponse.SimpleSuccessResponse
-import com.foxyApp.data.network.apiRequest.*
 import com.foxyApp.domain.eventBus.NetworkErrorEvent
 import com.google.gson.Gson
 import io.reactivex.Observable
@@ -31,10 +31,13 @@ class UserService : IUserService {
      * Return an observable linked to an endpoint of the api to create an account
      */
     override fun createAccount(email: String, password: String, firstName: String, lastName: String,
-                               username: String, birthday: Date, deviceId: String): Observable<ConnectResponse> {
-        return Data.networkService!!
-                .createAccount(CreateAccountRequest(email, password, firstName, lastName, username,
-                        birthday, deviceId))
+                               username: String, birthday: Date): Observable<ConnectResponse> {
+        return Observable.just(Constants.GCM)
+                .flatMap {
+                    Data.networkService!!
+                            .createAccount(CreateAccountRequest(email, password, firstName, lastName, username,
+                                    birthday, it))
+                }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
     }
@@ -42,9 +45,12 @@ class UserService : IUserService {
     /**
      * Return an observable linked to an endpoint of the api to login
      */
-    override fun login(email: String, password: String, deviceId: String): Observable<ConnectResponse> {
-        return Data.networkService!!
-                .login(ConnectRequest(email, password, deviceId))
+    override fun login(email: String, password: String): Observable<ConnectResponse> {
+        return Observable.just(Constants.GCM)
+                .flatMap {
+                    Data.networkService!!
+                            .login(ConnectRequest(email, password, it))
+                }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
     }
@@ -52,9 +58,12 @@ class UserService : IUserService {
     /**
      * Return an observable linked to an endpoint of the api to login with facebook
      */
-    override fun loginFacebook(facebookId: String, facebookToken: String, deviceId: String): Observable<ConnectResponse> {
-        return Data.networkService!!
-                .loginFacebook(ConnectWithFacebookRequest(facebookId, facebookToken, deviceId))
+    override fun loginFacebook(facebookId: String, facebookToken: String): Observable<ConnectResponse> {
+        return Observable.just(Constants.GCM)
+                .flatMap {
+                    Data.networkService!!
+                            .loginFacebook(ConnectWithFacebookRequest(facebookId, facebookToken, it))
+                }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
     }

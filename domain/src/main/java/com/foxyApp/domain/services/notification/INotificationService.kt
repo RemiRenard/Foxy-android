@@ -11,8 +11,6 @@ import java.io.File
  */
 interface INotificationService {
 
-    fun getTokenOnIoThread(): Observable<String>
-
     fun sendNotification(userIds: List<String>): Observable<SimpleSuccessResponse>
 
     fun getNotifications(forceNetworkRefresh: Boolean): Observable<List<Notification>>

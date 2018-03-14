@@ -14,11 +14,11 @@ import java.util.*
 interface IUserService {
 
     fun createAccount(email: String, password: String, firstName: String, lastName: String,
-                      username: String, birthday: Date, deviceId: String): Observable<ConnectResponse>
+                      username: String, birthday: Date): Observable<ConnectResponse>
 
-    fun login(email: String, password: String, deviceId: String): Observable<ConnectResponse>
+    fun login(email: String, password: String): Observable<ConnectResponse>
 
-    fun loginFacebook(facebookId: String, facebookToken: String, deviceId: String): Observable<ConnectResponse>
+    fun loginFacebook(facebookId: String, facebookToken: String): Observable<ConnectResponse>
 
     fun logout(context: Context): Observable<SimpleSuccessResponse>
 

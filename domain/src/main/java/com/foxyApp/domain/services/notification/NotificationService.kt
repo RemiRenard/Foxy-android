@@ -30,12 +30,6 @@ class NotificationService : INotificationService {
     private var mNotifications = ArrayList<Notification>()
     private var mSongs = ArrayList<Song>()
 
-    override fun getTokenOnIoThread(): Observable<String> {
-        return Observable.just(Constants.GCM)
-                .subscribeOn(Schedulers.io())
-                .onErrorReturn { throwable -> throwable.message as String }
-    }
-
     /**
      * Get the list of notification from the database first and when notifications from the network are fetched,
      * the list of notification is up to date.
