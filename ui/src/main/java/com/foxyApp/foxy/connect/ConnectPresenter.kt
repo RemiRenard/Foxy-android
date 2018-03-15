@@ -5,7 +5,6 @@ import android.widget.Toast
 import com.facebook.login.LoginResult
 import com.foxyApp.data.network.ExceptionHandler
 import com.foxyApp.data.network.apiResponse.ConnectResponse
-import com.foxyApp.domain.services.notification.INotificationService
 import com.foxyApp.domain.services.user.IUserService
 import com.foxyApp.foxy.R
 import com.foxyApp.foxy.connect.dagger.ConnectScope
@@ -21,12 +20,10 @@ import java.util.*
  * Connect presenter
  */
 @ConnectScope
-class ConnectPresenter(private val mContext: Context, private val mUserService: IUserService,
-                       private val mNotificationService: INotificationService) : IConnectPresenter {
+class ConnectPresenter(private val mContext: Context, private val mUserService: IUserService) : IConnectPresenter {
 
     private var mView: IConnectView? = null
     private var mToken: String? = null
-    private var mDeviceId: String? = null
     private val mCompositeDisposable = CompositeDisposable()
 
     override fun attachView(view: IConnectView) {
