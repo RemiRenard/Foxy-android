@@ -33,7 +33,7 @@ class AddFriendsAdapter(val mContext: Context) : RecyclerView.Adapter<AddFriends
             holder.itemView?.item_add_friends_avatar?.setImageResource(R.drawable.ic_placeholder_male)
         } else {
             Glide.with(mContext).load(mUsers[position].avatar).apply(RequestOptions
-                    .placeholderOf(R.drawable.ic_placeholder_circle_gray))
+                    .placeholderOf(R.drawable.ic_placeholder_circle_blue))
                     .into(holder.itemView?.item_add_friends_avatar)
         }
     }

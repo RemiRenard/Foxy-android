@@ -31,7 +31,7 @@ class RankingAdapter(val mContext: Context) : RecyclerView.Adapter<RankingAdapte
                     .load(mUserRanks[position].avatar)
                     .apply(RequestOptions()
                             .circleCrop()
-                            .placeholder(R.drawable.ic_placeholder_circle_gray))
+                            .placeholder(R.drawable.ic_placeholder_circle_blue))
                     .into(holder.itemView?.item_ranking_avatar)
         }
         holder.itemView?.item_ranking_score?.text = mUserRanks[position].score.toString()

@@ -1,6 +1,7 @@
 package com.foxyApp.foxy.splash
 
 import android.content.Context
+import android.util.Log
 import com.foxyApp.data.Constants
 import com.foxyApp.data.model.Config
 import com.foxyApp.domain.services.global.IGlobalService
@@ -48,6 +49,7 @@ class SplashPresenter(private val mUserService: IUserService, private val mGloba
             }
 
             override fun onNext(config: Config) {
+                Log.i("test", config.minAndroidVersion.toString())
                 mView?.forceUpdate(BuildConfig.VERSION_CODE >= config.minAndroidVersion!!)
             }
 

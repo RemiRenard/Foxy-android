@@ -106,4 +106,5 @@
     <string name="Time_to_upgrade">Time to upgrade</string>
     <string name="Upgrade">Upgrade</string>
     <string name="upgrade_long_text">Your current version is no longer supported. Please update the app to enjoy new features.</string>
+    <string name="We_are_checking_the_version">We are checking the version of the app…</string>
 </resources>

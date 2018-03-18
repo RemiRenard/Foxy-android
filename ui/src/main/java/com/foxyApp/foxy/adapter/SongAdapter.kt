@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.foxyApp.data.model.Song
 import com.foxyApp.foxy.R
 import com.foxyApp.foxy.eventBus.SongSelectedNotifEvent
@@ -41,7 +42,9 @@ class SongAdapter(private val mContext: Context) : RecyclerView.Adapter<SongAdap
             holder.itemView.item_song_text_view.setTextColor(Color.GRAY)
             holder.itemView.item_song_text_view.setTypeface(null, Typeface.NORMAL)
         }
-        Glide.with(mContext).asGif().load(mSongs[position].picture).into(holder.itemView.item_song_image_view)
+        Glide.with(mContext).asGif().load(mSongs[position].picture).apply(RequestOptions
+                .placeholderOf(R.drawable.ic_placeholder_square_blue))
+                .into(holder.itemView.item_song_image_view)
         holder.itemView.item_song_text_view.text = mSongs[position].name
         holder.itemView.setOnClickListener {
             mSongSelected = if (mSongSelected == mSongs[position]) {

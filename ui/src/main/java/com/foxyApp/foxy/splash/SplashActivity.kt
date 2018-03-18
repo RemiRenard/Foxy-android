@@ -7,6 +7,7 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.foxyApp.foxy.BaseActivity
@@ -23,6 +24,7 @@ class SplashActivity : BaseActivity(), ISplashView {
 
     private var mIsVersionCorrect = false
     private var mIsAnimationCompleted = false
+    private var mNetworkCallCompleted = false
 
     @BindView(R.id.splash_gradient)
     lateinit var mGradient: CustomCircle
@@ -87,7 +89,7 @@ class SplashActivity : BaseActivity(), ISplashView {
      */
     private fun startSecondAnimation() {
         val decreaseSize = AnimationUtils.loadAnimation(this@SplashActivity, R.anim.scale1to08)
-        decreaseSize.duration = 100
+        decreaseSize.duration = 300
         decreaseSize.setAnimationListener(object : Animation.AnimationListener {
             override fun onAnimationStart(animation: Animation) {
                 mGradient.startAnimation(mLogo.left + mLogo.width / 2, mLogo.top + mLogo.height / 2,
@@ -108,7 +110,7 @@ class SplashActivity : BaseActivity(), ISplashView {
      */
     private fun startLastAnimation() {
         val increaseSize = AnimationUtils.loadAnimation(this@SplashActivity, R.anim.scale08to1)
-        increaseSize.duration = 100
+        increaseSize.duration = 300
         increaseSize.setAnimationListener(object : Animation.AnimationListener {
             override fun onAnimationStart(animation: Animation) {}
 
@@ -134,13 +136,16 @@ class SplashActivity : BaseActivity(), ISplashView {
                 startActivity(ConnectActivity.getStartingIntent(this@SplashActivity))
             }
             finish()
-        } else if (!mIsVersionCorrect && mIsAnimationCompleted) {
+        } else if (!mIsVersionCorrect && mIsAnimationCompleted && mNetworkCallCompleted) {
             startActivity(ForceUpdateActivity.getStartingIntent(this@SplashActivity))
             finish()
+        } else if (!mNetworkCallCompleted) {
+            Toast.makeText(this, R.string.We_are_checking_the_version, Toast.LENGTH_LONG).show()
         }
     }
 
     override fun forceUpdate(isVersionCorrect: Boolean) {
+        mNetworkCallCompleted = true
         mIsVersionCorrect = isVersionCorrect
         manageNextScreen()
     }
