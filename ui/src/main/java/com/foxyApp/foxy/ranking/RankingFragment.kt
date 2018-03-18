@@ -76,7 +76,6 @@ class RankingFragment : Fragment(), IRankingView {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onRefreshRankingSwiped(event: RefreshRankingSwiped) {
-        Log.i("test", "here")
         mPresenter.getRanking()
     }
 

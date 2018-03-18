@@ -49,7 +49,6 @@ class SplashPresenter(private val mUserService: IUserService, private val mGloba
             }
 
             override fun onNext(config: Config) {
-                Log.i("test", config.minAndroidVersion.toString())
                 mView?.forceUpdate(BuildConfig.VERSION_CODE >= config.minAndroidVersion!!)
             }
 

@@ -105,4 +105,5 @@
     <string name="Time_to_upgrade">Mise à jour requise</string>
     <string name="upgrade_long_text">Votre version actuelle n\'est plus prise en charge. Veuillez mettre à jour l\'application pour bénéficier de nouvelles fonctionnalités.</string>
     <string name="We_are_checking_the_version">Nous regardons si une mise à jour est nécessaire…</string>
+    <string name="Upgrade">Mise à jour</string>
 </resources>

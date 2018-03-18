@@ -2,10 +2,6 @@ package com.foxyApp.foxy.friends.add
 
 import android.content.Context
 import android.widget.Toast
-import io.reactivex.Observer
-import io.reactivex.annotations.NonNull
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
 import com.foxyApp.data.model.User
 import com.foxyApp.data.network.ExceptionHandler
 import com.foxyApp.data.network.apiResponse.SimpleSuccessResponse
@@ -13,6 +9,10 @@ import com.foxyApp.domain.services.friend.IFriendService
 import com.foxyApp.domain.services.user.IUserService
 import com.foxyApp.foxy.R
 import com.foxyApp.foxy.profile.dagger.ProfileScope
+import io.reactivex.Observer
+import io.reactivex.annotations.NonNull
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
 
 /**
  * AddFriends presenter
@@ -36,6 +36,7 @@ class AddFriendsPresenter(private val mUserService: IUserService, private val mF
     }
 
     override fun findUsers(username: String) {
+        if (username.isBlank()) return
         mView?.showProgressBar()
         //@TODO pagination with the skip
         mUserService.findUsers(username, mLimit, 0).subscribe(object : Observer<List<User>> {

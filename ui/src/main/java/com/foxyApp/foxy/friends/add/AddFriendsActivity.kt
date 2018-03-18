@@ -7,14 +7,12 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.OnClick
-import com.jakewharton.rxbinding2.widget.RxTextView
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import com.foxyApp.data.model.User
 import com.foxyApp.foxy.BaseActivity
 import com.foxyApp.foxy.FoxyApp
@@ -22,6 +20,9 @@ import com.foxyApp.foxy.R
 import com.foxyApp.foxy.adapter.AddFriendsAdapter
 import com.foxyApp.foxy.eventBus.AddFriendsIconClickedEvent
 import com.foxyApp.foxy.friends.dagger.FriendsModule
+import com.jakewharton.rxbinding2.widget.RxTextView
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -35,6 +36,9 @@ class AddFriendsActivity : BaseActivity(), IAddFriendsView {
 
     @BindView(R.id.add_friends_recycler_view)
     lateinit var mRecyclerView: RecyclerView
+
+    @BindView(R.id.add_friends_shaking_hands)
+    lateinit var mShakingHands: ImageView
 
     @BindView(R.id.add_friends_progress_bar)
     lateinit var mProgressBar: ProgressBar
@@ -67,8 +71,11 @@ class AddFriendsActivity : BaseActivity(), IAddFriendsView {
                 .map { it.toString() } //charSequence to String
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .onErrorReturn { "" }
-                .subscribe { mPresenter.findUsers(it) }
+                .onErrorReturn { String() }
+                .subscribe {
+                    if (!it.isBlank()) mShakingHands.visibility = View.GONE
+                    mPresenter.findUsers(it)
+                }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
