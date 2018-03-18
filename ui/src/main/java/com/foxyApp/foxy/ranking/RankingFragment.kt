@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.view.ViewPager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,10 +20,14 @@ import com.bumptech.glide.request.RequestOptions
 import com.foxyApp.data.model.UserRank
 import com.foxyApp.foxy.FoxyApp
 import com.foxyApp.foxy.R
+import com.foxyApp.foxy.eventBus.RefreshRankingSwiped
 import com.foxyApp.foxy.ranking.dagger.RankingModule
 import com.foxyApp.foxy.ranking.subFragment.RankingDailyFragment
 import com.foxyApp.foxy.ranking.subFragment.RankingGlobalFragment
 import com.foxyApp.foxy.ranking.subFragment.RankingWeeklyFragment
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import javax.inject.Inject
 
 class RankingFragment : Fragment(), IRankingView {
@@ -64,8 +69,15 @@ class RankingFragment : Fragment(), IRankingView {
         mViewPager.offscreenPageLimit = mNbItem
         mTabLayout.setupWithViewPager(mViewPager)
         mPresenter.attachView(this)
+        EventBus.getDefault().register(this)
         mPresenter.getRanking()
         return mView
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onRefreshRankingSwiped(event: RefreshRankingSwiped) {
+        Log.i("test", "here")
+        mPresenter.getRanking()
     }
 
     override fun showCurrentUserData(currentUserData: UserRank) {
@@ -139,6 +151,7 @@ class RankingFragment : Fragment(), IRankingView {
     }
 
     override fun onDestroyView() {
+        EventBus.getDefault().unregister(this)
         mPresenter.detachView()
         super.onDestroyView()
     }

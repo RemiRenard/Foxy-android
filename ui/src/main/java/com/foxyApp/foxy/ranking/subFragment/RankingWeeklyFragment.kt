@@ -15,6 +15,7 @@ import com.foxyApp.foxy.R
 import com.foxyApp.foxy.adapter.RankingAdapter
 import com.foxyApp.foxy.custom.SimpleDividerItemDecoration
 import com.foxyApp.foxy.eventBus.RankingCompleteEvent
+import com.foxyApp.foxy.eventBus.RefreshRankingSwiped
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -42,7 +43,7 @@ class RankingWeeklyFragment : Fragment() {
         initRecyclerView()
         EventBus.getDefault().register(this)
         mSwipeRefresh.setOnRefreshListener {
-            // @TODO SEND EVENTBUS
+            EventBus.getDefault().post(RefreshRankingSwiped())
             mSwipeRefresh.isRefreshing = false
         }
         return mView
