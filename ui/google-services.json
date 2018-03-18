@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:780116430355:android:9c8a53369a372544",
         "android_client_info": {
-          "package_name": "com.foxyApp.foxy"
+          "package_name": "org.foxy.foxy"
         }
       },
       "oauth_client": [
@@ -21,7 +21,38 @@
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCceqYLQ-JhZ01LIAEt39DE6qYw-707zJ4"
+          "current_key": "AIzaSyBANeQk89vJgL3yIpBKEL-oj0Uc_xgQoBg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:780116430355:android:b81e6fb23a2e5b3a",
+        "android_client_info": {
+          "package_name": "com.app.foxy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "780116430355-fu25arog2fb6ppblt8ujrp8ti4hs2bfl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBANeQk89vJgL3yIpBKEL-oj0Uc_xgQoBg"
         }
       ],
       "services": {
