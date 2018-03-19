@@ -7,6 +7,7 @@ import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.Bundle
+import android.support.design.widget.FloatingActionButton
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.content.ContextCompat
@@ -28,6 +29,8 @@ import com.app.foxy.notification.NotificationFragment
 import com.app.foxy.notification.add.AddNotificationActivity
 import com.app.foxy.profile.ProfileFragment
 import com.app.foxy.ranking.RankingFragment
+import com.getkeepsafe.taptargetview.TapTarget
+import com.getkeepsafe.taptargetview.TapTargetSequence
 import org.greenrobot.eventbus.EventBus
 import javax.inject.Inject
 
@@ -40,6 +43,12 @@ class MainActivity : BaseActivity(), IMainView {
     private var mFragmentManager: FragmentManager? = null
     private var mIsNewNotification: Boolean = false
     private var mCurrentViewId: Int = 0
+
+    @BindView(R.id.notif_send_button)
+    lateinit var mSendNotifButton: FloatingActionButton
+
+    @BindView(R.id.navigation_friends)
+    lateinit var mFriendsNav: ImageView
 
     @BindView(R.id.bottom_bar)
     lateinit var mBottomBarLayout: LinearLayout
@@ -66,6 +75,34 @@ class MainActivity : BaseActivity(), IMainView {
         }
         manageColorBottomBar(mNavigationNotification)
         manageFragment()
+        showTutorial()
+    }
+
+    /**
+     * Show the tutorial.
+     */
+    private fun showTutorial() {
+        TapTargetSequence(this).targets(
+                TapTarget.forView(mSendNotifButton,
+                        getString(R.string.tuto_btn_send_notif), getString(R.string.tuto_btn_send_notif_desc))
+                        .transparentTarget(true)
+                        .outerCircleColor(android.R.color.white)
+                        .textColor(R.color.colorPrimary)
+                        .targetRadius(25)
+                        .targetCircleColor(R.color.colorPrimaryDark)
+        ).listener(object : TapTargetSequence.Listener {
+            override fun onSequenceCanceled(lastTarget: TapTarget?) {
+                // Dp nothing.
+            }
+
+            override fun onSequenceFinish() {
+                // Do nothing for now.
+            }
+
+            override fun onSequenceStep(lastTarget: TapTarget?, targetClicked: Boolean) {
+                // Do nothing.
+            }
+        }).start()
     }
 
     @OnClick(R.id.notif_send_button)

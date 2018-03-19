@@ -5,17 +5,18 @@ import android.graphics.Color
 import android.graphics.Typeface
 import android.media.MediaPlayer
 import android.net.Uri
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.app.data.model.Song
 import com.app.foxy.R
 import com.app.foxy.eventBus.SongSelectedNotifEvent
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.item_song.view.*
 import org.greenrobot.eventbus.EventBus
 import java.io.IOException
@@ -37,9 +38,11 @@ class SongAdapter(private val mContext: Context) : RecyclerView.Adapter<SongAdap
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         if (mSongSelected == mSongs[position]) {
             holder.itemView.item_song_text_view.setTextColor(Color.BLACK)
+            holder.itemView.setBackgroundColor(Color.WHITE)
             holder.itemView.item_song_text_view.setTypeface(null, Typeface.BOLD)
         } else {
             holder.itemView.item_song_text_view.setTextColor(Color.GRAY)
+            holder.itemView.setBackgroundColor(ContextCompat.getColor(mContext, R.color.colorWhiteTransparent))
             holder.itemView.item_song_text_view.setTypeface(null, Typeface.NORMAL)
         }
         Glide.with(mContext).asGif().load(mSongs[position].picture).apply(RequestOptions

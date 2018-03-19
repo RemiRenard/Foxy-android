@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorWhite"
     android:focusable="true"
-    android:focusableInTouchMode="true"
-    tools:context="com.app.foxy.notification.add.AddNotificationActivity">
+    android:focusableInTouchMode="true">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/night_mountain" />
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar_layout"
@@ -43,6 +46,14 @@
                 android:textAllCaps="true"
                 android:textColor="@android:color/white"
                 android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/toolbar_record"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:padding="16dp"
+                android:src="@drawable/ic_micro_white" />
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
 
@@ -61,8 +72,8 @@
         android:maxLength="40"
         android:padding="8dp"
         android:paddingTop="8dp"
-        android:textColor="@android:color/black"
-        android:textColorHint="@color/colorAccent"
+        android:textColor="@android:color/white"
+        android:textColorHint="@android:color/white"
         android:textSize="14sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -78,7 +89,7 @@
         android:padding="4dp"
         android:text="@string/tutorial_send_song"
         android:textAlignment="center"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@android:color/white"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/add_notification_message" />
@@ -89,6 +100,7 @@
         android:layout_height="48dp"
         android:layout_marginTop="4dp"
         android:src="@drawable/ic_micro_not_recording"
+        android:visibility="gone"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/add_notification_play_audio"
@@ -109,15 +121,10 @@
     <Button
         android:id="@+id/add_notification_button_next"
         android:layout_width="0dp"
-        android:layout_height="45dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/bg_dark_blue_rect_oval_border"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
         android:text="@string/Next"
-        android:textAllCaps="false"
-        android:textColor="@color/colorDarkBlue"
+        android:textColor="@android:color/white"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
