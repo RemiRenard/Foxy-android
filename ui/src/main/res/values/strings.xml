@@ -89,7 +89,6 @@
     <string name="Edit_my_profile">Edit my profile</string>
     <string name="See_more_stats">See more stats</string>
     <string name="See_less_stats">See less stats</string>
-    <string name="stop_audio_first">An other notification sound is playing. Please stop it before playing an other one.</string>
     <string name="user_time">%1$s at %2$s</string>
     <string name="Message">Message (optional)</string>
     <string name="Top_songs_played">Top song played</string>
@@ -102,7 +101,6 @@
     <string name="Rate_the_app">Rate the app</string>
     <string name="No_points">No points</string>
     <string name="Unranked">Unranked</string>
-    <string name="tutorial_send_song">To send a song to your friend, choose a song in the list or record your own voice.</string>
     <string name="Time_to_upgrade">Time to upgrade</string>
     <string name="Upgrade">Upgrade</string>
     <string name="upgrade_long_text">Your current version is no longer supported. Please update the app to enjoy new features.</string>
@@ -111,8 +109,8 @@
     <string name="tuto_btn_send_notif_desc">First of all, you should add friends.</string>
     <string name="tuto_btn_record_your_own_voice">Or record your own voice !</string>
     <string name="tuto_btn_record_your_own_voice_desc">Your friends will receive this song as a notification. (Tap to the button to hide this message)</string>
-    <string name="tuto_list_songs">Select a song in the list by typing to an item of the list.</string>
-    <string name="tuto_list_songs_desc">Your friends will receive this song as a notification. (Tap to the white area to hide this message)</string>
+    <string name="tuto_list_songs">Select a sound by pressing and holding the item, you can play the song by clicking to the "play button".</string>
+    <string name="tuto_list_songs_desc">Your friends will receive this song as a notification. (Tap to the area to hide this message)</string>
     <string name="tuto_add_message">You can add a simple message.</string>
     <string name="tuto_add_message_desc">Your friend will receive it as a message. (Tap to the white area to hide this message)</string>
 </resources>

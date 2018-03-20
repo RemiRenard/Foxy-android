@@ -1,4 +1,4 @@
-package com.app.foxy.notification.add
+package com.app.foxy.notification.selectSong
 
 import android.Manifest
 import android.content.Context
@@ -11,11 +11,10 @@ import android.os.Bundle
 import android.provider.Settings
 import android.support.design.widget.Snackbar
 import android.support.v4.app.ActivityCompat
-import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.Button
-import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import butterknife.BindView
@@ -28,7 +27,7 @@ import com.app.foxy.BuildConfig
 import com.app.foxy.FoxyApp
 import com.app.foxy.R
 import com.app.foxy.adapter.SongAdapter
-import com.app.foxy.custom.SimpleDividerItemDecoration
+import com.app.foxy.custom.SpacesItemDecoration
 import com.app.foxy.eventBus.SongSelectedNotifEvent
 import com.app.foxy.notification.dagger.NotificationModule
 import com.app.foxy.notification.selectFriends.SelectFriendsActivity
@@ -40,9 +39,9 @@ import java.io.File
 import javax.inject.Inject
 
 /**
- * AddNotificationActivity class.
+ * SelectSongActivity class.
  */
-class AddNotificationActivity : BaseActivity(), IAddNotificationView {
+class SelectSongActivity : BaseActivity(), ISelectSongView {
 
     private var mRecorder: MediaRecorder? = null
     private var mPlayer: MediaPlayer? = null
@@ -52,15 +51,6 @@ class AddNotificationActivity : BaseActivity(), IAddNotificationView {
     private var mIsPlaying: Boolean = false
     private var mIsFileRecorded = false
     private var mSongIdSelected: String = ""
-
-    @BindView(R.id.add_notification_message)
-    lateinit var mMessage: EditText
-
-    @BindView(R.id.add_notification_play_audio)
-    lateinit var mPlayAudio: ImageView
-
-    @BindView(R.id.add_notification_micro)
-    lateinit var mMicro: ImageView
 
     @BindView(R.id.add_notification_recycler_view)
     lateinit var mRecyclerView: RecyclerView
@@ -72,7 +62,7 @@ class AddNotificationActivity : BaseActivity(), IAddNotificationView {
     lateinit var mToolbarRecord: ImageView
 
     @Inject
-    lateinit var mPresenter: IAddNotificationPresenter
+    lateinit var mPresenter: ISelectSongPresenter
 
     @Inject
     lateinit var mSongAdapter: SongAdapter
@@ -85,8 +75,8 @@ class AddNotificationActivity : BaseActivity(), IAddNotificationView {
         // Register this target with dagger.
         FoxyApp.get(this).getAppComponent()?.plus(NotificationModule())?.inject(this)
         mRecyclerView.setHasFixedSize(true)
-        mRecyclerView.layoutManager = LinearLayoutManager(this)
-        mRecyclerView.addItemDecoration(SimpleDividerItemDecoration(this))
+        mRecyclerView.layoutManager = GridLayoutManager(this, 2)
+        mRecyclerView.addItemDecoration(SpacesItemDecoration(5))
         mRecyclerView.adapter = mSongAdapter
         mPresenter.attachView(this)
         mPresenter.getSongs(true)
@@ -106,14 +96,7 @@ class AddNotificationActivity : BaseActivity(), IAddNotificationView {
                         .outerCircleColor(R.color.colorPrimary)
                         .textColor(android.R.color.white)
                         .cancelable(false)
-                        .targetCircleColor(android.R.color.white),
-                TapTarget.forView(mMessage,
-                        getString(R.string.tuto_add_message),
-                        getString(R.string.tuto_add_message_desc))
-                        .outerCircleColor(R.color.colorPrimary)
-                        .textColor(android.R.color.white)
-                        .targetRadius(25)
-                        .cancelable(false)
+                        .transparentTarget(true)
                         .targetCircleColor(android.R.color.white),
                 TapTarget.forView(mToolbarRecord,
                         getString(R.string.tuto_btn_record_your_own_voice),
@@ -145,13 +128,7 @@ class AddNotificationActivity : BaseActivity(), IAddNotificationView {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onSongSelectedNotifUpdateEvent(event: SongSelectedNotifEvent) {
-        if (event.song.id != null) {
-            mSongIdSelected = event.song.id!!
-            mButtonNext.visibility = View.VISIBLE
-        } else if (!mIsFileRecorded) {
-            mSongIdSelected = ""
-            mButtonNext.visibility = View.GONE
-        }
+        mPresenter.saveTmpNotification(event.song.id!!)
     }
 
     @OnClick(R.id.toolbar_back)
@@ -161,10 +138,9 @@ class AddNotificationActivity : BaseActivity(), IAddNotificationView {
 
     @OnClick(R.id.add_notification_button_next)
     fun sendNotification() {
-        mPresenter.saveTmpNotification(mMessage.text.toString(), mSongIdSelected, "message", mAudioFile)
+        mPresenter.saveTmpNotification(mSongIdSelected)
     }
 
-    @OnClick(R.id.add_notification_play_audio)
     fun playAudioClicked() {
         if (!mIsPlaying) {
             startPlaying()
@@ -173,7 +149,6 @@ class AddNotificationActivity : BaseActivity(), IAddNotificationView {
         }
     }
 
-    @OnClick(R.id.add_notification_micro)
     fun startRecordClicked() {
         if (mIsPlaying)
             stopPlaying()
@@ -198,8 +173,8 @@ class AddNotificationActivity : BaseActivity(), IAddNotificationView {
     }
 
     private fun startRecordVoice() {
-        mMicro.setImageResource(R.drawable.ic_micro_recording)
-        mPlayAudio.visibility = View.GONE
+        //mMicro.setImageResource(R.drawable.ic_micro_recording)
+        //mPlayAudio.visibility = View.GONE
         mRecorder = MediaRecorder()
         mRecorder?.setAudioSource(MediaRecorder.AudioSource.MIC)
         mRecorder?.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
@@ -223,8 +198,8 @@ class AddNotificationActivity : BaseActivity(), IAddNotificationView {
         mRecorder?.release()
         mRecorder = null
         mIsRecording = false
-        mPlayAudio.visibility = View.VISIBLE
-        mMicro.setImageResource(R.drawable.ic_micro_not_recording)
+        //mPlayAudio.visibility = View.VISIBLE
+        //mMicro.setImageResource(R.drawable.ic_micro_not_recording)
     }
 
     private fun startPlaying() {
@@ -234,14 +209,14 @@ class AddNotificationActivity : BaseActivity(), IAddNotificationView {
         mPlayer?.prepare()
         mPlayer?.start()
         mPlayer?.setOnCompletionListener { stopPlaying() }
-        mPlayAudio.setImageResource(R.drawable.ic_speaker_off)
+        //mPlayAudio.setImageResource(R.drawable.ic_speaker_off)
     }
 
     private fun stopPlaying() {
         mPlayer?.release()
         mPlayer = null
         mIsPlaying = false
-        mPlayAudio.setImageResource(R.drawable.ic_speaker_on)
+        //mPlayAudio.setImageResource(R.drawable.ic_speaker_on)
     }
 
     /**
@@ -338,6 +313,6 @@ class AddNotificationActivity : BaseActivity(), IAddNotificationView {
          * @return Intent
          */
         fun getStartingIntent(callingContext: Context): Intent =
-                Intent(callingContext, AddNotificationActivity::class.java)
+                Intent(callingContext, SelectSongActivity::class.java)
     }
 }

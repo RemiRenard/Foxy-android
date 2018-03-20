@@ -46,6 +46,9 @@ public class ButtonRecord extends View {
         mPaintFillPrimary = new Paint();
         mPaintStrokeDark = new Paint();
         mPaintStrokeRed = new Paint();
+        mPaintFillPrimary.setAntiAlias(true);
+        mPaintStrokeDark.setAntiAlias(true);
+        mPaintStrokeRed.setAntiAlias(true);
         mPaintStrokeDark.setStyle(Paint.Style.STROKE);
         mPaintStrokeRed.setStyle(Paint.Style.STROKE);
         mPaintStrokeDark.setColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
@@ -92,6 +95,8 @@ public class ButtonRecord extends View {
                     @Override
                     public void onFinish() {
                         mTimer.cancel();
+                        initVariables();
+                        invalidate();
                         Toast.makeText(getContext(), "Completed", Toast.LENGTH_SHORT).show();
                     }
                 }.start();

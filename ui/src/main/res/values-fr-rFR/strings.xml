@@ -88,7 +88,6 @@
     <string name="Edit_my_profile">Editer mon profil</string>
     <string name="See_more_stats">Voir plus de stats</string>
     <string name="See_less_stats">Voir moins de stats</string>
-    <string name="stop_audio_first">Un autre son de notification est en cours de lecture. Veuillez l\'arrêter avant d\'en jouer un autre.</string>
     <string name="user_time">%1$s à %2$s</string>
     <string name="Message">Message (optionnel)</string>
     <string name="Top_songs_played">Sons les plus joués</string>
@@ -101,7 +100,6 @@
     <string name="Rate_the_app">Notez l\'application</string>
     <string name="No_points">Pas de points</string>
     <string name="Unranked">Non classé</string>
-    <string name="tutorial_send_song">Pour envoyer un son à un ami, choisi un son dans la liste ou enregistre ta voix.</string>
     <string name="Time_to_upgrade">Mise à jour requise</string>
     <string name="upgrade_long_text">Votre version actuelle n\'est plus prise en charge. Veuillez mettre à jour l\'application pour bénéficier de nouvelles fonctionnalités.</string>
     <string name="We_are_checking_the_version">Nous regardons si une mise à jour est nécessaire…</string>

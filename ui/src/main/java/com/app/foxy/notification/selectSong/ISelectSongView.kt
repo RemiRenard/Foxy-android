@@ -1,12 +1,12 @@
-package com.app.foxy.notification.add
+package com.app.foxy.notification.selectSong
 
 import com.app.data.model.Song
 import com.app.foxy.IView
 
 /**
- * Interface of the Add notification view.
+ * Interface of the SelectSong view.
  */
-interface IAddNotificationView : IView {
+interface ISelectSongView : IView {
 
     fun openFriendsActivity()
 

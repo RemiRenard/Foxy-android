@@ -1,8 +1,6 @@
 package com.app.foxy.adapter
 
 import android.content.Context
-import android.graphics.Color
-import android.graphics.Typeface
 import android.media.MediaPlayer
 import android.net.Uri
 import android.support.v4.content.ContextCompat
@@ -11,7 +9,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.app.data.model.Song
 import com.app.foxy.R
 import com.app.foxy.eventBus.SongSelectedNotifEvent
@@ -30,74 +27,82 @@ class SongAdapter(private val mContext: Context) : RecyclerView.Adapter<SongAdap
     private var mPlayer: MediaPlayer? = null
     private var mIsPlaying: Boolean = false
     private var mPositionPlaying: Int = -1
-    private var mSongSelected: Song? = null
+    private var mForceStopPosition: Int = -1
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder =
             ItemViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_song, parent, false))
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        if (mSongSelected == mSongs[position]) {
-            holder.itemView.item_song_text_view.setTextColor(Color.BLACK)
-            holder.itemView.setBackgroundColor(Color.WHITE)
-            holder.itemView.item_song_text_view.setTypeface(null, Typeface.BOLD)
-        } else {
-            holder.itemView.item_song_text_view.setTextColor(Color.GRAY)
-            holder.itemView.setBackgroundColor(ContextCompat.getColor(mContext, R.color.colorWhiteTransparent))
-            holder.itemView.item_song_text_view.setTypeface(null, Typeface.NORMAL)
+        if(position == mForceStopPosition){
+            holder.itemView.item_song_audio_button.setImageResource(R.drawable.ic_play_white)
+            mForceStopPosition = -1
         }
         Glide.with(mContext).asGif().load(mSongs[position].picture).apply(RequestOptions
-                .placeholderOf(R.drawable.ic_placeholder_square_blue))
+                .placeholderOf(R.drawable.ic_placeholder_square_gray))
                 .into(holder.itemView.item_song_image_view)
-        holder.itemView.item_song_text_view.text = mSongs[position].name
-        holder.itemView.setOnClickListener {
-            mSongSelected = if (mSongSelected == mSongs[position]) {
-                Song()
-            } else {
-                mSongs[position]
-            }
-            EventBus.getDefault().post(SongSelectedNotifEvent(mSongSelected!!))
-            notifyDataSetChanged()
+        holder.itemView.setOnLongClickListener {
+            songSelected(holder, position)
+        }
+        holder.itemView.item_song_audio_button.setOnLongClickListener {
+            songSelected(holder, position)
         }
         holder.itemView.item_song_audio_button.setOnClickListener({
             if (!mIsPlaying) {
-                mIsPlaying = true
-                mPositionPlaying = position
-                //If nothing is currently played
-                holder.itemView.item_song_progress_bar.visibility = View.VISIBLE
-                holder.itemView.item_song_audio_button.visibility = View.GONE
-                mPlayer = MediaPlayer()
-                try {
-                    mPlayer?.setDataSource(mContext, Uri.parse(mSongs[position].url))
-                    mPlayer?.prepareAsync()
-                    mPlayer?.setOnPreparedListener {
-                        holder.itemView.item_song_progress_bar.visibility = View.GONE
-                        holder.itemView.item_song_audio_button.visibility = View.VISIBLE
-                        holder.itemView.item_song_audio_button.setImageResource(R.drawable.ic_stop)
-                        mPlayer?.start()
-                    }
-                    mPlayer?.setOnCompletionListener {
-                        mPlayer = null
-                        holder.itemView.item_song_audio_button.setImageResource(R.drawable.ic_play)
-                        mIsPlaying = false
-                        mPositionPlaying = -1
-                    }
-                } catch (e: IOException) {
-                    Log.e(javaClass.simpleName, e.message)
-                } catch (e: IllegalStateException) {
-                    Log.e(javaClass.simpleName, e.message)
-                }
+                playSong(holder, position)
             } else {
                 //If an other notification's audio is currently played
                 if (mPositionPlaying == position) {
-                    mPlayer?.release()
-                    mIsPlaying = false
-                    mPositionPlaying = -1
-                    holder.itemView.item_song_audio_button.setImageResource(R.drawable.ic_play)
+                    stopSong(holder)
                 } else {
-                    Toast.makeText(mContext, R.string.stop_audio_first, Toast.LENGTH_SHORT).show()
+                    mForceStopPosition = mPositionPlaying
+                    notifyItemChanged(mForceStopPosition)
+                    stopSong(holder)
+                    playSong(holder, position)
                 }
             }
         })
+    }
+
+    private fun stopSong(holder: ItemViewHolder) {
+        mPlayer?.release()
+        mIsPlaying = false
+        mPositionPlaying = -1
+        holder.itemView.item_song_audio_button.setImageResource(R.drawable.ic_play_white)
+    }
+
+    private fun playSong(holder: ItemViewHolder, position: Int) {
+        mIsPlaying = true
+        mPositionPlaying = position
+        //If nothing is currently played
+        holder.itemView.item_song_progress_bar.visibility = View.VISIBLE
+        holder.itemView.item_song_audio_button.visibility = View.INVISIBLE
+        mPlayer = MediaPlayer()
+        try {
+            mPlayer?.setDataSource(mContext, Uri.parse(mSongs[position].url))
+            mPlayer?.prepareAsync()
+            mPlayer?.setOnPreparedListener {
+                holder.itemView.item_song_progress_bar.visibility = View.INVISIBLE
+                holder.itemView.item_song_audio_button.visibility = View.VISIBLE
+                holder.itemView.item_song_audio_button.setImageResource(R.drawable.ic_stop_white)
+                mPlayer?.start()
+            }
+            mPlayer?.setOnCompletionListener {
+                mPlayer = null
+                holder.itemView.item_song_audio_button.setImageResource(R.drawable.ic_play_white)
+                mIsPlaying = false
+                mPositionPlaying = -1
+            }
+        } catch (e: IOException) {
+            Log.e(javaClass.simpleName, e.message)
+        } catch (e: IllegalStateException) {
+            Log.e(javaClass.simpleName, e.message)
+        }
+    }
+
+    private fun songSelected(holder: ItemViewHolder, position: Int): Boolean {
+        holder.itemView.item_song_image_view.setColorFilter(ContextCompat.getColor(mContext, R.color.colorGreenTransparent))
+        EventBus.getDefault().post(SongSelectedNotifEvent(mSongs[position]))
+        return true
     }
 
     override fun getItemCount(): Int = mSongs.size

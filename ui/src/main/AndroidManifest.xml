@@ -72,7 +72,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.app.foxy.notification.add.AddNotificationActivity"
+            android:name="com.app.foxy.notification.selectSong.SelectSongActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

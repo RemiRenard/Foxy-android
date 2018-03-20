@@ -6,12 +6,6 @@
     android:focusable="true"
     android:focusableInTouchMode="true">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/night_mountain" />
-
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar_layout"
         android:layout_width="0dp"
@@ -57,67 +51,6 @@
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
 
-    <EditText
-        android:id="@+id/add_notification_message"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/bg_dark_blue_rect_oval_border"
-        android:gravity="center"
-        android:hint="@string/Message"
-        android:inputType="text"
-        android:lines="1"
-        android:maxLength="40"
-        android:padding="8dp"
-        android:paddingTop="8dp"
-        android:textColor="@android:color/white"
-        android:textColorHint="@android:color/white"
-        android:textSize="14sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/app_bar_layout" />
-
-    <TextView
-        android:id="@+id/add_notification_tutorial"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:padding="4dp"
-        android:text="@string/tutorial_send_song"
-        android:textAlignment="center"
-        android:textColor="@android:color/white"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/add_notification_message" />
-
-    <ImageView
-        android:id="@+id/add_notification_micro"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="4dp"
-        android:src="@drawable/ic_micro_not_recording"
-        android:visibility="gone"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/add_notification_play_audio"
-        app:layout_constraintTop_toBottomOf="@id/add_notification_tutorial" />
-
-    <ImageView
-        android:id="@+id/add_notification_play_audio"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="24dp"
-        android:src="@drawable/ic_speaker_on"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/add_notification_micro"
-        app:layout_constraintLeft_toRightOf="@+id/add_notification_micro"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/add_notification_micro" />
-
     <Button
         android:id="@+id/add_notification_button_next"
         android:layout_width="0dp"
@@ -135,9 +68,8 @@
         android:id="@+id/add_notification_recycler_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="12dp"
         app:layout_constraintBottom_toTopOf="@+id/add_notification_button_next"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/add_notification_micro" />
+        app:layout_constraintTop_toBottomOf="@id/app_bar_layout" />
 </android.support.constraint.ConstraintLayout>

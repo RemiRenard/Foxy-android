@@ -53,10 +53,10 @@ class RankingGlobalFragment : Fragment() {
     fun onLoginViewClickedEvent(event: RankingCompleteEvent) {
         if (event.rankingResponse.globalRanking.isNotEmpty()) {
             mNoData.visibility = View.GONE
-            mAdapter.setData(event.rankingResponse.globalRanking)
         } else {
             mNoData.visibility = View.VISIBLE
         }
+        mAdapter.setData(event.rankingResponse.globalRanking)
     }
 
     /**

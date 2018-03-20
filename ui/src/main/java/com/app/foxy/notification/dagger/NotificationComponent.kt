@@ -1,7 +1,7 @@
 package com.app.foxy.notification.dagger
 
 import com.app.foxy.notification.NotificationFragment
-import com.app.foxy.notification.add.AddNotificationActivity
+import com.app.foxy.notification.selectSong.SelectSongActivity
 import com.app.foxy.notification.selectFriends.SelectFriendsActivity
 import dagger.Subcomponent
 
@@ -15,7 +15,7 @@ interface NotificationComponent {
     // inject target here
     fun inject(target: NotificationFragment)
 
-    fun inject(target: AddNotificationActivity)
+    fun inject(target: SelectSongActivity)
 
     fun inject(target: SelectFriendsActivity)
 }

@@ -1,4 +1,4 @@
-package com.app.foxy.notification.add
+package com.app.foxy.notification.selectSong
 
 import android.content.Context
 import android.widget.Toast
@@ -13,16 +13,16 @@ import io.reactivex.disposables.Disposable
 import java.io.File
 
 /**
- * Add notification presenter
+ * Select song presenter
  */
 @NotificationScope
-class AddNotificationPresenter(private val mNotificationService: INotificationService,
-                               private val mContext: Context) : IAddNotificationPresenter {
+class SelectSongPresenter(private val mNotificationService: INotificationService,
+                          private val mContext: Context) : ISelectSongPresenter {
 
-    private var mView: IAddNotificationView? = null
+    private var mView: ISelectSongView? = null
     private var mCompositeDisposable: CompositeDisposable? = null
 
-    override fun attachView(view: IAddNotificationView) {
+    override fun attachView(view: ISelectSongView) {
         mCompositeDisposable = CompositeDisposable()
         mView = view
     }
@@ -32,9 +32,17 @@ class AddNotificationPresenter(private val mNotificationService: INotificationSe
         mView = null
     }
 
-    override fun saveTmpNotification(message: String, songId: String, type: String, audioFile: File?) {
+    override fun saveTmpNotification(message: String, songId: String, audioFile: File?) {
         mView?.showProgressBar()
-        mNotificationService.saveTmpNotification(Notification(message, songId, type), audioFile).doOnComplete {
+        mNotificationService.saveTmpNotification(Notification(message, songId, "message"), audioFile).doOnComplete {
+            mView?.hideProgressBar()
+            mView?.openFriendsActivity()
+        }.subscribe()
+    }
+
+    override fun saveTmpNotification(songId: String) {
+        mView?.showProgressBar()
+        mNotificationService.saveTmpNotification(Notification(String(), songId, "message"), null).doOnComplete {
             mView?.hideProgressBar()
             mView?.openFriendsActivity()
         }.subscribe()

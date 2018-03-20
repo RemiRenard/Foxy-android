@@ -198,7 +198,8 @@ class NotificationService : INotificationService {
                         RequestBody.create(MediaType.parse(Constants.MEDIA_TYPE_TEXT), Cache.tmpNotification?.songId!!),
                         RequestBody.create(MediaType.parse(Constants.MEDIA_TYPE_TEXT), Cache.tmpNotification?.type!!),
                         RequestBody.create(MediaType.parse(Constants.MEDIA_TYPE_TEXT), userIds.joinToString { it }),
-                        if (Cache.audioFile!!.length().toInt() == 0) {
+                        // If the file is null or empty
+                        if (Cache.audioFile == null || Cache.audioFile!!.length().toInt() == 0) {
                             null
                         } else {
                             RequestBody.create(MediaType.parse(Constants.MEDIA_TYPE_AUDIO), Cache.audioFile!!)

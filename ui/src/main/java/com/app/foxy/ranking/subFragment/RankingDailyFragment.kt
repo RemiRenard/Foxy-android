@@ -53,10 +53,10 @@ class RankingDailyFragment : Fragment() {
     fun onLoginViewClickedEvent(event: RankingCompleteEvent) {
         if (event.rankingResponse.dailyRanking.isNotEmpty()) {
             mNoData.visibility = View.GONE
-            mAdapter.setData(event.rankingResponse.dailyRanking)
         } else {
             mNoData.visibility = View.VISIBLE
         }
+        mAdapter.setData(event.rankingResponse.dailyRanking)
     }
 
     /**

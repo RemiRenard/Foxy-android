@@ -8,8 +8,8 @@ import com.app.foxy.adapter.SelectFriendsAdapter
 import com.app.foxy.adapter.SongAdapter
 import com.app.foxy.notification.INotificationPresenter
 import com.app.foxy.notification.NotificationPresenter
-import com.app.foxy.notification.add.AddNotificationPresenter
-import com.app.foxy.notification.add.IAddNotificationPresenter
+import com.app.foxy.notification.selectSong.SelectSongPresenter
+import com.app.foxy.notification.selectSong.ISelectSongPresenter
 import com.app.foxy.notification.selectFriends.ISelectFriendsPresenter
 import com.app.foxy.notification.selectFriends.SelectFriendsPresenter
 import dagger.Module
@@ -26,8 +26,8 @@ class NotificationModule {
 
     @Provides
     @NotificationScope
-    fun provideAddNotificationPresenter(notificationService: INotificationService, context: Context): IAddNotificationPresenter =
-            AddNotificationPresenter(notificationService, context)
+    fun provideAddNotificationPresenter(notificationService: INotificationService, context: Context): ISelectSongPresenter =
+            SelectSongPresenter(notificationService, context)
 
     @Provides
     @NotificationScope

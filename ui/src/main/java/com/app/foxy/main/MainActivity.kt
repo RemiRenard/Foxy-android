@@ -26,7 +26,7 @@ import com.app.foxy.eventBus.WriteStoragePermResultEvent
 import com.app.foxy.friends.FriendsFragment
 import com.app.foxy.main.dagger.MainModule
 import com.app.foxy.notification.NotificationFragment
-import com.app.foxy.notification.add.AddNotificationActivity
+import com.app.foxy.notification.selectSong.SelectSongActivity
 import com.app.foxy.profile.ProfileFragment
 import com.app.foxy.ranking.RankingFragment
 import com.getkeepsafe.taptargetview.TapTarget
@@ -46,9 +46,6 @@ class MainActivity : BaseActivity(), IMainView {
 
     @BindView(R.id.notif_send_button)
     lateinit var mSendNotifButton: FloatingActionButton
-
-    @BindView(R.id.navigation_friends)
-    lateinit var mFriendsNav: ImageView
 
     @BindView(R.id.bottom_bar)
     lateinit var mBottomBarLayout: LinearLayout
@@ -107,7 +104,7 @@ class MainActivity : BaseActivity(), IMainView {
 
     @OnClick(R.id.notif_send_button)
     fun addNotification() {
-        startActivity(AddNotificationActivity.getStartingIntent(this))
+        startActivity(SelectSongActivity.getStartingIntent(this))
     }
 
     /**
