@@ -2,21 +2,23 @@ package com.app.foxy.ranking
 
 import android.content.Context
 import android.widget.Toast
+import com.app.data.network.ExceptionHandler
+import com.app.data.network.apiResponse.RankingResponse
+import com.app.domain.services.global.IGlobalService
+import com.app.domain.services.ranking.IRankingService
+import com.app.foxy.eventBus.RankingCompleteEvent
+import com.app.foxy.ranking.dagger.RankingScope
 import io.reactivex.Observer
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
-import com.app.data.network.ExceptionHandler
-import com.app.data.network.apiResponse.RankingResponse
-import com.app.domain.services.ranking.IRankingService
-import com.app.foxy.eventBus.RankingCompleteEvent
-import com.app.foxy.profile.dagger.ProfileScope
 import org.greenrobot.eventbus.EventBus
 
 /**
  * Ranking presenter
  */
-@ProfileScope
-class RankingPresenter(private val rankingService: IRankingService, private val mContext: Context) : IRankingPresenter {
+@RankingScope
+class RankingPresenter(private val rankingService: IRankingService, private val mContext: Context,
+                       private val mGlobalService: IGlobalService) : IRankingPresenter {
 
     private var mView: IRankingView? = null
     private var mCompositeDisposable: CompositeDisposable? = null
@@ -29,6 +31,13 @@ class RankingPresenter(private val rankingService: IRankingService, private val 
     override fun detachView() {
         mCompositeDisposable?.clear()
         mView = null
+    }
+
+    override fun manageTutorial() {
+        if (!mGlobalService.isRankingTutorialShowed(mContext)) {
+            mView?.showTutorial()
+            mGlobalService.rankingTutorialShowed(mContext)
+        }
     }
 
     override fun getRanking() {

@@ -13,7 +13,6 @@ import android.support.design.widget.Snackbar
 import android.support.v4.app.ActivityCompat
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
@@ -27,11 +26,11 @@ import com.app.foxy.BaseActivity
 import com.app.foxy.BuildConfig
 import com.app.foxy.FoxyApp
 import com.app.foxy.R
-import com.app.foxy.notification.selectSong.adapter.SongAdapter
 import com.app.foxy.custom.SpacesItemDecoration
 import com.app.foxy.eventBus.SongSelectedNotifEvent
 import com.app.foxy.notification.dagger.NotificationModule
 import com.app.foxy.notification.selectFriends.SelectFriendsActivity
+import com.app.foxy.notification.selectSong.adapter.SongAdapter
 import com.getkeepsafe.taptargetview.TapTarget
 import com.getkeepsafe.taptargetview.TapTargetSequence
 import org.greenrobot.eventbus.Subscribe
@@ -103,7 +102,6 @@ class SelectSongActivity : BaseActivity(), ISelectSongView {
                         getString(R.string.tuto_list_songs_desc))
                         .outerCircleColor(R.color.colorPrimary)
                         .textColor(android.R.color.white)
-                        .cancelable(false)
                         .transparentTarget(true)
                         .targetCircleColor(android.R.color.white),
                 TapTarget.forView(mToolbarRecord,
@@ -112,7 +110,6 @@ class SelectSongActivity : BaseActivity(), ISelectSongView {
                         .outerCircleColor(R.color.colorPrimary)
                         .textColor(android.R.color.white)
                         .targetRadius(25)
-                        .cancelable(false)
                         .targetCircleColor(android.R.color.white)
         ).listener(object : TapTargetSequence.Listener {
             override fun onSequenceCanceled(lastTarget: TapTarget?) {
@@ -126,7 +123,7 @@ class SelectSongActivity : BaseActivity(), ISelectSongView {
             override fun onSequenceStep(lastTarget: TapTarget?, targetClicked: Boolean) {
                 // Do nothing.
             }
-        }).start()
+        }).continueOnCancel(true).start()
     }
 
     @OnClick(R.id.toolbar_record)

@@ -10,4 +10,5 @@ interface IRankingView : IView {
 
     fun showCurrentUserData(currentUserData: UserRank)
 
+    fun showTutorial()
 }

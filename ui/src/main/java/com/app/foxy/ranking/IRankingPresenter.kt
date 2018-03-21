@@ -8,4 +8,6 @@ import com.app.foxy.IPresenter
 interface IRankingPresenter : IPresenter<IRankingView> {
 
     fun getRanking()
+
+    fun manageTutorial()
 }

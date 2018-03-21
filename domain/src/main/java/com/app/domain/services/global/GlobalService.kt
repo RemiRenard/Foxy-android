@@ -13,6 +13,7 @@ import io.reactivex.schedulers.Schedulers
  * Class GlobalService
  */
 class GlobalService : IGlobalService {
+
     override fun getApiConfig(): Observable<Config> {
         return Data.networkService!!
                 .getConfig()
@@ -38,6 +39,16 @@ class GlobalService : IGlobalService {
     override fun selectSongTutorialShowed(context: Context) {
         val editor = context.getSharedPreferences(Constants.TUTORIAL_SELECT_SONG_ALREADY_PLAYED, Context.MODE_PRIVATE)?.edit()
         editor?.putBoolean(Constants.TUTORIAL_SELECT_SONG_ALREADY_PLAYED, true)?.apply()
+    }
+
+    override fun isRankingTutorialShowed(context: Context): Boolean {
+        return context.getSharedPreferences(Constants.TUTORIAL_SELECT_SONG_ALREADY_PLAYED, Context.MODE_PRIVATE)
+                .getBoolean(Constants.TUTORIAL_SELECT_SONG_ALREADY_PLAYED, false)
+    }
+
+    override fun rankingTutorialShowed(context: Context) {
+        val editor = context.getSharedPreferences(Constants.TUTORIAL_RANKING_ALREADY_PLAYED, Context.MODE_PRIVATE)?.edit()
+        editor?.putBoolean(Constants.TUTORIAL_RANKING_ALREADY_PLAYED, true)?.apply()
     }
 
 }

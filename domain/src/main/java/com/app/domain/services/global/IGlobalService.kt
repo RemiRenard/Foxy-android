@@ -18,4 +18,8 @@ interface IGlobalService {
     fun isSelectSongTutorialShowed(context: Context): Boolean
 
     fun selectSongTutorialShowed(context: Context)
+
+    fun isRankingTutorialShowed(context: Context): Boolean
+
+    fun rankingTutorialShowed(context: Context)
 }

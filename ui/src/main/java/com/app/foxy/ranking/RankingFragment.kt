@@ -1,5 +1,6 @@
 package com.app.foxy.ranking
 
+import android.graphics.Rect
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
@@ -14,8 +15,6 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.app.data.model.UserRank
 import com.app.foxy.FoxyApp
 import com.app.foxy.R
@@ -24,6 +23,10 @@ import com.app.foxy.ranking.dagger.RankingModule
 import com.app.foxy.ranking.subFragment.RankingDailyFragment
 import com.app.foxy.ranking.subFragment.RankingGlobalFragment
 import com.app.foxy.ranking.subFragment.RankingWeeklyFragment
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.getkeepsafe.taptargetview.TapTarget
+import com.getkeepsafe.taptargetview.TapTargetSequence
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -70,7 +73,43 @@ class RankingFragment : Fragment(), IRankingView {
         mPresenter.attachView(this)
         EventBus.getDefault().register(this)
         mPresenter.getRanking()
+        mPresenter.manageTutorial()
         return mView
+    }
+
+    override fun showTutorial() {
+        TapTargetSequence(activity).targets(
+                TapTarget.forView(mScore,
+                        getString(R.string.tuto_your_score), getString(R.string.tuto_your_score_desc))
+                        .transparentTarget(true)
+                        .outerCircleColor(R.color.colorPrimaryDark)
+                        .textColor(android.R.color.white)
+                        .outerCircleAlpha(0.98F)
+                        .targetRadius(40)
+                        .targetCircleColor(android.R.color.white),
+                TapTarget.forBounds(Rect(activity!!.resources.displayMetrics.widthPixels / 2,
+                        activity!!.resources.displayMetrics.heightPixels / 2,
+                        activity!!.resources.displayMetrics.widthPixels / 2,
+                        activity!!.resources.displayMetrics.heightPixels / 2),
+                        getString(R.string.tuto_ranking), getString(R.string.tuto_ranking_desc))
+                        .transparentTarget(true)
+                        .outerCircleColor(R.color.colorPrimaryDark)
+                        .textColor(android.R.color.white)
+                        .targetRadius(40)
+                        .targetCircleColor(android.R.color.white)
+        ).listener(object : TapTargetSequence.Listener {
+            override fun onSequenceCanceled(lastTarget: TapTarget?) {
+                // Do nothing
+            }
+
+            override fun onSequenceFinish() {
+                // Do nothing
+            }
+
+            override fun onSequenceStep(lastTarget: TapTarget?, targetClicked: Boolean) {
+                // Do nothing
+            }
+        }).continueOnCancel(true).start()
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
