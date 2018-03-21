@@ -5,13 +5,15 @@ import com.app.domain.services.friend.IFriendService
 import com.app.domain.services.notification.INotificationService
 import com.app.foxy.adapter.NotificationAdapter
 import com.app.foxy.adapter.SelectFriendsAdapter
-import com.app.foxy.adapter.SongAdapter
 import com.app.foxy.notification.INotificationPresenter
 import com.app.foxy.notification.NotificationPresenter
-import com.app.foxy.notification.selectSong.SelectSongPresenter
-import com.app.foxy.notification.selectSong.ISelectSongPresenter
 import com.app.foxy.notification.selectFriends.ISelectFriendsPresenter
 import com.app.foxy.notification.selectFriends.SelectFriendsPresenter
+import com.app.foxy.notification.selectSong.ISelectSongPresenter
+import com.app.foxy.notification.selectSong.SelectSongPresenter
+import com.app.foxy.notification.selectSong.adapter.ISongAdapterPresenter
+import com.app.foxy.notification.selectSong.adapter.SongAdapter
+import com.app.foxy.notification.selectSong.adapter.SongAdapterPresenter
 import dagger.Module
 import dagger.Provides
 
@@ -35,6 +37,10 @@ class NotificationModule {
                                 notificationService: INotificationService): ISelectFriendsPresenter =
             SelectFriendsPresenter(context, friendService, notificationService)
 
+    @Provides
+    @NotificationScope
+    fun provideSongAdapterPresenter(context: Context): ISongAdapterPresenter = SongAdapterPresenter(context)
+
     // Adapters
     @Provides
     @NotificationScope
@@ -46,5 +52,5 @@ class NotificationModule {
 
     @Provides
     @NotificationScope
-    fun provideSongAdapter(context: Context): SongAdapter = SongAdapter(context)
+    fun provideSongAdapter(presenter: ISongAdapterPresenter): SongAdapter = SongAdapter(presenter)
 }

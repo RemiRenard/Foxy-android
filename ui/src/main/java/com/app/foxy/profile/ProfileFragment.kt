@@ -108,7 +108,7 @@ class ProfileFragment : Fragment(), IProfileView {
         FoxyApp.get(context!!).getAppComponent()?.plus(ProfileModule())?.inject(this)
         mPresenter.attachView(this)
         EventBus.getDefault().register(this)
-        mPresenter.getProfile(forceNetworkRefresh = false)
+        mPresenter.getProfile(forceNetworkRefresh = true)
         mSwipeRefresh.setOnRefreshListener { mPresenter.getProfile(forceNetworkRefresh = true) }
         displayBarChart()
         displayPieChart()

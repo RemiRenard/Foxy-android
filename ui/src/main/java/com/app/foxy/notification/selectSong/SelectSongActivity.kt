@@ -13,6 +13,7 @@ import android.support.design.widget.Snackbar
 import android.support.v4.app.ActivityCompat
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
@@ -26,7 +27,7 @@ import com.app.foxy.BaseActivity
 import com.app.foxy.BuildConfig
 import com.app.foxy.FoxyApp
 import com.app.foxy.R
-import com.app.foxy.adapter.SongAdapter
+import com.app.foxy.notification.selectSong.adapter.SongAdapter
 import com.app.foxy.custom.SpacesItemDecoration
 import com.app.foxy.eventBus.SongSelectedNotifEvent
 import com.app.foxy.notification.dagger.NotificationModule
@@ -85,6 +86,15 @@ class SelectSongActivity : BaseActivity(), ISelectSongView {
         showTutorial()
     }
 
+    override fun onResume() {
+        super.onResume()
+        mSongAdapter.onResume()
+    }
+
+    override fun onPause() {
+        mSongAdapter.onPause()
+        super.onPause()
+    }
     /**
      * Show tutorial to add a custom song
      */

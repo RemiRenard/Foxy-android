@@ -10,6 +10,7 @@ import com.app.data.model.Stats
 import com.app.data.model.User
 import com.app.data.network.apiRequest.*
 import com.app.data.network.apiResponse.ConnectResponse
+import com.app.data.network.apiResponse.RankingResponse
 import com.app.data.network.apiResponse.SimpleSuccessResponse
 import com.app.domain.eventBus.NetworkErrorEvent
 import com.google.firebase.iid.FirebaseInstanceId
@@ -94,6 +95,7 @@ class UserService : IUserService {
     private fun clearCache() {
         Cache.currentUser = null
         Cache.friends = ArrayList()
+        Cache.rankings = RankingResponse()
         Cache.notifications = ArrayList()
     }
 
