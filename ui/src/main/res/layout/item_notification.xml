@@ -4,6 +4,7 @@
     android:id="@+id/item_notification_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/colorWhite"
     android:paddingBottom="8dp"
     android:paddingTop="8dp">
 
@@ -17,7 +18,7 @@
         android:textColor="@color/colorPrimary"
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/item_notification_audio_loading"
+        app:layout_constraintRight_toLeftOf="@+id/item_notification_audio_button"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -30,7 +31,7 @@
         android:lines="1"
         android:textColor="@color/colorPrimary"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/item_notification_audio_loading"
+        app:layout_constraintRight_toLeftOf="@+id/item_notification_audio_button"
         app:layout_constraintTop_toBottomOf="@+id/item_notification_message" />
 
     <ImageView
@@ -53,20 +54,5 @@
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/item_notification_audio_loading"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:lines="1"
-        android:text="@string/loading"
-        android:textColor="@color/colorPrimary"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/item_notification_audio_button"
         app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>

@@ -5,8 +5,6 @@ package com.app.foxy.notification.selectSong.adapter
  */
 interface ISongAdapterView {
 
-    fun updateItems()
-
     fun itemLoadingCompleted()
 
     fun itemPlayingCompleted()

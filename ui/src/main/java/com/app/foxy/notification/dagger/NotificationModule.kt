@@ -3,10 +3,12 @@ package com.app.foxy.notification.dagger
 import android.content.Context
 import com.app.domain.services.friend.IFriendService
 import com.app.domain.services.notification.INotificationService
-import com.app.foxy.adapter.NotificationAdapter
 import com.app.foxy.adapter.SelectFriendsAdapter
 import com.app.foxy.notification.INotificationPresenter
 import com.app.foxy.notification.NotificationPresenter
+import com.app.foxy.notification.adapter.INotificationAdapterPresenter
+import com.app.foxy.notification.adapter.NotificationAdapter
+import com.app.foxy.notification.adapter.NotificationAdapterPresenter
 import com.app.foxy.notification.selectFriends.ISelectFriendsPresenter
 import com.app.foxy.notification.selectFriends.SelectFriendsPresenter
 import com.app.foxy.notification.selectSong.ISelectSongPresenter
@@ -41,10 +43,16 @@ class NotificationModule {
     @NotificationScope
     fun provideSongAdapterPresenter(context: Context): ISongAdapterPresenter = SongAdapterPresenter(context)
 
+    @Provides
+    @NotificationScope
+    fun provideNotificationAdapterPresenter(context: Context): INotificationAdapterPresenter =
+            NotificationAdapterPresenter(context)
+
     // Adapters
     @Provides
     @NotificationScope
-    fun provideNotificationAdapter(): NotificationAdapter = NotificationAdapter()
+    fun provideNotificationAdapter(presenter: INotificationAdapterPresenter): NotificationAdapter =
+            NotificationAdapter(presenter)
 
     @Provides
     @NotificationScope

@@ -1,25 +1,22 @@
-package com.app.foxy.notification.selectSong.adapter
+package com.app.foxy.notification.adapter
 
 import android.content.Context
 import android.media.MediaPlayer
 import android.net.Uri
 import android.util.Log
-import com.app.data.model.Song
-import com.app.foxy.eventBus.SongSelectedNotifEvent
 import com.app.foxy.notification.dagger.NotificationScope
-import org.greenrobot.eventbus.EventBus
 import java.io.IOException
 
 /**
- * Song adapter presenter
+ * Notification adapter presenter
  */
 @NotificationScope
-class SongAdapterPresenter(val mContext: Context) : ISongAdapterPresenter {
+class NotificationAdapterPresenter(val mContext: Context) : INotificationAdapterPresenter {
 
-    private var mView: ISongAdapterView? = null
+    private var mView: INotificationAdapterView? = null
     private var mPlayer: MediaPlayer? = null
 
-    override fun attachView(view: ISongAdapterView) {
+    override fun attachView(view: INotificationAdapterView) {
         mView = view
     }
 
@@ -27,10 +24,10 @@ class SongAdapterPresenter(val mContext: Context) : ISongAdapterPresenter {
         mView = null
     }
 
-    override fun playSong(song: Song) {
+    override fun playSong(songUrl: String) {
         mPlayer = MediaPlayer()
         try {
-            mPlayer?.setDataSource(mContext, Uri.parse(song.url))
+            mPlayer?.setDataSource(mContext, Uri.parse(songUrl))
             mPlayer?.prepareAsync()
             mPlayer?.setOnPreparedListener {
                 mView?.itemLoadingCompleted()
@@ -49,9 +46,5 @@ class SongAdapterPresenter(val mContext: Context) : ISongAdapterPresenter {
 
     override fun stopSong() {
         mPlayer?.stop()
-    }
-
-    override fun songSelected(song: Song) {
-        EventBus.getDefault().post(SongSelectedNotifEvent(song))
     }
 }

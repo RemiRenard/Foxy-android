@@ -38,10 +38,6 @@ class SongAdapter(val mPresenter: ISongAdapterPresenter) : RecyclerView.Adapter<
         mPresenter.detachView()
     }
 
-    override fun updateItems() {
-        //notifyDataSetChanged()
-    }
-
     override fun itemPlayingCompleted() {
         mPositionPlaying = -1
         mIsPlaying = false

@@ -16,9 +16,9 @@ import com.app.data.Constants
 import com.app.data.model.Notification
 import com.app.foxy.FoxyApp
 import com.app.foxy.R
-import com.app.foxy.adapter.NotificationAdapter
 import com.app.foxy.custom.SimpleDividerItemDecoration
 import com.app.foxy.eventBus.NotificationClickedEvent
+import com.app.foxy.notification.adapter.NotificationAdapter
 import com.app.foxy.notification.dagger.NotificationModule
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -67,6 +67,7 @@ class NotificationFragment : Fragment(), INotificationView {
 
     override fun onResume() {
         super.onResume()
+        mAdapter.onResume()
         EventBus.getDefault().register(this)
     }
 
@@ -103,6 +104,7 @@ class NotificationFragment : Fragment(), INotificationView {
     }
 
     override fun onPause() {
+        mAdapter.onPause()
         EventBus.getDefault().unregister(this)
         super.onPause()
     }
