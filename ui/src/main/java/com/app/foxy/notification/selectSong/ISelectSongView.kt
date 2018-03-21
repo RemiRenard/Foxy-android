@@ -11,4 +11,6 @@ interface ISelectSongView : IView {
     fun openFriendsActivity()
 
     fun displaySongs(songs: List<Song>)
+
+    fun showTutorial()
 }

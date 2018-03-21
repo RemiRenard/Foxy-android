@@ -3,4 +3,7 @@ package com.app.foxy.main
 /**
  * Interface of the main view.
  */
-interface IMainView
+interface IMainView {
+
+    fun showTutorial()
+}

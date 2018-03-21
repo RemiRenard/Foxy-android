@@ -1,15 +1,17 @@
 package com.app.foxy.main
 
 import android.content.Context
-import io.reactivex.disposables.CompositeDisposable
+import com.app.domain.services.global.IGlobalService
 import com.app.domain.services.user.IUserService
 import com.app.foxy.main.dagger.MainScope
+import io.reactivex.disposables.CompositeDisposable
 
 /**
  * Main presenter
  */
 @MainScope
-class MainPresenter(private val mContext: Context, private val mUserService: IUserService) : IMainPresenter {
+class MainPresenter(private val mContext: Context, private val mUserService: IUserService,
+                    private val mGlobalService: IGlobalService) : IMainPresenter {
 
     private var mView: IMainView? = null
     private var mCompositeDisposable: CompositeDisposable? = null
@@ -28,4 +30,12 @@ class MainPresenter(private val mContext: Context, private val mUserService: IUs
         // We should refresh token
         mUserService.refreshToken(mContext)
     }
+
+    override fun manageTutorial() {
+        if (!mGlobalService.isMainTutorialShowed(mContext)) {
+            mView?.showTutorial()
+            mGlobalService.mainTutorialShowed(mContext)
+        }
+    }
+
 }

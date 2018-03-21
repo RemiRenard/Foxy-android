@@ -13,4 +13,6 @@ interface ISelectSongPresenter : IPresenter<ISelectSongView> {
     fun saveTmpNotification(songId: String)
 
     fun getSongs(forceNetworkRefresh: Boolean)
+
+    fun manageTutorial()
 }

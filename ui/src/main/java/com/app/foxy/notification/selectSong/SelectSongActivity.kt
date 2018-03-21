@@ -83,7 +83,7 @@ class SelectSongActivity : BaseActivity(), ISelectSongView {
         mPresenter.getSongs(true)
         mAudioFileName = externalCacheDir.absolutePath + "/foxyAudioRecord.mp3"
         mAudioFile = File(mAudioFileName)
-        showTutorial()
+        mPresenter.manageTutorial()
     }
 
     override fun onResume() {
@@ -95,10 +95,8 @@ class SelectSongActivity : BaseActivity(), ISelectSongView {
         mSongAdapter.onPause()
         super.onPause()
     }
-    /**
-     * Show tutorial to add a custom song
-     */
-    private fun showTutorial() {
+
+    override fun showTutorial() {
         TapTargetSequence(this).targets(
                 TapTarget.forView(mRecyclerView,
                         getString(R.string.tuto_list_songs),

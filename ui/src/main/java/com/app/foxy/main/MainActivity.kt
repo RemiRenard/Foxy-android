@@ -53,6 +53,9 @@ class MainActivity : BaseActivity(), IMainView {
     @BindView(R.id.navigation_notification)
     lateinit var mNavigationNotification: ImageView
 
+    @BindView(R.id.navigation_friends)
+    lateinit var mNavigationFriend: ImageView
+
     @Inject
     lateinit var mPresenter: IMainPresenter
 
@@ -72,13 +75,11 @@ class MainActivity : BaseActivity(), IMainView {
         }
         manageColorBottomBar(mNavigationNotification)
         manageFragment()
-        showTutorial()
+        mPresenter.manageTutorial()
     }
 
-    /**
-     * Show the tutorial.
-     */
-    private fun showTutorial() {
+    override fun showTutorial() {
+        mSendNotifButton.isClickable = false
         TapTargetSequence(this).targets(
                 TapTarget.forView(mSendNotifButton,
                         getString(R.string.tuto_btn_send_notif), getString(R.string.tuto_btn_send_notif_desc))
@@ -89,17 +90,18 @@ class MainActivity : BaseActivity(), IMainView {
                         .targetCircleColor(R.color.colorPrimaryDark)
         ).listener(object : TapTargetSequence.Listener {
             override fun onSequenceCanceled(lastTarget: TapTarget?) {
-                // Dp nothing.
+                // Do nothing
             }
 
             override fun onSequenceFinish() {
-                // Do nothing for now.
+                // Do nothing
             }
 
             override fun onSequenceStep(lastTarget: TapTarget?, targetClicked: Boolean) {
-                // Do nothing.
+                mSendNotifButton.isClickable = true
+                manageBottomBar(mNavigationFriend)
             }
-        }).start()
+        }).continueOnCancel(true).start()
     }
 
     @OnClick(R.id.notif_send_button)

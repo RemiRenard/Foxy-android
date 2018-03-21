@@ -8,4 +8,6 @@ import com.app.foxy.IPresenter
 interface IMainPresenter : IPresenter<IMainView> {
 
     fun refreshToken()
+
+    fun manageTutorial()
 }

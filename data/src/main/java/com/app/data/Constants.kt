@@ -25,6 +25,8 @@ object Constants {
     const val REQUEST_PERMISSION_GROUP_CAMERA = 5
     const val DEFAULT_SONG_LOCATION = "https://s3.eu-west-3.amazonaws.com/foxy-sounds/default_song.mp3"
     const val RECORD_MAX_DURATION = 5000 //milliseconds
+    const val TUTORIAL_MAIN_ALREADY_PLAYED = "TUTORIAL_MAIN_ALREADY_PLAYED"
+    const val TUTORIAL_SELECT_SONG_ALREADY_PLAYED = "TUTORIAL_SELECT_SONG_ALREADY_PLAYED"
 
     // DEV
     const val SERVER_URL_DEV = "http://192.168.1.138:8888/api/"

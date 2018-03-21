@@ -106,11 +106,11 @@
     <string name="upgrade_long_text">Your current version is no longer supported. Please update the app to enjoy new features.</string>
     <string name="We_are_checking_the_version">We are checking the version of the app…</string>
     <string name="tuto_btn_send_notif">You can send notifications by typing to this button</string>
-    <string name="tuto_btn_send_notif_desc">First of all, you should add friends.</string>
+    <string name="tuto_btn_send_notif_desc">First of all, you should add a friend. (Tap on this button to continue the tutorial)</string>
     <string name="tuto_btn_record_your_own_voice">Or record your own voice !</string>
     <string name="tuto_btn_record_your_own_voice_desc">Your friends will receive this song as a notification. (Tap to the button to hide this message)</string>
-    <string name="tuto_list_songs">Select a sound by pressing and holding the item, you can play the song by clicking to the "play button".</string>
-    <string name="tuto_list_songs_desc">Your friends will receive this song as a notification. (Tap to the area to hide this message)</string>
+    <string name="tuto_list_songs">Select a sound by pressing and holding the item, you can play the sound by clicking to the "play button".</string>
+    <string name="tuto_list_songs_desc">Your friends will receive this sound as a notification. (Tap to the area to hide this message)</string>
     <string name="tuto_add_message">You can add a simple message.</string>
     <string name="tuto_add_message_desc">Your friend will receive it as a message. (Tap to the white area to hide this message)</string>
 </resources>
