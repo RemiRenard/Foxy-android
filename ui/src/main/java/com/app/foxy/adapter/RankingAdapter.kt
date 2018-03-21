@@ -5,21 +5,24 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.app.data.model.UserRank
+import com.app.foxy.R
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.item_ranking.view.*
-import com.app.data.model.UserRank
-import com.app.foxy.R
 
 /**
  * Adapter used to display ranking.
  */
-class RankingAdapter(val mContext: Context) : RecyclerView.Adapter<RankingAdapter.ItemViewHolder>() {
+class RankingAdapter : RecyclerView.Adapter<RankingAdapter.ItemViewHolder>() {
 
+    private var mContext: Context? = null
     private var mUserRanks: List<UserRank> = ArrayList()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder =
-            ItemViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_ranking, parent, false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
+        mContext = parent.context
+        return ItemViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_ranking, parent, false))
+    }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         holder.itemView?.item_ranking_position?.text = (position + 1).toString()

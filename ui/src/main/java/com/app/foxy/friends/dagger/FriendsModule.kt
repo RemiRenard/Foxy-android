@@ -39,16 +39,13 @@ class FriendsModule {
 
     @Provides
     @FriendsScope
-    fun provideFriendsAdapter(context: Context): FriendsAdapter =
-            FriendsAdapter(context)
+    fun provideFriendsAdapter(): FriendsAdapter = FriendsAdapter()
 
     @Provides
     @FriendsScope
-    fun provideAddFriendsAdapter(context: Context): AddFriendsAdapter =
-            AddFriendsAdapter(context)
+    fun provideAddFriendsAdapter(): AddFriendsAdapter = AddFriendsAdapter()
 
     @Provides
     @FriendsScope
-    fun provideFriendsRequestsAdapter(context: Context): FriendsRequestsAdapter =
-            FriendsRequestsAdapter(context)
+    fun provideFriendsRequestsAdapter(): FriendsRequestsAdapter = FriendsRequestsAdapter()
 }

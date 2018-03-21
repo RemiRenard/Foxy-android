@@ -44,11 +44,11 @@ class NotificationModule {
     // Adapters
     @Provides
     @NotificationScope
-    fun provideNotificationAdapter(context: Context): NotificationAdapter = NotificationAdapter(context)
+    fun provideNotificationAdapter(): NotificationAdapter = NotificationAdapter()
 
     @Provides
     @NotificationScope
-    fun provideSelectFriendsAdapter(context: Context): SelectFriendsAdapter = SelectFriendsAdapter(context)
+    fun provideSelectFriendsAdapter(): SelectFriendsAdapter = SelectFriendsAdapter()
 
     @Provides
     @NotificationScope

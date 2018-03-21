@@ -2,9 +2,9 @@ package com.app.data.network
 
 import android.content.Context
 import android.util.Log
-import com.google.gson.Gson
 import com.app.data.R
 import com.app.data.network.apiError.ResponseError
+import com.google.gson.Gson
 import retrofit2.HttpException
 
 /**
@@ -28,7 +28,8 @@ class ExceptionHandler {
                     Log.e(ExceptionHandler::class.java.simpleName, "error message: " + e.message)
                 }
             } else {
-                message = throwable.message
+                Log.e(ExceptionHandler::class.java.simpleName, throwable.message, throwable)
+                message = context.getString(R.string.Unexpected_server_error)
             }
             return message
         }

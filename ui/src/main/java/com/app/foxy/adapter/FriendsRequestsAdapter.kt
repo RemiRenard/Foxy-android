@@ -18,12 +18,15 @@ import java.util.*
 /**
  * Adapter used to display friends requests.
  */
-class FriendsRequestsAdapter(val mContext: Context) : RecyclerView.Adapter<FriendsRequestsAdapter.ItemViewHolder>() {
+class FriendsRequestsAdapter : RecyclerView.Adapter<FriendsRequestsAdapter.ItemViewHolder>() {
 
+    private var mContext: Context? = null
     private var mRequests: MutableList<FriendsRequestsResponse> = ArrayList()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder =
-            ItemViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_friends_requests, parent, false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
+        mContext = parent.context
+        return ItemViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_friends_requests, parent, false))
+    }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         holder.username.text = mRequests[position].requestedBy?.username

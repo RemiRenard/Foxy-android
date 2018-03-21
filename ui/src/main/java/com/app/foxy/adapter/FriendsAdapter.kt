@@ -14,12 +14,15 @@ import java.util.*
 /**
  * Adapter used to display friends.
  */
-class FriendsAdapter(val mContext: Context) : RecyclerView.Adapter<FriendsAdapter.ItemViewHolder>() {
+class FriendsAdapter : RecyclerView.Adapter<FriendsAdapter.ItemViewHolder>() {
 
+    private var mContext: Context? = null
     private var mFriends: List<User> = ArrayList()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder =
-            ItemViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_friends, parent, false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
+        mContext = parent.context
+        return ItemViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_friends, parent, false))
+    }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         holder.itemView?.item_friends_name?.text = mFriends[position].username

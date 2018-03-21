@@ -11,11 +11,13 @@ import android.view.ViewGroup
 import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
+import com.app.foxy.FoxyApp
 import com.app.foxy.R
 import com.app.foxy.adapter.RankingAdapter
 import com.app.foxy.custom.SimpleDividerItemDecoration
 import com.app.foxy.eventBus.RankingCompleteEvent
 import com.app.foxy.eventBus.RefreshRankingSwiped
+import com.app.foxy.ranking.dagger.RankingModule
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -40,6 +42,8 @@ class RankingGlobalFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mView = inflater.inflate(R.layout.fragment_ranking_content, container, false)
         ButterKnife.bind(this, mView!!)
+        // Register this target with dagger.
+        FoxyApp.get(context!!).getAppComponent()?.plus(RankingModule())?.inject(this)
         initRecyclerView()
         EventBus.getDefault().register(this)
         mSwipeRefresh.setOnRefreshListener {
@@ -66,7 +70,6 @@ class RankingGlobalFragment : Fragment() {
         mRecyclerView.setHasFixedSize(true)
         mRecyclerView.addItemDecoration(SimpleDividerItemDecoration(context!!))
         mRecyclerView.layoutManager = LinearLayoutManager(context)
-        mAdapter = RankingAdapter(context!!)
         mRecyclerView.adapter = mAdapter
         mAdapter.notifyDataSetChanged()
     }

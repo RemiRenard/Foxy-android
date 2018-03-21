@@ -26,8 +26,9 @@ import java.util.*
 /**
  * Adapter used to display notifications.
  */
-class NotificationAdapter(val mContext: Context) : RecyclerView.Adapter<NotificationAdapter.ItemViewHolder>() {
+class NotificationAdapter : RecyclerView.Adapter<NotificationAdapter.ItemViewHolder>() {
 
+    private var mContext: Context? = null
     private var mNotifications: MutableList<Notification> = ArrayList()
     private var mPlayer: MediaPlayer? = null
     private var mIsPlaying: Boolean = false
@@ -35,8 +36,10 @@ class NotificationAdapter(val mContext: Context) : RecyclerView.Adapter<Notifica
     private val mDatePattern: String = "HH:mm"
     private var mForceStopPosition: Int = -1
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder =
-            ItemViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_notification, parent, false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
+        mContext = parent.context
+        return ItemViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_notification, parent, false))
+    }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         if (position == mForceStopPosition) {
@@ -47,7 +50,7 @@ class NotificationAdapter(val mContext: Context) : RecyclerView.Adapter<Notifica
             mForceStopPosition = -1
         }
         holder.itemView?.item_notification_message?.text = mNotifications[position].message
-        holder.itemView?.item_notification_user_time?.text = mContext.getString(
+        holder.itemView?.item_notification_user_time?.text = mContext!!.getString(
                 R.string.user_time,
                 mNotifications[position].userSource?.username,
                 SimpleDateFormat(mDatePattern, Locale.US).format(mNotifications[position].createdAt))
@@ -60,13 +63,13 @@ class NotificationAdapter(val mContext: Context) : RecyclerView.Adapter<Notifica
             }
             // Manage the type of notification
             if (mNotifications[position].type.equals("friendRequest")) {
-                mContext.startActivity(FriendsRequestsActivity.getStartingIntent(mContext)
+                mContext!!.startActivity(FriendsRequestsActivity.getStartingIntent(mContext!!)
                         .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
             }
         }
 
         if (mNotifications[position].isRead)
-            holder.itemView?.item_notification_layout?.setBackgroundColor(ContextCompat.getColor(mContext, R.color.colorWhiteTransparent))
+            holder.itemView?.item_notification_layout?.setBackgroundColor(ContextCompat.getColor(mContext!!, R.color.colorWhiteTransparent))
         else
             holder.itemView?.item_notification_layout?.setBackgroundColor(Color.WHITE)
 

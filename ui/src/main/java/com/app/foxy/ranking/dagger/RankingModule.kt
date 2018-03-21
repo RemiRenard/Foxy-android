@@ -19,5 +19,5 @@ class RankingModule {
     // Adapters
     @Provides
     @RankingScope
-    fun provideRankingAdapter(context: Context): RankingAdapter = RankingAdapter(context)
+    fun provideRankingAdapter(): RankingAdapter = RankingAdapter()
 }
