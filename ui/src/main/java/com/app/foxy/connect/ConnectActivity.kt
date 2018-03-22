@@ -9,7 +9,6 @@ import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.view.ViewPager
 import butterknife.BindView
 import butterknife.ButterKnife
-import com.eftimoff.viewpagertransformers.ZoomOutSlideTransformer
 import com.app.foxy.BaseActivity
 import com.app.foxy.R
 import com.app.foxy.connect.fragment.LoginFragment
@@ -18,6 +17,7 @@ import com.app.foxy.eventBus.ConnectStepCompleteEvent
 import com.app.foxy.eventBus.CreateAccountViewClickedEvent
 import com.app.foxy.eventBus.LoginViewClickedEvent
 import com.app.foxy.main.MainActivity
+import com.eftimoff.viewpagertransformers.DepthPageTransformer
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 
@@ -33,7 +33,7 @@ class ConnectActivity : BaseActivity() {
         ButterKnife.bind(this)
         // setting up the view pager with the sections adapter.
         mViewPager.adapter = SectionsPagerAdapter(supportFragmentManager)
-        mViewPager.setPageTransformer(true, ZoomOutSlideTransformer())
+        //mViewPager.setPageTransformer(true, DepthPageTransformer())
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

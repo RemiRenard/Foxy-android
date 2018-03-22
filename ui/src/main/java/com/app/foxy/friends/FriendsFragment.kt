@@ -86,7 +86,7 @@ class FriendsFragment : Fragment(), IFriendsView {
         mRecyclerView.adapter = mAdapter
     }
 
-    @OnClick(R.id.toolbar_add)
+    @OnClick(R.id.friends_add)
     fun addFriends() {
         startActivity(AddFriendsActivity.getStartingIntent(context!!))
     }

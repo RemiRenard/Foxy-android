@@ -43,7 +43,7 @@
         <activity
             android:name="com.app.foxy.main.MainActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:theme="@style/AppTheme.NoActionBar.FullScreen"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name="com.thefinestartist.finestwebview.FinestWebViewActivity"
@@ -65,40 +65,40 @@
         <activity
             android:name="com.app.foxy.connect.ConnectActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:theme="@style/AppTheme.NoActionBar.FullScreen"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name="com.app.foxy.notification.selectFriends.SelectFriendsActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar.FullScreen" />
         <activity
             android:name="com.app.foxy.notification.selectSong.SelectSongActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar.FullScreen" />
         <activity
             android:name="com.app.foxy.profile.settings.SettingsActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar.FullScreen" />
         <activity
             android:name="com.app.foxy.connect.forgotPassword.ForgotPasswordActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar.FullScreen" />
         <activity
             android:name="com.app.foxy.update.ForceUpdateActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar.FullScreen" />
         <activity
             android:name="com.app.foxy.friends.add.AddFriendsActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar.FullScreen" />
         <activity
             android:name="com.app.foxy.friends.requests.FriendsRequestsActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar.FullScreen" />
         <activity
             android:name="com.app.foxy.profile.edit.EditProfileActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar.FullScreen" />
     </application>
 
 </manifest>

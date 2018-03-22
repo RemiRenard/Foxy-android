@@ -7,24 +7,21 @@
 
     <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="?attr/actionBarSize">
+        android:layout_height="wrap_content">
 
         <ImageView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/dusk_mountain"
-            app:layout_constraintBottom_toTopOf="@+id/profile_chart_title"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:id="@+id/profile_settings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:src="@drawable/ic_settings"
+            app:layout_constraintRight_toRightOf="parent" />
 
         <ImageView
             android:id="@+id/profile_avatar"
             android:layout_width="@dimen/profile_avatar_width"
             android:layout_height="@dimen/profile_avatar_height"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="40dp"
             android:src="@drawable/ic_placeholder_male_white"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -70,79 +67,83 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profile_username" />
 
-        <TextView
-            android:id="@+id/profile_chart_top_songs_title"
-            android:layout_width="wrap_content"
+        <android.support.v7.widget.CardView
+            android:id="@+id/profile_chart_top_songs_played_card"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/Top_songs_played"
-            android:textColor="@color/colorPrimary"
-            android:textSize="16sp"
-            android:textStyle="bold"
+            android:layout_margin="16dp"
+            android:padding="8dp"
+            app:cardCornerRadius="6dp"
+            app:cardElevation="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profile_chart_title" />
+            app:layout_constraintTop_toBottomOf="@+id/profile_chart_title">
 
-        <com.github.mikephil.charting.charts.BarChart
-            android:id="@+id/profile_chart_top_songs_played"
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp">
+
+                <TextView
+                    android:id="@+id/profile_chart_top_songs_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Top_songs_played"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent" />
+
+                <com.github.mikephil.charting.charts.BarChart
+                    android:id="@+id/profile_chart_top_songs_played"
+                    android:layout_width="0dp"
+                    android:layout_height="150dp"
+                    android:layout_marginTop="4dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/profile_chart_top_songs_title" />
+            </android.support.constraint.ConstraintLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/profile_chart_best_friends_card"
             android:layout_width="0dp"
-            android:layout_height="200dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="4dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profile_chart_top_songs_title" />
-
-        <TextView
-            android:id="@+id/profile_chart_top_songs_played_none"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:gravity="center"
-            android:text="@string/No_data_to_display"
-            android:textColor="@color/colorPrimary"
-            android:textSize="26sp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@+id/profile_chart_top_songs_played"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/profile_chart_top_songs_played" />
-
-        <View
-            android:id="@+id/profile_view_under_bar_chart"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_marginEnd="50dp"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="16dp"
-            android:alpha="0.7"
-            android:background="@color/colorPrimary"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profile_chart_top_songs_played" />
-
-        <TextView
-            android:id="@+id/profile_chart_top_friends_title"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/Best_friends"
-            android:textColor="@color/colorPrimary"
-            android:textSize="16sp"
-            android:textStyle="bold"
+            android:layout_margin="16dp"
+            android:padding="8dp"
+            app:cardCornerRadius="6dp"
+            app:cardElevation="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profile_view_under_bar_chart" />
+            app:layout_constraintTop_toBottomOf="@+id/profile_chart_top_songs_played_card">
 
-        <com.github.mikephil.charting.charts.PieChart
-            android:id="@+id/profile_chart_best_friends"
-            android:layout_width="0dp"
-            android:layout_height="230dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="6dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profile_chart_top_friends_title" />
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp">
+
+                <TextView
+                    android:id="@+id/profile_chart_top_friends"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Best_friends"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent" />
+
+                <com.github.mikephil.charting.charts.PieChart
+                    android:id="@+id/profile_chart_best_friends"
+                    android:layout_width="match_parent"
+                    android:layout_height="230dp"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/profile_chart_top_friends" />
+            </android.support.constraint.ConstraintLayout>
+        </android.support.v7.widget.CardView>
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

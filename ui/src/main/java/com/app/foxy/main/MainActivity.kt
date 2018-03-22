@@ -1,19 +1,14 @@
 package com.app.foxy.main
 
-import android.animation.ObjectAnimator
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Color
-import android.graphics.PorterDuff
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
-import android.support.v4.content.ContextCompat
-import android.view.View
-import android.widget.ImageView
-import android.widget.LinearLayout
+import android.support.v4.app.FragmentPagerAdapter
+import android.support.v4.view.ViewPager
 import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.OnClick
@@ -29,6 +24,7 @@ import com.app.foxy.notification.NotificationFragment
 import com.app.foxy.notification.selectSong.SelectSongActivity
 import com.app.foxy.profile.ProfileFragment
 import com.app.foxy.ranking.RankingFragment
+import com.eftimoff.viewpagertransformers.ZoomOutSlideTransformer
 import com.getkeepsafe.taptargetview.TapTarget
 import com.getkeepsafe.taptargetview.TapTargetSequence
 import org.greenrobot.eventbus.EventBus
@@ -40,21 +36,13 @@ import javax.inject.Inject
  */
 class MainActivity : BaseActivity(), IMainView {
 
-    private var mFragmentManager: FragmentManager? = null
     private var mIsNewNotification: Boolean = false
-    private var mCurrentViewId: Int = 0
 
     @BindView(R.id.notif_send_button)
     lateinit var mSendNotifButton: FloatingActionButton
 
-    @BindView(R.id.bottom_bar)
-    lateinit var mBottomBarLayout: LinearLayout
-
-    @BindView(R.id.navigation_notification)
-    lateinit var mNavigationNotification: ImageView
-
-    @BindView(R.id.navigation_friends)
-    lateinit var mNavigationFriend: ImageView
+    @BindView(R.id.main_view_pager)
+    lateinit var mViewPager: ViewPager
 
     @Inject
     lateinit var mPresenter: IMainPresenter
@@ -69,11 +57,12 @@ class MainActivity : BaseActivity(), IMainView {
         mPresenter.attachView(this)
         // Binding views.
         ButterKnife.bind(this)
-        mFragmentManager = supportFragmentManager
         if (mIsNewNotification) {
             mPresenter.refreshToken()
         }
-        manageColorBottomBar(mNavigationNotification)
+        // setting up the view pager with the sections adapter.
+        mViewPager.adapter = SectionsPagerAdapter(supportFragmentManager)
+        mViewPager.setPageTransformer(true, ZoomOutSlideTransformer())
         manageFragment()
         mPresenter.manageTutorial()
     }
@@ -99,7 +88,7 @@ class MainActivity : BaseActivity(), IMainView {
 
             override fun onSequenceStep(lastTarget: TapTarget?, targetClicked: Boolean) {
                 mSendNotifButton.isClickable = true
-                manageBottomBar(mNavigationFriend)
+                mViewPager.currentItem = FRIENDS_FRAGMENT_POSITION
             }
         }).continueOnCancel(true).start()
     }
@@ -117,43 +106,7 @@ class MainActivity : BaseActivity(), IMainView {
         val bundle = Bundle()
         bundle.putBoolean(Constants.BUNDLE_IS_NEW_NOTIFICATION, mIsNewNotification)
         fragment.arguments = bundle
-        mFragmentManager?.beginTransaction()?.replace(R.id.content, fragment)?.commit()
-    }
-
-    @OnClick(R.id.navigation_profile, R.id.navigation_notification, R.id.navigation_rank, R.id.navigation_friends)
-    fun manageBottomBar(view: View) {
-        manageColorBottomBar(view)
-        var fragment: Fragment? = null
-        when (view.id) {
-            R.id.navigation_notification -> fragment = NotificationFragment()
-            R.id.navigation_profile -> fragment = ProfileFragment()
-            R.id.navigation_rank -> fragment = RankingFragment()
-            R.id.navigation_friends -> fragment = FriendsFragment()
-        }
-        val bundle = Bundle()
-        fragment?.arguments = bundle
-        mFragmentManager?.popBackStack()
-        if (fragment != null && mCurrentViewId != view.id) {
-            mFragmentManager?.beginTransaction()?.replace(R.id.content, fragment)?.commit()
-        }
-        ObjectAnimator.ofFloat(view, "translationY", 0f, -25f, 0f).setDuration(500).start()
-        mCurrentViewId = view.id
-    }
-
-    /**
-     * Manage the color of the bottom bar.
-     * @param viewClicked View
-     */
-    private fun manageColorBottomBar(viewClicked: View?) {
-        (0 until mBottomBarLayout.childCount)
-                .map { mBottomBarLayout.getChildAt(it) as ImageView }
-                .forEach {
-                    if (viewClicked != null && it.id == viewClicked.id) {
-                        it.setColorFilter(Color.TRANSPARENT, PorterDuff.Mode.DST)
-                    } else {
-                        it.setColorFilter(ContextCompat.getColor(this, R.color.colorPrimaryTransparent))
-                    }
-                }
+        mViewPager.currentItem = NOTIFICATION_FRAGMENT_POSITION
     }
 
     /**
@@ -176,7 +129,35 @@ class MainActivity : BaseActivity(), IMainView {
         super.onDestroy()
     }
 
+    /**
+     * A [FragmentPagerAdapter] that returns a fragment corresponding to
+     * one of the sections/tabs/pages.
+     */
+    private inner class SectionsPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
+
+        override fun getItem(position: Int): Fragment? {
+            var fragment: Fragment? = null
+            when (position) {
+                PROFILE_FRAGMENT_POSITION -> fragment = ProfileFragment()
+                FRIENDS_FRAGMENT_POSITION -> fragment = FriendsFragment()
+                NOTIFICATION_FRAGMENT_POSITION -> fragment = NotificationFragment()
+                RANKING_FRAGMENT_POSITION -> fragment = RankingFragment()
+            }
+            fragment?.arguments = Bundle()
+            return fragment
+        }
+
+        override fun getCount(): Int = NB_PAGE
+    }
+
+
     companion object {
+
+        private val PROFILE_FRAGMENT_POSITION = 0
+        private val FRIENDS_FRAGMENT_POSITION = 1
+        private val NOTIFICATION_FRAGMENT_POSITION = 2
+        private val RANKING_FRAGMENT_POSITION = 3
+        private val NB_PAGE = 4
 
         /**
          * Return the intent to start this activity.

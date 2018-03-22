@@ -26,16 +26,6 @@ import android.widget.*
 import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.OnClick
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
-import com.bumptech.glide.signature.ObjectKey
-import com.github.mikephil.charting.charts.BarChart
-import com.github.mikephil.charting.charts.PieChart
-import com.github.mikephil.charting.components.XAxis
-import com.github.mikephil.charting.components.YAxis
-import com.github.mikephil.charting.data.*
-import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
-import com.github.mikephil.charting.utils.ColorTemplate
 import com.app.data.Constants
 import com.app.data.model.Stats
 import com.app.data.model.User
@@ -46,6 +36,16 @@ import com.app.foxy.eventBus.CameraPermsResultEvent
 import com.app.foxy.eventBus.WriteStoragePermResultEvent
 import com.app.foxy.profile.dagger.ProfileModule
 import com.app.foxy.profile.settings.SettingsActivity
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.signature.ObjectKey
+import com.github.mikephil.charting.charts.BarChart
+import com.github.mikephil.charting.charts.PieChart
+import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.components.YAxis
+import com.github.mikephil.charting.data.*
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
+import com.github.mikephil.charting.utils.ColorTemplate
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -68,9 +68,6 @@ class ProfileFragment : Fragment(), IProfileView {
     private val ACTIVITY_RESULT_CAMERA = 2
     private var mCameraFile: File? = null
 
-    @BindView(R.id.profile_progress_bar)
-    lateinit var mProgressBar: ProgressBar
-
     @BindView(R.id.swipe_refresh_profile)
     lateinit var mSwipeRefresh: SwipeRefreshLayout
 
@@ -88,15 +85,6 @@ class ProfileFragment : Fragment(), IProfileView {
 
     @BindView(R.id.profile_chart_best_friends)
     lateinit var mPieChart: PieChart
-
-    @BindView(R.id.profile_chart_top_songs_played_none)
-    lateinit var mBarChartTvNone: TextView
-
-    @BindView(R.id.profile_view_under_bar_chart)
-    lateinit var mViewBarChart: View
-
-    @BindView(R.id.profile_chart_top_friends_title)
-    lateinit var mTopFriendsTitle: TextView
 
     @Inject
     lateinit var mPresenter: IProfilePresenter
@@ -121,6 +109,8 @@ class ProfileFragment : Fragment(), IProfileView {
     private fun displayBarChart() {
         mChart.description.isEnabled = false
         mChart.setDrawBarShadow(false)
+        mChart.setNoDataText(getString(R.string.No_data_to_display))
+        mChart.setNoDataTextColor(R.color.colorPrimaryDark)
         mChart.setDrawGridBackground(false)
         mChart.xAxis.position = XAxis.XAxisPosition.BOTTOM
         mChart.xAxis.setDrawGridLines(false)
@@ -137,6 +127,8 @@ class ProfileFragment : Fragment(), IProfileView {
         mPieChart.setHoleColor(Color.TRANSPARENT)
         mPieChart.setTransparentCircleColor(Color.WHITE)
         mPieChart.setTransparentCircleAlpha(110)
+        mChart.setNoDataText(getString(R.string.No_data_to_display))
+        mPieChart.setNoDataTextColor(R.color.colorPrimaryDark)
         mPieChart.holeRadius = 45f
         mPieChart.setEntryLabelColor(Color.BLACK)
         mPieChart.transparentCircleRadius = 20f
@@ -166,39 +158,17 @@ class ProfileFragment : Fragment(), IProfileView {
         } else {
             mProfileUsername.visibility = View.GONE
         }
-        showStats()
-    }
-
-    private fun showStats() {
-        // BAR CHART
-        if (mCurrentUser?.stats != null && mCurrentUser?.stats?.topSongs != null
-                && mCurrentUser?.stats?.topSongs?.isNotEmpty()!!) {
-            setBarChartData(mCurrentUser?.stats?.topSongs!!)
-            mChart.visibility = View.VISIBLE
-            mBarChartTvNone.visibility = View.GONE
-        } else {
-            mChart.visibility = View.INVISIBLE
-            mBarChartTvNone.visibility = View.VISIBLE
-        }
-        // PIE CHART
-        if (mCurrentUser?.stats != null && mCurrentUser?.stats?.topFriends != null
-                && mCurrentUser?.stats?.topFriends?.isNotEmpty()!!) {
-            setPieChartData(mCurrentUser?.stats?.topFriends!!)
-            mPieChart.visibility = View.VISIBLE
-        } else {
-            mViewBarChart.visibility = View.GONE
-            mPieChart.visibility = View.GONE
-            mTopFriendsTitle.visibility = View.GONE
-        }
+        setBarChartData(user.stats?.topSongs)
+        setPieChartData(user.stats?.topFriends)
     }
 
     /**
      * Add data to the bar chart
      */
-    private fun setBarChartData(songs: List<Stats.Song>) {
+    private fun setBarChartData(songs: List<Stats.Song>?) {
         val songList = ArrayList<String>()
         val yVal = ArrayList<BarEntry>()
-        songs.mapIndexed { index, song ->
+        songs?.mapIndexed { index, song ->
             val value = song.nbUsed
             yVal.add(BarEntry(index.toFloat(), value!!.toFloat()))
             songList.add(song.name!!)
@@ -211,7 +181,7 @@ class ProfileFragment : Fragment(), IProfileView {
         val data = BarData(set)
         mChart.data = data
         mChart.xAxis.valueFormatter = IndexAxisValueFormatter(songList)
-        mChart.xAxis.labelCount = songs.size
+        mChart.xAxis.labelCount = if (songs != null && songs.isNotEmpty()) songs.size else 0
         mChart.invalidate()
         mChart.animateY(500)
     }
@@ -219,9 +189,9 @@ class ProfileFragment : Fragment(), IProfileView {
     /**
      * Add data to the pie chart
      */
-    private fun setPieChartData(topFriends: List<Stats.Friend>) {
+    private fun setPieChartData(topFriends: List<Stats.Friend>?) {
         val yVal = ArrayList<PieEntry>()
-        topFriends.map {
+        topFriends?.map {
             yVal.add(PieEntry(it.nbNotifSent?.toFloat()!!, it.username))
         }
         val set = PieDataSet(yVal, "Top friends")
@@ -239,22 +209,17 @@ class ProfileFragment : Fragment(), IProfileView {
         openBottomSheetDialog()
     }
 
-    @OnClick(R.id.toolbar_settings)
+    @OnClick(R.id.profile_settings)
     fun settingsClicked() {
         startActivity(SettingsActivity.getStartingIntent(context!!))
     }
 
-    @OnClick(R.id.toolbar_achievements)
-    fun achievementsClicked() {
-        Toast.makeText(context, "Not implemented yet!", Toast.LENGTH_SHORT).show()
-    }
-
     override fun showProgressBar() {
-        mProgressBar.visibility = View.VISIBLE
+        // There is no progress bar on this screen
     }
 
     override fun hideProgressBar() {
-        mProgressBar.visibility = View.GONE
+        // There is no progress bar on this screen
         mSwipeRefresh.isRefreshing = false
     }
 
