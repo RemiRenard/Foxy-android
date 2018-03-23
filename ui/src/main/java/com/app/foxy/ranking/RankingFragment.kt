@@ -1,13 +1,11 @@
 package com.app.foxy.ranking
 
-import android.graphics.Rect
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.view.ViewPager
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -127,7 +125,11 @@ class RankingFragment : Fragment(), IRankingView {
 
     override fun showCurrentUserData(currentUserData: UserRank) {
         Glide.with(context)
-                .load(currentUserData.avatar)
+                .load(if(currentUserData.avatar.isNullOrEmpty()){
+                    R.drawable.ic_placeholder_male_white
+                }else{
+                    currentUserData.avatar
+                })
                 .apply(RequestOptions()
                         .circleCrop()
                         .placeholder(R.drawable.ic_placeholder_circle_white))

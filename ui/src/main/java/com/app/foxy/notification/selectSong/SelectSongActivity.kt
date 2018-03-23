@@ -26,7 +26,6 @@ import com.app.foxy.BaseActivity
 import com.app.foxy.BuildConfig
 import com.app.foxy.FoxyApp
 import com.app.foxy.R
-import com.app.foxy.custom.SpacesItemDecoration
 import com.app.foxy.eventBus.SongSelectedNotifEvent
 import com.app.foxy.notification.dagger.NotificationModule
 import com.app.foxy.notification.selectFriends.SelectFriendsActivity
@@ -50,16 +49,9 @@ class SelectSongActivity : BaseActivity(), ISelectSongView {
     private var mIsRecording: Boolean = false
     private var mIsPlaying: Boolean = false
     private var mIsFileRecorded = false
-    private var mSongIdSelected: String = ""
 
-    @BindView(R.id.add_notification_recycler_view)
+    @BindView(R.id.select_sound_recycler_view)
     lateinit var mRecyclerView: RecyclerView
-
-    @BindView(R.id.add_notification_button_next)
-    lateinit var mButtonNext: Button
-
-    @BindView(R.id.toolbar_record)
-    lateinit var mToolbarRecord: ImageView
 
     @Inject
     lateinit var mPresenter: ISelectSongPresenter
@@ -70,13 +62,13 @@ class SelectSongActivity : BaseActivity(), ISelectSongView {
     override fun onCreate(savedInstanceState: Bundle?) {
         overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_add_notification)
+        setContentView(R.layout.activity_select_sound)
         ButterKnife.bind(this)
         // Register this target with dagger.
         FoxyApp.get(this).getAppComponent()?.plus(NotificationModule())?.inject(this)
         mRecyclerView.setHasFixedSize(true)
         mRecyclerView.layoutManager = GridLayoutManager(this, 2)
-        mRecyclerView.addItemDecoration(SpacesItemDecoration(5))
+        // mRecyclerView.addItemDecoration(SpacesItemDecoration(5))
         mRecyclerView.adapter = mSongAdapter
         mPresenter.attachView(this)
         mPresenter.getSongs(true)
@@ -103,13 +95,6 @@ class SelectSongActivity : BaseActivity(), ISelectSongView {
                         .outerCircleColor(R.color.colorPrimary)
                         .textColor(android.R.color.white)
                         .transparentTarget(true)
-                        .targetCircleColor(android.R.color.white),
-                TapTarget.forView(mToolbarRecord,
-                        getString(R.string.tuto_btn_record_your_own_voice),
-                        getString(R.string.tuto_btn_record_your_own_voice_desc))
-                        .outerCircleColor(R.color.colorPrimary)
-                        .textColor(android.R.color.white)
-                        .targetRadius(25)
                         .targetCircleColor(android.R.color.white)
         ).listener(object : TapTargetSequence.Listener {
             override fun onSequenceCanceled(lastTarget: TapTarget?) {
@@ -126,24 +111,9 @@ class SelectSongActivity : BaseActivity(), ISelectSongView {
         }).continueOnCancel(true).start()
     }
 
-    @OnClick(R.id.toolbar_record)
-    fun addCustomSong() {
-        Toast.makeText(this, "Not implemented yet :/", Toast.LENGTH_SHORT).show()
-    }
-
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onSongSelectedNotifUpdateEvent(event: SongSelectedNotifEvent) {
         mPresenter.saveTmpNotification(event.song.id!!)
-    }
-
-    @OnClick(R.id.toolbar_back)
-    fun back() {
-        onBackPressed()
-    }
-
-    @OnClick(R.id.add_notification_button_next)
-    fun sendNotification() {
-        mPresenter.saveTmpNotification(mSongIdSelected)
     }
 
     fun playAudioClicked() {
@@ -197,7 +167,6 @@ class SelectSongActivity : BaseActivity(), ISelectSongView {
     }
 
     private fun stopRecordVoice() {
-        mButtonNext.visibility = View.VISIBLE
         mIsFileRecorded = true
         mRecorder?.stop()
         mRecorder?.release()

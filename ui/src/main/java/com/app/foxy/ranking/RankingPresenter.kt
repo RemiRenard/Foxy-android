@@ -35,8 +35,8 @@ class RankingPresenter(private val rankingService: IRankingService, private val 
 
     override fun manageTutorial() {
         if (!mGlobalService.isRankingTutorialShowed(mContext)) {
-            mView?.showTutorial()
             mGlobalService.rankingTutorialShowed(mContext)
+            mView?.showTutorial()
         }
     }
 
