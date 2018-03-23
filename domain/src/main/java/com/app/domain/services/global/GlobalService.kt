@@ -42,8 +42,8 @@ class GlobalService : IGlobalService {
     }
 
     override fun isRankingTutorialShowed(context: Context): Boolean {
-        return context.getSharedPreferences(Constants.TUTORIAL_SELECT_SONG_ALREADY_PLAYED, Context.MODE_PRIVATE)
-                .getBoolean(Constants.TUTORIAL_SELECT_SONG_ALREADY_PLAYED, false)
+        return context.getSharedPreferences(Constants.TUTORIAL_RANKING_ALREADY_PLAYED, Context.MODE_PRIVATE)
+                .getBoolean(Constants.TUTORIAL_RANKING_ALREADY_PLAYED, false)
     }
 
     override fun rankingTutorialShowed(context: Context) {

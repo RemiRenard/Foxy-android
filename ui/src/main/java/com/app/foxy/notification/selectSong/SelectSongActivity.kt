@@ -68,7 +68,7 @@ class SelectSongActivity : BaseActivity(), ISelectSongView {
         FoxyApp.get(this).getAppComponent()?.plus(NotificationModule())?.inject(this)
         mRecyclerView.setHasFixedSize(true)
         mRecyclerView.layoutManager = GridLayoutManager(this, 2)
-        // mRecyclerView.addItemDecoration(SpacesItemDecoration(5))
+        // mRecyclerView.addItemDecoration(SpacesItemDecoration(1))
         mRecyclerView.adapter = mSongAdapter
         mPresenter.attachView(this)
         mPresenter.getSongs(true)

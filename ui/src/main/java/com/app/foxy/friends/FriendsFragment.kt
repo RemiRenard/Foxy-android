@@ -106,10 +106,9 @@ class FriendsFragment : Fragment(), IFriendsView {
         mAdapter.setData(friends)
         mNoFriends.visibility = if (friends.isNotEmpty()) View.GONE else View.VISIBLE
         mCurvedArrow.clearAnimation()
-        mCurvedArrow.startAnimation(mScaleAnimation)
         if (friends.isEmpty()) {
-            mCurvedArrow.startAnimation(mScaleAnimation)
             mCurvedArrow.visibility = View.VISIBLE
+            mCurvedArrow.startAnimation(mScaleAnimation)
         } else {
             mCurvedArrow.visibility = View.GONE
         }
