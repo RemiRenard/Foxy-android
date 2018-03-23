@@ -1,5 +1,6 @@
 package com.app.foxy.notification
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.widget.SwipeRefreshLayout
@@ -22,6 +23,7 @@ import com.app.foxy.custom.SimpleDividerItemDecoration
 import com.app.foxy.eventBus.NotificationClickedEvent
 import com.app.foxy.notification.adapter.NotificationAdapter
 import com.app.foxy.notification.dagger.NotificationModule
+import com.app.foxy.notification.selectSong.SelectSongActivity
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -86,6 +88,14 @@ class NotificationFragment : Fragment(), INotificationView {
     @OnClick(R.id.notification_filter)
     fun filterNotifications() {
         Toast.makeText(context, "Not implemented yet :/", Toast.LENGTH_SHORT).show()
+    }
+
+    @OnClick(R.id.notification_add)
+    fun addNotification() {
+        if (context != null) {
+            startActivity(SelectSongActivity.getStartingIntent(context!!)
+                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+        }
     }
 
     override fun showProgressBar() {

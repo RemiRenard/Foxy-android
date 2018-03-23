@@ -50,7 +50,7 @@ class SettingsActivity : BaseActivity(), ISettingsView {
         startActivity(EditProfileActivity.getStartingIntent(this))
     }
 
-    @OnClick(R.id.toolbar_back)
+    @OnClick(R.id.settings_back)
     fun back() {
         onBackPressed()
     }

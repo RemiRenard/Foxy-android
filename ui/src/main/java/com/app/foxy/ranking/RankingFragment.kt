@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.view.ViewPager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -52,6 +53,9 @@ class RankingFragment : Fragment(), IRankingView {
     @BindView(R.id.ranking_profile_avatar)
     lateinit var mProfileAvatar: ImageView
 
+    @BindView(R.id.ranking_star)
+    lateinit var mRankinBadge: ImageView
+
     @BindView(R.id.ranking_score)
     lateinit var mScore: TextView
 
@@ -73,8 +77,14 @@ class RankingFragment : Fragment(), IRankingView {
         mPresenter.attachView(this)
         EventBus.getDefault().register(this)
         mPresenter.getRanking()
-        mPresenter.manageTutorial()
         return mView
+    }
+
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        if (isVisibleToUser) {
+            mPresenter.manageTutorial()
+        }
     }
 
     override fun showTutorial() {
@@ -85,17 +95,15 @@ class RankingFragment : Fragment(), IRankingView {
                         .outerCircleColor(R.color.colorPrimaryDark)
                         .textColor(android.R.color.white)
                         .outerCircleAlpha(0.98F)
-                        .targetRadius(40)
+                        .targetRadius(0)
                         .targetCircleColor(android.R.color.white),
-                TapTarget.forBounds(Rect(activity!!.resources.displayMetrics.widthPixels / 2,
-                        activity!!.resources.displayMetrics.heightPixels / 2,
-                        activity!!.resources.displayMetrics.widthPixels / 2,
-                        activity!!.resources.displayMetrics.heightPixels / 2),
-                        getString(R.string.tuto_ranking), getString(R.string.tuto_ranking_desc))
+                TapTarget.forView(mRankinBadge,
+                        getString(R.string.tuto_your_badge), getString(R.string.tuto_your_badge_desc))
                         .transparentTarget(true)
                         .outerCircleColor(R.color.colorPrimaryDark)
                         .textColor(android.R.color.white)
-                        .targetRadius(40)
+                        .outerCircleAlpha(0.98F)
+                        .targetRadius(25)
                         .targetCircleColor(android.R.color.white)
         ).listener(object : TapTargetSequence.Listener {
             override fun onSequenceCanceled(lastTarget: TapTarget?) {
@@ -140,14 +148,15 @@ class RankingFragment : Fragment(), IRankingView {
      * return the string of the rank + its ending ('st', 'nd', 'rd' or 'th')
      */
     private fun getRankString(n: Int): String {
+        val rank = getString(R.string.Rank) + " "
         if (n in 11..13) {
-            return n.toString() + "th"
+            return rank + n.toString() + "th"
         }
         return when (n % 10) {
-            1 -> n.toString() + "st"
-            2 -> n.toString() + "nd"
-            3 -> n.toString() + "rd"
-            else -> n.toString() + "th"
+            1 -> rank + n.toString() + "st"
+            2 -> rank + n.toString() + "nd"
+            3 -> rank + n.toString() + "rd"
+            else -> rank + n.toString() + "th"
         }
     }
 

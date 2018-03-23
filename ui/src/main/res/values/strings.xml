@@ -97,7 +97,7 @@
     <string name="Daily">Daily</string>
     <string name="loading">Loading…</string>
     <string name="No_data_to_display">No data to display, try to refresh</string>
-    <string name="Score">%1$d pts</string>
+    <string name="Score">Score : %1$d pts</string>
     <string name="Rate_the_app">Rate the app</string>
     <string name="No_points">No points</string>
     <string name="Unranked">Unranked</string>
@@ -113,6 +113,7 @@
     <string name="tuto_list_songs_desc">Your friends will receive this sound as a notification.</string>
     <string name="tuto_your_score">Here there is your score, updated for each notification sent.</string>
     <string name="tuto_your_score_desc">One notification sent = 1 new point</string>
-    <string name="tuto_ranking">Here, there is the ranking (global, weekly and daily)</string>
-    <string name="tuto_ranking_desc">If you stay regularly in the top 3 you will unlock unique sounds to send</string>
+    <string name="Rank">Rank :</string>
+    <string name="tuto_your_badge">This is your badge associated to your rank</string>
+    <string name="tuto_your_badge_desc">When you rank up, you can unlock new badges !</string>
 </resources>
