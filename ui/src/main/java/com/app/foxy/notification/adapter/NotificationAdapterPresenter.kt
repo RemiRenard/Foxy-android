@@ -36,6 +36,7 @@ class NotificationAdapterPresenter(val mContext: Context) : INotificationAdapter
             mPlayer?.setOnCompletionListener {
                 mPlayer = null
                 mView?.itemPlayingCompleted()
+                // TODO Mark notification as read.
             }
         } catch (e: IOException) {
             Log.e(javaClass.simpleName, e.message)

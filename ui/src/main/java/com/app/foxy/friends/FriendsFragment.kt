@@ -14,6 +14,7 @@ import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
 import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.OnClick
@@ -91,6 +92,11 @@ class FriendsFragment : Fragment(), IFriendsView {
         startActivity(AddFriendsActivity.getStartingIntent(context!!))
     }
 
+    @OnClick(R.id.friends_filter)
+    fun filterFriends() {
+        Toast.makeText(context, "Not implemented yet :/", Toast.LENGTH_SHORT).show()
+    }
+
     @OnClick(R.id.friends_banner_requests)
     fun openFriendsRequests() {
         startActivity(FriendsRequestsActivity.getStartingIntent(context!!))
@@ -100,6 +106,7 @@ class FriendsFragment : Fragment(), IFriendsView {
         mAdapter.setData(friends)
         mNoFriends.visibility = if (friends.isNotEmpty()) View.GONE else View.VISIBLE
         mCurvedArrow.clearAnimation()
+        mCurvedArrow.startAnimation(mScaleAnimation)
         if (friends.isEmpty()) {
             mCurvedArrow.startAnimation(mScaleAnimation)
             mCurvedArrow.visibility = View.VISIBLE

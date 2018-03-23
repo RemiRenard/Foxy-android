@@ -10,8 +10,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
 import butterknife.BindView
 import butterknife.ButterKnife
+import butterknife.OnClick
 import com.app.data.Constants
 import com.app.data.model.Notification
 import com.app.foxy.FoxyApp
@@ -81,12 +83,17 @@ class NotificationFragment : Fragment(), INotificationView {
         mRecyclerView.adapter = mAdapter
     }
 
+    @OnClick(R.id.notification_filter)
+    fun filterNotifications() {
+        Toast.makeText(context, "Not implemented yet :/", Toast.LENGTH_SHORT).show()
+    }
+
     override fun showProgressBar() {
-        mProgressBar.visibility = View.VISIBLE
+        // mProgressBar.visibility = View.VISIBLE
     }
 
     override fun hideProgressBar() {
-        mProgressBar.visibility = View.GONE
+        // mProgressBar.visibility = View.GONE
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

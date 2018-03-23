@@ -28,13 +28,13 @@ class RankingAdapter : RecyclerView.Adapter<RankingAdapter.ItemViewHolder>() {
         holder.itemView?.item_ranking_position?.text = (position + 1).toString()
         holder.itemView?.item_ranking_user_name?.text = mUserRanks[position].username
         if (mUserRanks[position].avatar.isNullOrEmpty()) {
-            holder.itemView?.item_ranking_avatar?.setImageResource(R.drawable.ic_placeholder_male)
+            holder.itemView?.item_ranking_avatar?.setImageResource(R.drawable.ic_placeholder_male_white)
         } else {
             Glide.with(mContext)
                     .load(mUserRanks[position].avatar)
                     .apply(RequestOptions()
                             .circleCrop()
-                            .placeholder(R.drawable.ic_placeholder_circle_blue))
+                            .placeholder(R.drawable.ic_placeholder_circle_white))
                     .into(holder.itemView?.item_ranking_avatar)
         }
         holder.itemView?.item_ranking_score?.text = mUserRanks[position].score.toString()

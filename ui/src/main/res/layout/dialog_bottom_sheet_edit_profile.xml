@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorPrimary"
+    android:alpha="0.8"
     android:orientation="vertical"
     android:padding="8dp">
 
@@ -11,28 +11,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
-        android:background="@drawable/bg_white_rect_oval_border"
+        android:background="@drawable/bg_dark_blue_rect_oval_border"
         android:text="@string/Add_picture_from_camera"
         android:textAllCaps="false"
-        android:textColor="@android:color/white" />
+        android:textColor="@color/colorPrimary" />
 
     <Button
         android:id="@+id/dialog_bottom_edit_profile_library"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
-        android:background="@drawable/bg_white_rect_oval_border"
+        android:background="@drawable/bg_dark_blue_rect_oval_border"
         android:text="@string/Add_picture_from_library"
         android:textAllCaps="false"
-        android:textColor="@android:color/white" />
+        android:textColor="@color/colorPrimary" />
 
     <Button
         android:id="@+id/dialog_bottom_edit_profile_cancel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
-        android:background="@drawable/bg_white_rect_oval_border"
+        android:background="@drawable/bg_dark_blue_rect_oval_border"
         android:text="@string/Cancel"
         android:textAllCaps="false"
-        android:textColor="@android:color/white" />
+        android:textColor="@color/colorPrimary" />
 </LinearLayout>

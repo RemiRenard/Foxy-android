@@ -149,7 +149,7 @@ class ProfileFragment : Fragment(), IProfileView {
             Glide.with(context).load(mCurrentUser?.avatar).apply(RequestOptions()
                     .signature(ObjectKey(System.currentTimeMillis()))
                     .circleCrop()
-                    .placeholder(R.drawable.ic_placeholder_circle_blue))
+                    .placeholder(R.drawable.ic_placeholder_male_white))
                     .into(mProfileAvatar)
         }
         mProfileName.text = context!!.getString(R.string.placeholder_name, mCurrentUser?.firstName, mCurrentUser?.lastName)

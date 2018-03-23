@@ -122,7 +122,7 @@ class RankingFragment : Fragment(), IRankingView {
                 .load(currentUserData.avatar)
                 .apply(RequestOptions()
                         .circleCrop()
-                        .placeholder(R.drawable.ic_placeholder_circle_blue))
+                        .placeholder(R.drawable.ic_placeholder_circle_white))
                 .into(mProfileAvatar)
         if (currentUserData.score != null) {
             mScore.text = context!!.getString(R.string.Score, currentUserData.score)

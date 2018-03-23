@@ -64,21 +64,21 @@ class NotificationAdapter(val mPresenter: INotificationAdapterPresenter) : Recyc
             mPreviousPositionPlaying = -1
             mPreviousPositionLoading = -1
             holder.itemView.item_notification_audio_button.visibility = View.VISIBLE
-            holder.itemView.item_notification_audio_button.setImageResource(R.drawable.ic_play)
+            holder.itemView.item_notification_audio_button.setImageResource(R.drawable.ic_play_white)
             holder.itemView.item_notification_progress_bar.visibility = View.GONE
 
             // Mark notification as read.
-            holder.itemView.item_notification_audio_button.setImageResource(R.drawable.ic_play)
+            holder.itemView.item_notification_audio_button.setImageResource(R.drawable.ic_play_white)
             EventBus.getDefault().post(NotificationClickedEvent(mNotifications[position].id!!))
             mNotifications[position].isRead = true
 
         } else if (mPositionPlaying == position) {
             holder.itemView.item_notification_audio_button.visibility = View.VISIBLE
-            holder.itemView.item_notification_audio_button.setImageResource(R.drawable.ic_stop)
+            holder.itemView.item_notification_audio_button.setImageResource(R.drawable.ic_stop_white)
             holder.itemView.item_notification_progress_bar.visibility = View.GONE
         } else {
             holder.itemView.item_notification_audio_button.visibility = View.VISIBLE
-            holder.itemView.item_notification_audio_button.setImageResource(R.drawable.ic_play)
+            holder.itemView.item_notification_audio_button.setImageResource(R.drawable.ic_play_white)
             holder.itemView.item_notification_progress_bar.visibility = View.GONE
         }
         holder.itemView?.item_notification_message?.text = mNotifications[position].message
