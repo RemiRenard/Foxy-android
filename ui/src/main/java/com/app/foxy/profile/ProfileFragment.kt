@@ -158,8 +158,12 @@ class ProfileFragment : Fragment(), IProfileView {
         } else {
             mProfileUsername.visibility = View.GONE
         }
-        setBarChartData(user.stats?.topSongs)
-        setPieChartData(user.stats?.topFriends)
+        if(user.stats?.topSongs!!.isNotEmpty() && user.stats?.topFriends.isNotEmpty()){
+            setBarChartData(user.stats?.topSongs)
+            setPieChartData(user.stats?.topFriends)
+        }else{
+            
+        }
     }
 
     /**
