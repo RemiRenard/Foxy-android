@@ -63,7 +63,7 @@ class MainActivity : BaseActivity(), IMainView {
         // setting up the view pager with the sections adapter.
         mViewPager.adapter = SectionsPagerAdapter(supportFragmentManager)
         mViewPager.setPageTransformer(true, ZoomOutSlideTransformer())
-        manageFragment()
+        mViewPager.currentItem = NOTIFICATION_FRAGMENT_POSITION
         mPresenter.manageTutorial()
     }
 
@@ -96,17 +96,6 @@ class MainActivity : BaseActivity(), IMainView {
     @OnClick(R.id.notif_send_button)
     fun addNotification() {
         startActivity(SelectSongActivity.getStartingIntent(this))
-    }
-
-    /**
-     * Display the good fragment if there are new notifications
-     */
-    private fun manageFragment() {
-        val fragment: Fragment = NotificationFragment()
-        val bundle = Bundle()
-        bundle.putBoolean(Constants.BUNDLE_IS_NEW_NOTIFICATION, mIsNewNotification)
-        fragment.arguments = bundle
-        mViewPager.currentItem = NOTIFICATION_FRAGMENT_POSITION
     }
 
     /**
@@ -143,7 +132,9 @@ class MainActivity : BaseActivity(), IMainView {
                 NOTIFICATION_FRAGMENT_POSITION -> fragment = NotificationFragment()
                 RANKING_FRAGMENT_POSITION -> fragment = RankingFragment()
             }
-            fragment?.arguments = Bundle()
+            val bundle = Bundle()
+            bundle.putBoolean(Constants.BUNDLE_IS_NEW_NOTIFICATION, mIsNewNotification)
+            fragment?.arguments = bundle
             return fragment
         }
 
