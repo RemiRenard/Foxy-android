@@ -36,7 +36,7 @@ class AddFriendsAdapter : RecyclerView.Adapter<AddFriendsAdapter.ItemViewHolder>
             EventBus.getDefault().post(AddFriendsIconClickedEvent(mUsers[position]))
         }
         if (mUsers[position].avatar.isNullOrEmpty()) {
-            holder.itemView?.item_add_friends_avatar?.setImageResource(R.drawable.ic_placeholder_male)
+            holder.itemView?.item_add_friends_avatar?.setImageResource(R.drawable.ic_placeholder_male_white)
         } else {
             Glide.with(mContext).load(mUsers[position].avatar).apply(RequestOptions
                     .placeholderOf(R.drawable.ic_placeholder_circle_white))

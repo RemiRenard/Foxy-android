@@ -7,7 +7,6 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.EditText
-import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import butterknife.BindView
@@ -37,9 +36,6 @@ class AddFriendsActivity : BaseActivity(), IAddFriendsView {
     @BindView(R.id.add_friends_recycler_view)
     lateinit var mRecyclerView: RecyclerView
 
-    @BindView(R.id.add_friends_shaking_hands)
-    lateinit var mShakingHands: ImageView
-
     @BindView(R.id.add_friends_progress_bar)
     lateinit var mProgressBar: ProgressBar
 
@@ -64,6 +60,7 @@ class AddFriendsActivity : BaseActivity(), IAddFriendsView {
         FoxyApp.get(this).getAppComponent()?.plus(FriendsModule())?.inject(this)
         initRecyclerView()
         mPresenter.attachView(this)
+        mPresenter.findUsers(null)
         //Reactive search bar
         RxTextView.textChanges(mSearchBar)
                 .filter({ mSearchBar.text.length > 2 }) //From more than 2 characters
@@ -73,7 +70,6 @@ class AddFriendsActivity : BaseActivity(), IAddFriendsView {
                 .observeOn(AndroidSchedulers.mainThread())
                 .onErrorReturn { "" }
                 .subscribe {
-                    if (!it.isBlank()) mShakingHands.visibility = View.GONE
                     mPresenter.findUsers(it)
                 }
     }
@@ -101,7 +97,7 @@ class AddFriendsActivity : BaseActivity(), IAddFriendsView {
         mAdapter.setData(users)
     }
 
-    @OnClick(R.id.toolbar_back)
+    @OnClick(R.id.add_friends_back)
     fun back() {
         onBackPressed()
     }

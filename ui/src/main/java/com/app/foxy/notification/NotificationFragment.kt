@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -66,11 +67,13 @@ class NotificationFragment : Fragment(), INotificationView {
             mPresenter.getNotifications(forceNetworkRefresh = true)
             mSwipeRefresh.isRefreshing = false
         }
+        Log.i("test", "notification fragment : onCreate")
         return mView
     }
 
     override fun onResume() {
         super.onResume()
+        Log.i("test", "notification fragment : onResume")
         mAdapter.onResume()
         EventBus.getDefault().register(this)
     }

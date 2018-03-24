@@ -34,7 +34,7 @@ interface IUserService {
 
     fun getCurrentUser(forceNetworkRefresh: Boolean): Observable<User>
 
-    fun findUsers(username: String, limit: Int, skip: Int): Observable<List<User>>
+    fun findUsers(username: String?, limit: Int, skip: Int): Observable<List<User>>
 
     fun updateProfilePicture(picture: File): Observable<User>
 }

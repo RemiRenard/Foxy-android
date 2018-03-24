@@ -90,7 +90,8 @@
         <activity
             android:name="com.app.foxy.friends.add.AddFriendsActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar.FullScreen" />
+            android:theme="@style/AppTheme.NoActionBar.FullScreen"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name="com.app.foxy.friends.requests.FriendsRequestsActivity"
             android:screenOrientation="portrait"

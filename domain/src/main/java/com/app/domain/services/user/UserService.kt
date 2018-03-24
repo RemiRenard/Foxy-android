@@ -210,7 +210,7 @@ class UserService : IUserService {
      * Get the users from the database
      * @return an observable of a list of users.
      */
-    override fun findUsers(username: String, limit: Int, skip: Int): Observable<List<User>> {
+    override fun findUsers(username: String?, limit: Int, skip: Int): Observable<List<User>> {
         return Data.networkService!!
                 .findUsers(Cache.token!!, FindUsersRequest(username, limit, skip))
                 .subscribeOn(Schedulers.io())

@@ -35,8 +35,8 @@ class AddFriendsPresenter(private val mUserService: IUserService, private val mF
         mView = null
     }
 
-    override fun findUsers(username: String) {
-        if (username.isBlank()) return
+    override fun findUsers(username: String?) {
+        if (username != null && username.isBlank()) return
         mView?.showProgressBar()
         //@TODO pagination with the skip
         mUserService.findUsers(username, mLimit, 0).subscribe(object : Observer<List<User>> {

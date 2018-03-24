@@ -27,6 +27,8 @@ import javax.inject.Inject
  */
 class FriendsRequestsActivity : BaseActivity(), IFriendsRequestsView {
 
+    private var mListSize: Int = 0
+
     @BindView(R.id.friends_requests_progress_bar)
     lateinit var mProgressBar: ProgressBar
 
@@ -71,17 +73,20 @@ class FriendsRequestsActivity : BaseActivity(), IFriendsRequestsView {
         }
     }
 
-    @OnClick(R.id.toolbar_back)
+    @OnClick(R.id.friends_requests_back)
     fun back() {
         onBackPressed()
     }
 
     override fun displayFriendsRequests(friendsRequests: List<FriendsRequestsResponse>) {
+        mListSize = friendsRequests.size
         mNoFriendsRequests.visibility = if (friendsRequests.isNotEmpty()) View.GONE else View.VISIBLE
         mAdapter.setData(friendsRequests)
     }
 
     override fun friendRequestCompleted(request: FriendsRequestsResponse) {
+        mListSize--
+        mNoFriendsRequests.visibility = if (mListSize > 0) View.GONE else View.VISIBLE
         mAdapter.removeItem(request)
     }
 

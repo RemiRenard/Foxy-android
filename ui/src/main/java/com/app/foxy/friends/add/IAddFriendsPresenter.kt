@@ -8,7 +8,7 @@ import com.app.foxy.IPresenter
  */
 interface IAddFriendsPresenter : IPresenter<IAddFriendsView> {
 
-    fun findUsers(username : String = "")
+    fun findUsers(username : String?)
 
     fun addFriends(user: User)
 }

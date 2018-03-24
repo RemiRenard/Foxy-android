@@ -22,7 +22,9 @@ import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.OnClick
@@ -158,11 +160,11 @@ class ProfileFragment : Fragment(), IProfileView {
         } else {
             mProfileUsername.visibility = View.GONE
         }
-        if(user.stats?.topSongs!!.isNotEmpty() && user.stats?.topFriends.isNotEmpty()){
+        if (user.stats?.topSongs != null && user.stats?.topFriends != null) {
             setBarChartData(user.stats?.topSongs)
             setPieChartData(user.stats?.topFriends)
-        }else{
-            
+        } else {
+
         }
     }
 
