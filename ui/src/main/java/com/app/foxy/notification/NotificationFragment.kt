@@ -67,7 +67,6 @@ class NotificationFragment : Fragment(), INotificationView {
             mPresenter.getNotifications(forceNetworkRefresh = true)
             mSwipeRefresh.isRefreshing = false
         }
-        Log.i("test", "notification fragment : onCreate")
         return mView
     }
 

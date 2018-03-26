@@ -125,7 +125,7 @@ class MainActivity : BaseActivity(), IMainView {
         mNavButton.isClickable = false
         TapTargetSequence(this).targets(
                 TapTarget.forView(mNavButton,
-                        getString(R.string.tuto_btn_send_notif), getString(R.string.tuto_btn_send_notif_desc))
+                        getString(R.string.tuto_btn_nav), getString(R.string.tuto_btn_nav_desc))
                         .transparentTarget(true)
                         .outerCircleColor(android.R.color.white)
                         .textColor(R.color.colorPrimary)

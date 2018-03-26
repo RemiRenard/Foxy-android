@@ -105,8 +105,8 @@
     <string name="Upgrade">Upgrade</string>
     <string name="upgrade_long_text">Your current version is no longer supported. Please update the app to enjoy new features.</string>
     <string name="We_are_checking_the_version">We are checking the version of the app…</string>
-    <string name="tuto_btn_send_notif">You can send notifications by typing to this button</string>
-    <string name="tuto_btn_send_notif_desc">First of all, you should add a friend.</string>
+    <string name="tuto_btn_nav">Tap to this button to display the menu.</string>
+    <string name="tuto_btn_nav_desc">You can navigate between screens when you slide the screen or when you click on a button of this menu.</string>
     <string name="tuto_btn_record_your_own_voice">Or record your own voice !</string>
     <string name="tuto_btn_record_your_own_voice_desc">Your friends will receive this song as a notification.</string>
     <string name="tuto_list_songs">Select a sound by pressing and holding the item, you can play the sound by clicking to the "play button".</string>

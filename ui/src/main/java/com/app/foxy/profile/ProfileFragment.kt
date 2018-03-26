@@ -170,7 +170,7 @@ class ProfileFragment : Fragment(), IProfileView {
         } else {
             mProfileUsername.visibility = View.GONE
         }
-        if (user.stats?.topSongs!!.isNotEmpty() && user.stats?.topFriends!!.isNotEmpty()) {
+        if (user.stats != null && user.stats?.topSongs!!.isNotEmpty() && user.stats?.topFriends!!.isNotEmpty()) {
             mNoDataText.visibility = View.GONE
             mCardBar.visibility = View.VISIBLE
             mCardPie.visibility = View.VISIBLE

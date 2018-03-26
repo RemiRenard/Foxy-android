@@ -53,12 +53,15 @@ class SwipeLayout : ViewGroup {
     private var mMinDistRequestDisallowParent = 0
 
     private var mIsOpenBeforeInit = false
-    @Volatile private var mAborted = false
-    @Volatile private var mIsScrolling = false
+    @Volatile
+    private var mAborted = false
+    @Volatile
+    private var mIsScrolling = false
     /**
      * @return true if the drag/swipe motion is currently locked.
      */
-    @Volatile var isDragLocked = false
+    @Volatile
+    var isDragLocked = false
         private set
 
     /**
@@ -169,7 +172,7 @@ class SwipeLayout : ViewGroup {
     override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
         mAborted = false
 
-        for (index in 0..childCount - 1) {
+        for (index in 0 until childCount) {
             val child = getChildAt(index)
 
             var left: Int
@@ -288,7 +291,7 @@ class SwipeLayout : ViewGroup {
         var desiredWidth = 0
         var desiredHeight = 0
 
-        for (i in 0..childCount - 1) {
+        for (i in 0 until childCount) {
             val child = getChildAt(i)
             val childParams = child.layoutParams
 
@@ -450,23 +453,23 @@ class SwipeLayout : ViewGroup {
 
      * @return true if you should call [.requestLayout].
      */
-    protected fun shouldRequestLayout(): Boolean {
+    private fun shouldRequestLayout(): Boolean {
         return mOnLayoutCount < 2
     }
 
 
     private val mainOpenLeft: Int
         get() {
-            when (dragEdge) {
-                DRAG_EDGE_LEFT -> return mRectMainClose.left + mSecondaryView!!.width
+            return when (dragEdge) {
+                DRAG_EDGE_LEFT -> mRectMainClose.left + mSecondaryView!!.width
 
-                DRAG_EDGE_RIGHT -> return mRectMainClose.left - mSecondaryView!!.width
+                DRAG_EDGE_RIGHT -> mRectMainClose.left - mSecondaryView!!.width
 
-                DRAG_EDGE_TOP -> return mRectMainClose.left
+                DRAG_EDGE_TOP -> mRectMainClose.left
 
-                DRAG_EDGE_BOTTOM -> return mRectMainClose.left
+                DRAG_EDGE_BOTTOM -> mRectMainClose.left
 
-                else -> return 0
+                else -> 0
             }
         }
 
@@ -818,16 +821,16 @@ class SwipeLayout : ViewGroup {
 
         private val slideOffset: Float
             get() {
-                when (dragEdge) {
-                    DRAG_EDGE_LEFT -> return (mMainView!!.left - mRectMainClose.left).toFloat() / mSecondaryView!!.width
+                return when (dragEdge) {
+                    DRAG_EDGE_LEFT -> (mMainView!!.left - mRectMainClose.left).toFloat() / mSecondaryView!!.width
 
-                    DRAG_EDGE_RIGHT -> return (mRectMainClose.left - mMainView!!.left).toFloat() / mSecondaryView!!.width
+                    DRAG_EDGE_RIGHT -> (mRectMainClose.left - mMainView!!.left).toFloat() / mSecondaryView!!.width
 
-                    DRAG_EDGE_TOP -> return (mMainView!!.top - mRectMainClose.top).toFloat() / mSecondaryView!!.height
+                    DRAG_EDGE_TOP -> (mMainView!!.top - mRectMainClose.top).toFloat() / mSecondaryView!!.height
 
-                    DRAG_EDGE_BOTTOM -> return (mRectMainClose.top - mMainView!!.top).toFloat() / mSecondaryView!!.height
+                    DRAG_EDGE_BOTTOM -> (mRectMainClose.top - mMainView!!.top).toFloat() / mSecondaryView!!.height
 
-                    else -> return 0f
+                    else -> 0f
                 }
             }
 
@@ -841,17 +844,17 @@ class SwipeLayout : ViewGroup {
                 ViewDragHelper.STATE_IDLE ->
 
                     // drag edge is left or right
-                    if (dragEdge == DRAG_EDGE_LEFT || dragEdge == DRAG_EDGE_RIGHT) {
+                    mState = if (dragEdge == DRAG_EDGE_LEFT || dragEdge == DRAG_EDGE_RIGHT) {
                         if (mMainView!!.left == mRectMainClose.left) {
-                            mState = STATE_CLOSE
+                            STATE_CLOSE
                         } else {
-                            mState = STATE_OPEN
+                            STATE_OPEN
                         }
                     } else {
                         if (mMainView!!.top == mRectMainClose.top) {
-                            mState = STATE_CLOSE
+                            STATE_CLOSE
                         } else {
-                            mState = STATE_OPEN
+                            STATE_OPEN
                         }
                     }// drag edge is top or bottom
             }
@@ -901,18 +904,18 @@ class SwipeLayout : ViewGroup {
         val MODE_SAME_LEVEL = 1
 
         fun getStateString(state: Int): String {
-            when (state) {
-                STATE_CLOSE -> return "state_close"
+            return when (state) {
+                STATE_CLOSE -> "state_close"
 
-                STATE_CLOSING -> return "state_closing"
+                STATE_CLOSING -> "state_closing"
 
-                STATE_OPEN -> return "state_open"
+                STATE_OPEN -> "state_open"
 
-                STATE_OPENING -> return "state_opening"
+                STATE_OPENING -> "state_opening"
 
-                STATE_DRAGGING -> return "state_dragging"
+                STATE_DRAGGING -> "state_dragging"
 
-                else -> return "undefined"
+                else -> "undefined"
             }
         }
     }

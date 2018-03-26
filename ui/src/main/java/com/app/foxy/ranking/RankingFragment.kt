@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.view.ViewPager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -125,25 +126,19 @@ class RankingFragment : Fragment(), IRankingView {
 
     override fun showCurrentUserData(currentUserData: UserRank) {
         Glide.with(context)
-                .load(if(currentUserData.avatar.isNullOrEmpty()){
+                .load(if (currentUserData.avatar.isNullOrEmpty()) {
                     R.drawable.ic_placeholder_male_white
-                }else{
+                } else {
                     currentUserData.avatar
                 })
                 .apply(RequestOptions()
                         .circleCrop()
                         .placeholder(R.drawable.ic_placeholder_circle_white))
                 .into(mProfileAvatar)
-        if (currentUserData.score != null) {
-            mScore.text = context!!.getString(R.string.Score, currentUserData.score)
-        } else {
-            mScore.text = getString(R.string.Unranked)
-        }
-        if (currentUserData.rank != null) {
-            mRank.text = getRankString(currentUserData.rank!!)
-        } else {
-            mRank.text = getString(R.string.No_points)
-        }
+        mScore.text = if (currentUserData.score != null) context!!.getString(R.string.Score,
+                currentUserData.score) else getString(R.string.Unranked)
+        mRank.text = if (currentUserData.rank != null) getRankString(currentUserData.rank!!) else
+            getString(R.string.No_points)
     }
 
     /**
