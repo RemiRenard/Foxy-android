@@ -9,6 +9,9 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.view.ViewPager
+import android.support.v7.widget.CardView
+import android.view.View
+import android.widget.Toast
 import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.OnClick
@@ -37,12 +40,49 @@ import javax.inject.Inject
 class MainActivity : BaseActivity(), IMainView {
 
     private var mIsNewNotification: Boolean = false
-
-    @BindView(R.id.notif_send_button)
-    lateinit var mSendNotifButton: FloatingActionButton
+    private var mIsMenuOpen: Boolean = false
 
     @BindView(R.id.main_view_pager)
     lateinit var mViewPager: ViewPager
+
+    @BindView(R.id.navigation_notification_record)
+    lateinit var mNavRecord: FloatingActionButton
+
+    @BindView(R.id.navigation_notification_list)
+    lateinit var mNavListSound: FloatingActionButton
+
+    @BindView(R.id.navigation_rank)
+    lateinit var mNavRank: FloatingActionButton
+
+    @BindView(R.id.navigation_notification)
+    lateinit var mNavNotifications: FloatingActionButton
+
+    @BindView(R.id.navigation_friends)
+    lateinit var mNavFriends: FloatingActionButton
+
+    @BindView(R.id.navigation_profile)
+    lateinit var mNavProfile: FloatingActionButton
+
+    @BindView(R.id.navigation_button)
+    lateinit var mNavButton: FloatingActionButton
+
+    @BindView(R.id.navigation_profile_card)
+    lateinit var mNavProfileCard: CardView
+
+    @BindView(R.id.navigation_friends_card)
+    lateinit var mNavFriendsCard: CardView
+
+    @BindView(R.id.navigation_notification_card)
+    lateinit var mNavNotificationsCard: CardView
+
+    @BindView(R.id.navigation_rank_card)
+    lateinit var mNavRankCard: CardView
+
+    @BindView(R.id.navigation_notification_list_card)
+    lateinit var mNavListSoundCard: CardView
+
+    @BindView(R.id.navigation_notification_record_card)
+    lateinit var mNavRecordCard: CardView
 
     @Inject
     lateinit var mPresenter: IMainPresenter
@@ -64,13 +104,27 @@ class MainActivity : BaseActivity(), IMainView {
         mViewPager.adapter = SectionsPagerAdapter(supportFragmentManager)
         mViewPager.setPageTransformer(true, ZoomOutSlideTransformer())
         mViewPager.currentItem = NOTIFICATION_FRAGMENT_POSITION
+        mViewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+            override fun onPageScrollStateChanged(state: Int) {
+                // Do nothing.
+            }
+
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+                // Do nothing.
+            }
+
+            override fun onPageSelected(position: Int) {
+                mIsMenuOpen = false
+                showMenu(false)
+            }
+        })
         mPresenter.manageTutorial()
     }
 
     override fun showTutorial() {
-        mSendNotifButton.isClickable = false
+        mNavButton.isClickable = false
         TapTargetSequence(this).targets(
-                TapTarget.forView(mSendNotifButton,
+                TapTarget.forView(mNavButton,
                         getString(R.string.tuto_btn_send_notif), getString(R.string.tuto_btn_send_notif_desc))
                         .transparentTarget(true)
                         .outerCircleColor(android.R.color.white)
@@ -87,15 +141,70 @@ class MainActivity : BaseActivity(), IMainView {
             }
 
             override fun onSequenceStep(lastTarget: TapTarget?, targetClicked: Boolean) {
-                mSendNotifButton.isClickable = true
+                mNavButton.isClickable = true
                 mViewPager.currentItem = FRIENDS_FRAGMENT_POSITION
             }
         }).continueOnCancel(true).start()
     }
 
-    @OnClick(R.id.notif_send_button)
-    fun addNotification() {
+    @OnClick(R.id.navigation_button)
+    fun navigationClicked() {
+        mIsMenuOpen = !mIsMenuOpen
+        showMenu(mIsMenuOpen)
+    }
+
+    private fun showMenu(isShowing: Boolean) {
+        mNavButton.animate().rotation(if (isShowing) 180F else 0F)
+        // Cards
+        mNavRecordCard.visibility = if (isShowing) View.VISIBLE else View.GONE
+        mNavRecordCard.animate().translationY(if (isShowing) -resources.getDimension(R.dimen.standard_70) else 0F)
+        mNavListSoundCard.visibility = if (isShowing) View.VISIBLE else View.GONE
+        mNavListSoundCard.animate().translationY(if (isShowing) -resources.getDimension(R.dimen.standard_120) else 0F)
+        mNavRankCard.visibility = if (isShowing) View.VISIBLE else View.GONE
+        mNavRankCard.animate().translationY(if (isShowing) -resources.getDimension(R.dimen.standard_170) else 0F)
+        mNavNotificationsCard.visibility = if (isShowing) View.VISIBLE else View.GONE
+        mNavNotificationsCard.animate().translationY(if (isShowing) -resources.getDimension(R.dimen.standard_220) else 0F)
+        mNavFriendsCard.visibility = if (isShowing) View.VISIBLE else View.GONE
+        mNavFriendsCard.animate().translationY(if (isShowing) -resources.getDimension(R.dimen.standard_270) else 0F)
+        mNavProfileCard.visibility = if (isShowing) View.VISIBLE else View.GONE
+        mNavProfileCard.animate().translationY(if (isShowing) -resources.getDimension(R.dimen.standard_320) else 0F)
+        // Floating buttons
+        mNavRecord.animate().translationY(if (isShowing) -resources.getDimension(R.dimen.standard_70) else 0F)
+        mNavListSound.animate().translationY(if (isShowing) -resources.getDimension(R.dimen.standard_120) else 0F)
+        mNavRank.animate().translationY(if (isShowing) -resources.getDimension(R.dimen.standard_170) else 0F)
+        mNavNotifications.animate().translationY(if (isShowing) -resources.getDimension(R.dimen.standard_220) else 0F)
+        mNavFriends.animate().translationY(if (isShowing) -resources.getDimension(R.dimen.standard_270) else 0F)
+        mNavProfile.animate().translationY(if (isShowing) -resources.getDimension(R.dimen.standard_320) else 0F)
+    }
+
+    @OnClick(R.id.navigation_friends)
+    fun navToFriends() {
+        mViewPager.currentItem = FRIENDS_FRAGMENT_POSITION
+    }
+
+    @OnClick(R.id.navigation_notification)
+    fun navToNotifications() {
+        mViewPager.currentItem = NOTIFICATION_FRAGMENT_POSITION
+    }
+
+    @OnClick(R.id.navigation_profile)
+    fun navToProfile() {
+        mViewPager.currentItem = PROFILE_FRAGMENT_POSITION
+    }
+
+    @OnClick(R.id.navigation_rank)
+    fun navToRanking() {
+        mViewPager.currentItem = RANKING_FRAGMENT_POSITION
+    }
+
+    @OnClick(R.id.navigation_notification_list)
+    fun navToListSound() {
         startActivity(SelectSongActivity.getStartingIntent(this))
+    }
+
+    @OnClick(R.id.navigation_notification_record)
+    fun navToRecordSound() {
+        Toast.makeText(this, "Not implemented yet :/", Toast.LENGTH_SHORT).show()
     }
 
     /**

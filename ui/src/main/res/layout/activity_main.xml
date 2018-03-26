@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -15,41 +16,237 @@
         android:id="@+id/main_view_pager"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/bottom_bar"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <include
-        android:id="@+id/bottom_bar"
-        layout="@layout/utils_bottom_bar"
-        android:layout_width="0dp"
-        android:layout_height="?attr/actionBarSize"
-        android:layout_gravity="bottom"
-        android:background="?android:attr/windowBackground"
+    <android.support.v7.widget.CardView
+        android:id="@+id/navigation_profile_card"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/bg_white_rect_oval_border"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/main_view_pager" />
+        app:cardElevation="6dp"
+        app:layout_constraintBottom_toBottomOf="@+id/navigation_profile"
+        app:layout_constraintRight_toLeftOf="@+id/navigation_profile"
+        app:layout_constraintTop_toTopOf="@+id/navigation_profile">
 
-    <View
-        android:id="@+id/bottom_bar_half"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        app:layout_constraintBottom_toBottomOf="@id/bottom_bar"
-        app:layout_constraintLeft_toLeftOf="@id/bottom_bar"
-        app:layout_constraintRight_toRightOf="@id/bottom_bar"
-        app:layout_constraintTop_toTopOf="@id/bottom_bar" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="4dp"
+            android:paddingEnd="8dp"
+            android:paddingStart="8dp"
+            android:paddingTop="4dp"
+            android:text="@string/Profile"
+            android:textColor="@color/colorAccent" />
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/navigation_friends_card"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/bg_white_rect_oval_border"
+        android:visibility="gone"
+        app:cardElevation="6dp"
+        app:layout_constraintBottom_toBottomOf="@+id/navigation_friends"
+        app:layout_constraintRight_toLeftOf="@+id/navigation_friends"
+        app:layout_constraintTop_toTopOf="@+id/navigation_friends">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="4dp"
+            android:paddingEnd="8dp"
+            android:paddingStart="8dp"
+            android:paddingTop="4dp"
+            android:text="@string/Friends"
+            android:textColor="@color/colorAccent" />
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/navigation_notification_card"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/bg_white_rect_oval_border"
+        android:visibility="gone"
+        app:cardElevation="6dp"
+        app:layout_constraintBottom_toBottomOf="@+id/navigation_notification"
+        app:layout_constraintRight_toLeftOf="@+id/navigation_notification"
+        app:layout_constraintTop_toTopOf="@+id/navigation_notification">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="4dp"
+            android:paddingEnd="8dp"
+            android:paddingStart="8dp"
+            android:paddingTop="4dp"
+            android:text="@string/Notifications"
+            android:textColor="@color/colorAccent" />
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/navigation_rank_card"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/bg_white_rect_oval_border"
+        android:visibility="gone"
+        app:cardElevation="6dp"
+        app:layout_constraintBottom_toBottomOf="@+id/navigation_rank"
+        app:layout_constraintRight_toLeftOf="@+id/navigation_rank"
+        app:layout_constraintTop_toTopOf="@+id/navigation_rank">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="4dp"
+            android:paddingEnd="8dp"
+            android:paddingStart="8dp"
+            android:paddingTop="4dp"
+            android:text="@string/Ranking"
+            android:textColor="@color/colorAccent" />
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/navigation_notification_list_card"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/bg_white_rect_oval_border"
+        android:visibility="gone"
+        app:cardElevation="6dp"
+        app:layout_constraintBottom_toBottomOf="@+id/navigation_notification_list"
+        app:layout_constraintRight_toLeftOf="@+id/navigation_notification_list"
+        app:layout_constraintTop_toTopOf="@+id/navigation_notification_list">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="4dp"
+            android:paddingEnd="8dp"
+            android:paddingStart="8dp"
+            android:paddingTop="4dp"
+            android:text="@string/Use_a_registered_sound"
+            android:textColor="@color/colorAccent" />
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/navigation_notification_record_card"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/bg_white_rect_oval_border"
+        android:visibility="gone"
+        app:cardElevation="6dp"
+        app:layout_constraintBottom_toBottomOf="@+id/navigation_notification_record"
+        app:layout_constraintRight_toLeftOf="@+id/navigation_notification_record"
+        app:layout_constraintTop_toTopOf="@+id/navigation_notification_record">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="4dp"
+            android:paddingEnd="8dp"
+            android:paddingStart="8dp"
+            android:paddingTop="4dp"
+            android:text="@string/Record_your_voice"
+            android:textColor="@color/colorAccent" />
+    </android.support.v7.widget.CardView>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/notif_send_button"
+        android:id="@+id/navigation_profile"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="24dp"
+        android:src="@drawable/ic_profile_white"
+        app:borderWidth="0dp"
+        app:elevation="6dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@+id/navigation_notification_record"
+        app:layout_constraintRight_toRightOf="@+id/navigation_notification_record"
+        tools:ignore="VectorDrawableCompat" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/navigation_friends"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="24dp"
+        android:src="@drawable/ic_friends"
+        app:borderWidth="0dp"
+        app:elevation="6dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@+id/navigation_button"
+        app:layout_constraintRight_toRightOf="@+id/navigation_button"
+        tools:ignore="VectorDrawableCompat" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/navigation_notification"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="24dp"
+        android:src="@drawable/ic_notifications_white"
+        app:borderWidth="0dp"
+        app:elevation="6dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@+id/navigation_button"
+        app:layout_constraintRight_toRightOf="@+id/navigation_button"
+        tools:ignore="VectorDrawableCompat" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/navigation_rank"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="24dp"
+        android:src="@drawable/ic_podium_white"
+        app:borderWidth="0dp"
+        app:elevation="6dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@+id/navigation_button"
+        app:layout_constraintRight_toRightOf="@+id/navigation_button"
+        tools:ignore="VectorDrawableCompat" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/navigation_notification_list"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="24dp"
+        android:src="@drawable/ic_library_music_white"
+        app:borderWidth="0dp"
+        app:elevation="6dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@+id/navigation_button"
+        app:layout_constraintRight_toRightOf="@+id/navigation_button"
+        tools:ignore="VectorDrawableCompat" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/navigation_notification_record"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="24dp"
+        android:src="@drawable/ic_micro_white"
+        app:borderWidth="0dp"
+        app:elevation="6dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@+id/navigation_button"
+        app:layout_constraintRight_toRightOf="@+id/navigation_button"
+        tools:ignore="VectorDrawableCompat" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/navigation_button"
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:layout_marginBottom="24dp"
         android:layout_marginEnd="24dp"
-        android:src="@drawable/ic_send_white"
+        android:src="@drawable/ic_expand_white"
         app:borderWidth="0dp"
+        app:elevation="6dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        tools:ignore="VectorDrawableCompat" />
 </android.support.constraint.ConstraintLayout>

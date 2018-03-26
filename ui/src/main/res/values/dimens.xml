@@ -11,4 +11,10 @@
     <dimen name="add_friends_avatar_height">50dp</dimen>
     <dimen name="ranking_friends_avatar_width">30dp</dimen>
     <dimen name="ranking_friends_avatar_height">30dp</dimen>
+    <dimen name="standard_70">70dp</dimen>
+    <dimen name="standard_120">120dp</dimen>
+    <dimen name="standard_170">170dp</dimen>
+    <dimen name="standard_220">220dp</dimen>
+    <dimen name="standard_270">270dp</dimen>
+    <dimen name="standard_320">320dp</dimen>
 </resources>

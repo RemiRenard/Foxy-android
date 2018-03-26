@@ -117,4 +117,6 @@
     <string name="tuto_your_badge">This is your badge associated to your rank</string>
     <string name="tuto_your_badge_desc">When you rank up, you can unlock new badges !</string>
     <string name="Select_a_sound">Select a sound</string>
+    <string name="Use_a_registered_sound">Use a registered sound</string>
+    <string name="Record_your_voice">Record your voice</string>
 </resources>
