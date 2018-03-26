@@ -18,6 +18,7 @@ import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.support.v4.widget.SwipeRefreshLayout
+import android.support.v7.widget.CardView
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
@@ -81,6 +82,15 @@ class ProfileFragment : Fragment(), IProfileView {
 
     @BindView(R.id.profile_username)
     lateinit var mProfileUsername: TextView
+
+    @BindView(R.id.profile_chart_no_data)
+    lateinit var mNoDataText: TextView
+
+    @BindView(R.id.profile_chart_top_songs_played_card)
+    lateinit var mCardBar: CardView
+
+    @BindView(R.id.profile_chart_best_friends_card)
+    lateinit var mCardPie: CardView
 
     @BindView(R.id.profile_chart_top_songs_played)
     lateinit var mChart: BarChart
@@ -160,11 +170,16 @@ class ProfileFragment : Fragment(), IProfileView {
         } else {
             mProfileUsername.visibility = View.GONE
         }
-        if (user.stats?.topSongs != null && user.stats?.topFriends != null) {
+        if (user.stats?.topSongs!!.isNotEmpty() && user.stats?.topFriends!!.isNotEmpty()) {
+            mNoDataText.visibility = View.GONE
+            mCardBar.visibility = View.VISIBLE
+            mCardPie.visibility = View.VISIBLE
             setBarChartData(user.stats?.topSongs)
             setPieChartData(user.stats?.topFriends)
         } else {
-
+            mCardBar.visibility = View.INVISIBLE
+            mCardPie.visibility = View.GONE
+            mNoDataText.visibility = View.VISIBLE
         }
     }
 
