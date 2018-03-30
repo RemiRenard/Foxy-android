@@ -1,6 +1,6 @@
 # Foxy
 
-<p align="center"><img height="300" width="300" src="https://ibb.co/bNZVn7" /></p>
+<p align="center"><img height="300" width="300" src="https://image.ibb.co/bzRbS7/logo_foxy_blue.png" /></p>
 
 How the architecture works ?
 
