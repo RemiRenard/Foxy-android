@@ -1,6 +1,6 @@
 # Foxy
 
-<p align="center"><img height="300" width="300" src="https://lh5.googleusercontent.com/m_eTAAr0KGS_BLBBraVwYepb_rHPB0-qQb5TjtXKukqEmEQv6BkherAWM7bD2H5nXySOfFS3m2punz4=w1920-h943" /></p>
+<p align="center"><img height="300" width="300" src="https://ibb.co/bNZVn7" /></p>
 
 How the architecture works ?
 
