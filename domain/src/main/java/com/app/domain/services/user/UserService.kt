@@ -93,7 +93,7 @@ class UserService : IUserService {
      * Clear custom cache (object in memory)
      */
     private fun clearCache() {
-        Cache.currentUser = null
+        Cache.currentUser = User()
         Cache.friends = ArrayList()
         Cache.rankings = RankingResponse()
         Cache.notifications = ArrayList()
@@ -125,7 +125,7 @@ class UserService : IUserService {
      * Save the current user in the cache and in the database.
      */
     override fun saveCurrentUser(user: User?) {
-        Cache.currentUser = user
+        Cache.currentUser = user!!
         Observable.just(Data.database!!
                 .insert(TableUser.DATABASE_TABLE_NAME, TableUser.insertUser(user, true)))
                 .subscribeOn(Schedulers.io())
@@ -138,7 +138,7 @@ class UserService : IUserService {
      * @return an observable of a user.
      */
     override fun getCurrentUser(forceNetworkRefresh: Boolean): Observable<User> {
-        return if (Cache.currentUser != null && !forceNetworkRefresh) {
+        return if (!forceNetworkRefresh) {
             Observable.just(Cache.currentUser)
         } else {
             getCurrentUserFromNetwork(Cache.token!!)
@@ -160,7 +160,7 @@ class UserService : IUserService {
                 .doOnNext({ updateCurrentUserDb(it); Cache.currentUser = it })
                 .onErrorReturn {
                     EventBus.getDefault().post(NetworkErrorEvent(it))
-                    Cache.currentUser!!
+                    Cache.currentUser
                 }
     }
 

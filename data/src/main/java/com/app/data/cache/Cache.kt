@@ -19,6 +19,6 @@ object Cache {
     var audioFile: File? = null
     var friends: List<User> = ArrayList()
     var achievements: List<Achievement> = ArrayList()
-    var currentUser: User? = null
+    var currentUser: User = User()
     var rankings: RankingResponse? = RankingResponse()
 }
