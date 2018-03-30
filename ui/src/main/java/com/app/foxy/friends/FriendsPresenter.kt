@@ -1,16 +1,17 @@
 package com.app.foxy.friends
 
 import android.content.Context
+import android.util.Log
 import android.widget.Toast
-import io.reactivex.Observer
-import io.reactivex.annotations.NonNull
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
 import com.app.data.model.User
 import com.app.data.network.ExceptionHandler
 import com.app.data.network.apiResponse.FriendsRequestsResponse
 import com.app.domain.services.friend.IFriendService
 import com.app.foxy.profile.dagger.ProfileScope
+import io.reactivex.Observer
+import io.reactivex.annotations.NonNull
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
 
 /**
  * Friends presenter
@@ -43,7 +44,7 @@ class FriendsPresenter(private val mFriendService: IFriendService, private val m
             }
 
             override fun onError(@NonNull e: Throwable) {
-                Toast.makeText(mContext, ExceptionHandler.getMessage(e, mContext), Toast.LENGTH_LONG).show()
+                Log.i(javaClass.simpleName, ExceptionHandler.getMessage(e, mContext))
                 mView?.hideProgressBar()
             }
 
@@ -64,7 +65,7 @@ class FriendsPresenter(private val mFriendService: IFriendService, private val m
             }
 
             override fun onError(@NonNull e: Throwable) {
-                Toast.makeText(mContext, ExceptionHandler.getMessage(e, mContext), Toast.LENGTH_LONG).show()
+                Log.i(javaClass.simpleName, ExceptionHandler.getMessage(e, mContext))
             }
 
             override fun onComplete() {

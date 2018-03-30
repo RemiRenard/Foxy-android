@@ -72,7 +72,6 @@ class NotificationFragment : Fragment(), INotificationView {
 
     override fun onResume() {
         super.onResume()
-        Log.i("test", "notification fragment : onResume")
         mAdapter.onResume()
         EventBus.getDefault().register(this)
     }

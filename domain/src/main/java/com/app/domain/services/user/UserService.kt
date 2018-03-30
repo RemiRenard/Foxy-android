@@ -184,6 +184,10 @@ class UserService : IUserService {
                     Cache.currentUser = user
                     user
                 }
+                .flatMap {
+                    Cache.currentUser = it
+                    return@flatMap Observable.just(it)
+                }
     }
 
     /**
