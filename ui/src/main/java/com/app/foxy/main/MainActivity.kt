@@ -3,20 +3,23 @@ package com.app.foxy.main
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import android.support.design.widget.FloatingActionButton
+import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.view.ViewPager
 import android.support.v7.widget.CardView
 import android.view.View
-import android.widget.Toast
 import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.OnClick
 import com.app.data.Constants
 import com.app.foxy.BaseActivity
+import com.app.foxy.BuildConfig
 import com.app.foxy.FoxyApp
 import com.app.foxy.R
 import com.app.foxy.eventBus.CameraPermsResultEvent
@@ -24,6 +27,7 @@ import com.app.foxy.eventBus.WriteStoragePermResultEvent
 import com.app.foxy.friends.FriendsFragment
 import com.app.foxy.main.dagger.MainModule
 import com.app.foxy.notification.NotificationFragment
+import com.app.foxy.notification.recordVoice.RecordVoiceActivity
 import com.app.foxy.notification.selectSong.SelectSongActivity
 import com.app.foxy.profile.ProfileFragment
 import com.app.foxy.ranking.RankingFragment
@@ -204,7 +208,7 @@ class MainActivity : BaseActivity(), IMainView {
 
     @OnClick(R.id.navigation_notification_record)
     fun navToRecordSound() {
-        Toast.makeText(this, "Not implemented yet :/", Toast.LENGTH_SHORT).show()
+        startActivity(RecordVoiceActivity.getStartingIntent(this))
     }
 
     /**

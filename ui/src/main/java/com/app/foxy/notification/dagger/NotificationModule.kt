@@ -10,6 +10,8 @@ import com.app.foxy.notification.NotificationPresenter
 import com.app.foxy.notification.adapter.INotificationAdapterPresenter
 import com.app.foxy.notification.adapter.NotificationAdapter
 import com.app.foxy.notification.adapter.NotificationAdapterPresenter
+import com.app.foxy.notification.recordVoice.IRecordVoicePresenter
+import com.app.foxy.notification.recordVoice.RecordVoicePresenter
 import com.app.foxy.notification.selectFriends.ISelectFriendsPresenter
 import com.app.foxy.notification.selectFriends.SelectFriendsPresenter
 import com.app.foxy.notification.selectSong.ISelectSongPresenter
@@ -49,6 +51,11 @@ class NotificationModule {
     @NotificationScope
     fun provideNotificationAdapterPresenter(context: Context): INotificationAdapterPresenter =
             NotificationAdapterPresenter(context)
+
+    @Provides
+    @NotificationScope
+    fun provideRecordVoicePresenter(notificationService: INotificationService): IRecordVoicePresenter =
+            RecordVoicePresenter(notificationService)
 
     // Adapters
     @Provides

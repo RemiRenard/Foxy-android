@@ -245,7 +245,7 @@ class ProfileFragment : Fragment(), IProfileView {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    fun onWriteStoragePermGrantedEvent(event: WriteStoragePermResultEvent) {
+    fun onWriteStoragePermResultEvent(event: WriteStoragePermResultEvent) {
         if (event.isGranted) openLibrary() else displaySnackBar()
     }
 

@@ -2,16 +2,16 @@ package com.app.foxy.notification.selectFriends
 
 import android.content.Context
 import android.widget.Toast
-import io.reactivex.Observer
-import io.reactivex.annotations.NonNull
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
 import com.app.data.model.User
 import com.app.data.network.ExceptionHandler
 import com.app.data.network.apiResponse.SimpleSuccessResponse
 import com.app.domain.services.friend.IFriendService
 import com.app.domain.services.notification.INotificationService
 import com.app.foxy.notification.dagger.NotificationScope
+import io.reactivex.Observer
+import io.reactivex.annotations.NonNull
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
 import java.io.File
 
 /**
@@ -84,8 +84,7 @@ class SelectFriendsPresenter(private val mContext: Context, private val mFriendS
                 })
     }
 
-    override fun clearNotificationCache()
-    {
+    override fun clearNotificationCache() {
         mNotificationService.clearNotificationCache()
     }
 }

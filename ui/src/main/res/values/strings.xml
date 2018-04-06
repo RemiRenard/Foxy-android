@@ -3,7 +3,7 @@
     <string name="Yes">Yes</string>
     <string name="No">No</string>
     <string name="cancel">Cancel</string>
-    <string name="No_internet_connection">You have lost internet :(</string>
+    <string name="No_internet_connection">You are not connected to internet :(</string>
     <string name="Ok">OK</string>
     <string name="Profile">Profile</string>
     <string name="Search">Discover</string>
@@ -119,4 +119,9 @@
     <string name="Select_a_sound">Select a sound</string>
     <string name="Use_a_registered_sound">Use a registered sound</string>
     <string name="Record_your_voice">Record your voice</string>
+    <string name="Downloading">Downloading...</string>
+    <string name="download_add_to_queue">The file has been added to the queue, it will be downloaded when you retrieve the internet.</string>
+    <string name="tuto_button_record_voice">To record your voice, you have to press and hold the button. (5s maximum)</string>
+    <string name="Add_an_optional_message">Add an optional message</string>
+    <string name="number_characters_message">40 characters maximum</string>
 </resources>

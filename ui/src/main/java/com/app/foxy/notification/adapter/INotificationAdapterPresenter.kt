@@ -12,4 +12,6 @@ interface INotificationAdapterPresenter {
     fun playSong(songUrl: String)
 
     fun stopSong()
+
+    fun downloadSound(soundUri: String, soundId: String)
 }

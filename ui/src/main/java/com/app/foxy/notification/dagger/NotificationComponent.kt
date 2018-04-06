@@ -1,9 +1,9 @@
 package com.app.foxy.notification.dagger
 
 import com.app.foxy.notification.NotificationFragment
+import com.app.foxy.notification.recordVoice.RecordVoiceActivity
 import com.app.foxy.notification.selectFriends.SelectFriendsActivity
 import com.app.foxy.notification.selectSong.SelectSongActivity
-import com.app.foxy.notification.selectSong.adapter.SongAdapter
 import dagger.Subcomponent
 
 /**
@@ -19,4 +19,7 @@ interface NotificationComponent {
     fun inject(target: SelectSongActivity)
 
     fun inject(target: SelectFriendsActivity)
+
+    fun inject(recordVoiceActivity: RecordVoiceActivity)
+
 }

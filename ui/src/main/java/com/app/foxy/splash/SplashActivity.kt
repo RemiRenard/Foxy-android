@@ -32,12 +32,6 @@ class SplashActivity : BaseActivity(), ISplashView {
     @BindView(R.id.splash_logo)
     lateinit var mLogo: ImageView
 
-    @BindView(R.id.splash_app_name)
-    lateinit var mAppName: TextView
-
-    @BindView(R.id.splash_slogan)
-    lateinit var mSlogan: TextView
-
     @Inject
     lateinit var mPresenter: ISplashPresenter
 
@@ -60,8 +54,7 @@ class SplashActivity : BaseActivity(), ISplashView {
     private fun setFonts() {
         val appTitle = Typeface.createFromAsset(assets, "fonts/appNameFont.otf")
         val boldItalic = Typeface.createFromAsset(assets, "fonts/SourceSansPro-SemiboldItalic.ttf")
-        mAppName.typeface = appTitle
-        mSlogan.typeface = boldItalic
+        // TODO add app name
     }
 
     /**

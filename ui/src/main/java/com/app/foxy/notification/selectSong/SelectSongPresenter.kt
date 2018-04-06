@@ -41,14 +41,6 @@ class SelectSongPresenter(private val mNotificationService: INotificationService
         }
     }
 
-    override fun saveTmpNotification(message: String, songId: String, audioFile: File?) {
-        mView?.showProgressBar()
-        mNotificationService.saveTmpNotification(Notification(message, songId, "message"), audioFile).doOnComplete {
-            mView?.hideProgressBar()
-            mView?.openFriendsActivity()
-        }.subscribe()
-    }
-
     override fun saveTmpNotification(songId: String) {
         mView?.showProgressBar()
         mNotificationService.saveTmpNotification(Notification(String(), songId, "message"), null).doOnComplete {

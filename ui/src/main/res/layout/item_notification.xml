@@ -18,7 +18,7 @@
         android:textColor="@android:color/white"
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/item_notification_audio_button"
+        app:layout_constraintRight_toLeftOf="@+id/item_notification_download_button"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -31,8 +31,18 @@
         android:lines="1"
         android:textColor="@android:color/white"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/item_notification_audio_button"
+        app:layout_constraintRight_toLeftOf="@+id/item_notification_download_button"
         app:layout_constraintTop_toBottomOf="@+id/item_notification_message" />
+
+    <ImageView
+        android:id="@+id/item_notification_download_button"
+        android:layout_width="48dp"
+        android:layout_height="0dp"
+        android:padding="8dp"
+        android:src="@drawable/ic_download_white_24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/item_notification_audio_button"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/item_notification_audio_button"

@@ -8,8 +8,6 @@ import java.io.File
  */
 interface ISelectSongPresenter : IPresenter<ISelectSongView> {
 
-    fun saveTmpNotification(message: String, songId: String, audioFile: File?)
-
     fun saveTmpNotification(songId: String)
 
     fun getSongs(forceNetworkRefresh: Boolean)

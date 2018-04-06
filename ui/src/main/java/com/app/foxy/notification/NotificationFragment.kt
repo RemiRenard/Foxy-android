@@ -1,12 +1,13 @@
 package com.app.foxy.notification
 
+import android.Manifest
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,6 +23,7 @@ import com.app.foxy.FoxyApp
 import com.app.foxy.R
 import com.app.foxy.custom.SimpleDividerItemDecoration
 import com.app.foxy.eventBus.NotificationClickedEvent
+import com.app.foxy.eventBus.RequestWriteStoragePermEvent
 import com.app.foxy.notification.adapter.NotificationAdapter
 import com.app.foxy.notification.dagger.NotificationModule
 import com.app.foxy.notification.selectSong.SelectSongActivity
@@ -110,6 +112,12 @@ class NotificationFragment : Fragment(), INotificationView {
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onNotificationClickedEvent(event: NotificationClickedEvent) {
         mPresenter.markNotificationAsRead(event.notificationId)
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onRequestWriteStoragePermEvent(event: RequestWriteStoragePermEvent) {
+        ActivityCompat.requestPermissions(activity!!, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                Constants.REQUEST_PERMISSION_WRITE_STORAGE)
     }
 
     override fun displayNotifications(notifications: List<Notification>) {

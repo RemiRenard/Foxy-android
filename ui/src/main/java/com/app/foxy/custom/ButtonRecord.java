@@ -1,23 +1,26 @@
 package com.app.foxy.custom;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Toast;
 
-import com.app.foxy.R;
+import com.app.foxy.notification.recordVoice.IButtonRecord;
 
 public class ButtonRecord extends View {
 
+    private IButtonRecord mListener;
     private int mRadiusFillBlue, mRadiusStrokeCyan, mX, mY, mSpace;
     private CountDownTimer mTimer;
     private float mSweepAngle;
@@ -27,6 +30,10 @@ public class ButtonRecord extends View {
         super(context, attrs);
         managePaint();
         initVariables();
+    }
+
+    public void setListener(IButtonRecord listener) {
+        mListener = listener;
     }
 
     /**
@@ -51,8 +58,8 @@ public class ButtonRecord extends View {
         mPaintStrokeRed.setAntiAlias(true);
         mPaintStrokeDark.setStyle(Paint.Style.STROKE);
         mPaintStrokeRed.setStyle(Paint.Style.STROKE);
-        mPaintStrokeDark.setColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
-        mPaintFillPrimary.setColor(ContextCompat.getColor(getContext(), R.color.colorPrimaryDark));
+        mPaintStrokeDark.setColor(ContextCompat.getColor(getContext(), android.R.color.white));
+        mPaintFillPrimary.setColor(ContextCompat.getColor(getContext(), android.R.color.white));
         mPaintStrokeRed.setColor(Color.RED);
         mPaintStrokeDark.setStrokeWidth(20f);
         mPaintStrokeRed.setStrokeWidth(10f);
@@ -77,36 +84,41 @@ public class ButtonRecord extends View {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                mTimer = new CountDownTimer(5000, 10) {
-                    @Override
-                    public void onTick(long l) {
-                        if (l > 4800) {
-                            mRadiusStrokeCyan += 1;
+        if (ActivityCompat.checkSelfPermission(getContext(),
+                Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED) {
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    mListener.startRecord();
+                    mTimer = new CountDownTimer(5000, 10) {
+                        @Override
+                        public void onTick(long l) {
+                            if (l > 4800) {
+                                mRadiusStrokeCyan += 1;
+                            }
+                            if (mRadiusFillBlue < mRadiusStrokeCyan - 30) {
+                                mRadiusFillBlue += 5;
+                            }
+                            mSweepAngle += 1.35;
+                            invalidate();
                         }
-                        if (mRadiusFillBlue < mRadiusStrokeCyan - 30) {
-                            mRadiusFillBlue += 5;
-                        }
-                        mSweepAngle += 1.35;
-                        invalidate();
-                    }
 
-                    @Override
-                    public void onFinish() {
-                        mTimer.cancel();
-                        initVariables();
-                        invalidate();
-                        Toast.makeText(getContext(), "Completed", Toast.LENGTH_SHORT).show();
-                    }
-                }.start();
-                break;
-            case MotionEvent.ACTION_UP:
-                mTimer.onFinish();
-                initVariables();
-                invalidate();
-                break;
+                        @Override
+                        public void onFinish() {
+                            initVariables();
+                            invalidate();
+                            mTimer.cancel();
+                            mListener.stopRecord();
+                        }
+                    }.start();
+                    break;
+                case MotionEvent.ACTION_UP:
+                    mTimer.onFinish();
+                    break;
+            }
+            return true;
+        } else {
+            mListener.requestPermissions();
+            return false;
         }
-        return true;
     }
 }

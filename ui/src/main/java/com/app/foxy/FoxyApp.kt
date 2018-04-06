@@ -8,6 +8,7 @@ import com.app.foxy.dagger.AppComponent
 import com.app.foxy.dagger.AppModule
 import com.app.foxy.dagger.DaggerAppComponent
 
+
 class FoxyApp : MultiDexApplication() {
 
     private var mAppComponent: AppComponent? = null
