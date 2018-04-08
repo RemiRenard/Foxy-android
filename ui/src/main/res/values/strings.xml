@@ -6,9 +6,7 @@
     <string name="No_internet_connection">You are not connected to internet :(</string>
     <string name="Ok">OK</string>
     <string name="Profile">Profile</string>
-    <string name="Search">Discover</string>
     <string name="slogan" translatable="false">Are you ready for this ?</string>
-    <string name="Money">Money</string>
     <string name="Ranking">Ranking</string>
     <string name="My_challenges">My challenges</string>
     <string name="Undefined_error">Undefined error</string>
@@ -106,9 +104,9 @@
     <string name="upgrade_long_text">Your current version is no longer supported. Please update the app to enjoy new features.</string>
     <string name="We_are_checking_the_version">We are checking the version of the app…</string>
     <string name="tuto_btn_nav">Tap to this button to display the menu.</string>
-    <string name="tuto_btn_nav_desc">You can navigate between screens when you slide the screen or when you click on a button of this menu.</string>
+    <string name="tuto_btn_nav_desc">You can navigate between screens when you slide your finger or when you click on a button of this menu.</string>
     <string name="tuto_btn_record_your_own_voice">Or record your own voice !</string>
-    <string name="tuto_btn_record_your_own_voice_desc">Your friends will receive this song as a notification.</string>
+    <string name="tuto_btn_record_your_own_voice_desc">Your friends will receive this sound as a notification.</string>
     <string name="tuto_list_songs">Select a sound by pressing and holding the item, you can play the sound by clicking to the "play button".</string>
     <string name="tuto_list_songs_desc">Your friends will receive this sound as a notification.</string>
     <string name="tuto_your_score">Here there is your score, updated for each notification sent.</string>
