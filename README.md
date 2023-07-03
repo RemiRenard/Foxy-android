@@ -1,4 +1,4 @@
-# Foxy
+# Foxy (This project is not longer maintained since 2019)
 
 <p align="center"><img height="300" width="300" src="https://image.ibb.co/bzRbS7/logo_foxy_blue.png" /></p>
 
